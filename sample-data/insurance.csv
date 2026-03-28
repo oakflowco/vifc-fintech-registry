@@ -1,0 +1,21 @@
+ID,Company Name,Trading Name,Category,License Type,Status,Headquarters,Website
+1,Bao Viet Insurance Corporation,Bao Viet,Life & Non-Life,State-owned Insurer,Active,Hanoi,baoviet.com.vn
+2,Prudential Vietnam Assurance,Prudential VN,Life Insurance,Foreign Life Insurer,Active,Ho Chi Minh City,prudential.com.vn
+3,Manulife Vietnam,Manulife VN,Life Insurance,Foreign Life Insurer,Active,Ho Chi Minh City,manulife.com.vn
+4,AIA Vietnam,AIA VN,Life Insurance,Foreign Life Insurer,Active,Ho Chi Minh City,aia.com.vn
+5,Dai-ichi Life Vietnam,Dai-ichi VN,Life Insurance,Foreign Life Insurer,Active,Ho Chi Minh City,dai-ichi-life.com.vn
+6,FWD Vietnam,FWD VN,Life Insurance,Foreign Life Insurer,Active,Ho Chi Minh City,fwd.com.vn
+7,Sun Life Vietnam,Sun Life VN,Life Insurance,Foreign Life Insurer,Active,Ho Chi Minh City,sunlife.com.vn
+8,PVI Insurance,PVI,Non-Life Insurance,Domestic Non-Life,Active,Hanoi,pvi.com.vn
+9,Bao Minh Insurance,Bao Minh,Non-Life Insurance,Domestic Non-Life,Active,Ho Chi Minh City,baominh.com.vn
+10,PTI Insurance,PTI,Non-Life Insurance,Domestic Non-Life,Active,Hanoi,pti.com.vn
+11,BIC Insurance (BIDV Insurance),BIC,Non-Life Insurance,Domestic Non-Life,Active,Hanoi,bic.vn
+12,MIC Insurance (Military Insurance),MIC,Non-Life Insurance,Domestic Non-Life,Active,Hanoi,mic.vn
+13,Samsung Vina Insurance,Samsung Vina,Non-Life Insurance,Foreign Non-Life,Active,Ho Chi Minh City,svic.com.vn
+14,Vietnam National Reinsurance (VINARE),VINARE,Reinsurance,State-owned Reinsurer,Active,Hanoi,vinare.com.vn
+15,Swiss Re Vietnam,Swiss Re VN,Reinsurance,Foreign Reinsurer,Active,Ho Chi Minh City,swissre.com
+16,Mfast Technology JSC,Mfast,InsurTech,InsurTech Distribution,Active,Ho Chi Minh City,mfast.vn
+17,Papaya Insurtech JSC,Papaya,InsurTech,InsurTech Distribution,Active,Ho Chi Minh City,papaya.vn
+18,OPES Insurance Technology,OPES,InsurTech,InsurTech Platform,Active,Ho Chi Minh City,opes.com.vn
+19,Saladin Technology,Saladin,InsurTech,InsurTech Platform,Active,Ho Chi Minh City,saladin.vn
+20,LIAN (Connected Insurance),LIAN,InsurTech,InsurTech Platform,Active,Ho Chi Minh City,lian.vn

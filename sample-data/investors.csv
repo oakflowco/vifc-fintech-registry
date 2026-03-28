@@ -1,0 +1,16 @@
+ID,Company Name,Trading Name,Category,Investor Type,Status,Country,AUM (USD),Website,Focus Sector
+1,VinaCapital Group,VinaCapital,Asset Management,Domestic Fund,Active,Vietnam,4.5B,vinacapital.com,Multi-sector
+2,Dragon Capital Group,Dragon Capital,Asset Management,Foreign Fund,Active,Vietnam,7B,dragoncapital.com,Equities & Fixed Income
+3,Mekong Capital,Mekong Capital,Private Equity,Foreign Fund,Active,Vietnam,300M,mekongcapital.com,Consumer & Retail
+4,IDG Ventures Vietnam,IDG Capital Vietnam,Venture Capital,Foreign Fund,Active,Vietnam,100M,idgvv.com.vn,Technology
+5,CyberAgent Capital,CyberAgent Capital,Venture Capital,Foreign Fund,Active,Japan,50M,cyberagentcapital.com,Internet & Mobile
+6,500 Startups Vietnam,500 Global Vietnam,Venture Capital,Foreign Fund,Active,USA,30M,500.co,Early-stage Tech
+7,Golden Gate Ventures,Golden Gate Ventures,Venture Capital,Foreign Fund,Active,Singapore,100M,goldengate.vc,Southeast Asia Tech
+8,Nextrans Vietnam,Nextrans,Venture Capital,Foreign Fund,Active,South Korea,60M,nextrans.co.kr,Fintech & Logistics
+9,BVIM (Bao Viet Investment Management),BVIM,Asset Management,Domestic Fund,Active,Vietnam,1.2B,bvim.com.vn,Insurance & Bonds
+10,SSI Asset Management,SSIAM,Asset Management,Domestic Fund,Active,Vietnam,800M,ssi.com.vn,Equities
+11,Vietnam Holding Ltd,Vietnam Holding,Investment Company,Foreign Fund,Active,Switzerland,120M,vietnamholding.com,Listed Equities
+12,Pyn Elite Fund,Pyn Elite,Hedge Fund,Foreign Fund,Active,Finland,400M,pynelite.fi,Vietnam Equities
+13,Saigon Asset Management,SAM,Asset Management,Domestic Fund,Active,Vietnam,200M,sam.com.vn,Multi-sector
+14,Jaccar Holdings,Jaccar,Private Equity,Foreign Fund,Active,Luxembourg,500M,jaccar.com,Infrastructure & Energy
+15,Do Ventures,Do Ventures,Venture Capital,Domestic Fund,Active,Vietnam,50M,doventures.com,Early-stage Tech

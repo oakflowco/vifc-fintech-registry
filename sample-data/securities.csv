@@ -1,0 +1,16 @@
+ID,Company Name,Trading Name,Category,License Type,Status,License Number,Headquarters,Website
+1,SSI Securities Corporation,SSI,Full-Service Brokerage,Securities Brokerage + Advisory + Underwriting,Active,03/GPHDKD,Ho Chi Minh City,ssi.com.vn
+2,VNDirect Securities Corporation,VNDirect,Full-Service Brokerage,Securities Brokerage + Advisory + Underwriting,Active,11/GPHDKD,Hanoi,vndirect.com.vn
+3,Ho Chi Minh City Securities (HSC),HSC,Full-Service Brokerage,Securities Brokerage + Advisory + Underwriting,Active,05/GPHDKD,Ho Chi Minh City,hsc.com.vn
+4,Vietcap Securities (VCSC),VCSC,Full-Service Brokerage,Securities Brokerage + Advisory + Underwriting,Active,07/GPHDKD,Ho Chi Minh City,vcsc.com.vn
+5,MB Securities (MBS),MBS,Full-Service Brokerage,Securities Brokerage + Advisory + Underwriting,Active,22/GPHDKD,Hanoi,mbs.com.vn
+6,Techcom Securities (TCBS),TCBS,Digital Brokerage,Securities Brokerage + Advisory,Active,28/GPHDKD,Hanoi,tcbs.com.vn
+7,VPS Securities,VPS,Full-Service Brokerage,Securities Brokerage + Advisory + Underwriting,Active,16/GPHDKD,Hanoi,vps.com.vn
+8,Mirae Asset Securities Vietnam,Mirae Asset VN,Foreign Brokerage,Securities Brokerage + Advisory,Active,42/GPHDKD,Ho Chi Minh City,miraeasset.com.vn
+9,KIS Vietnam Securities,KIS Vietnam,Foreign Brokerage,Securities Brokerage + Advisory,Active,38/GPHDKD,Ho Chi Minh City,kisvn.vn
+10,Dragon Capital VNDAF,DCVFM,Fund Management,Fund Management License,Active,FM-01,Ho Chi Minh City,dragoncapital.com
+11,VinaCapital Fund Management,VCFM,Fund Management,Fund Management License,Active,FM-03,Ho Chi Minh City,vinacapital.com
+12,SSI Asset Management (SSIAM),SSIAM,Fund Management,Fund Management License,Active,FM-05,Ho Chi Minh City,ssiam.com.vn
+13,Bao Viet Fund Management (BVIM),BVIM,Fund Management,Fund Management License,Active,FM-04,Hanoi,bvim.com.vn
+14,Techcom Capital (TCBF),Techcom Capital,Fund Management,Fund Management License,Active,FM-12,Hanoi,techcomcapital.com.vn
+15,Eastspring Investments Vietnam,Eastspring VN,Foreign Fund Management,Fund Management License,Active,FM-08,Ho Chi Minh City,eastspring.com.vn

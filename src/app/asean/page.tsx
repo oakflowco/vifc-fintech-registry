@@ -1,0 +1,27 @@
+import { fetchASEANComparison } from "@/lib/fetch-asean";
+import { ASEANDashboard } from "@/components/asean-dashboard";
+
+export const revalidate = 86400; // daily
+
+export default async function ASEANPage() {
+  const data = await fetchASEANComparison();
+
+  return (
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">
+            Vietnam vs ASEAN Dashboard
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Live macroeconomic comparison across 6 ASEAN economies — data from World Bank
+          </p>
+        </div>
+        <span className="text-[10px] text-muted-foreground font-mono hidden sm:block">
+          Source: World Bank Open Data
+        </span>
+      </div>
+      <ASEANDashboard data={data} />
+    </div>
+  );
+}
