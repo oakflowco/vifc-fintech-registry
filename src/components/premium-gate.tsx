@@ -20,7 +20,7 @@ export function PremiumGate({ feature }: { feature: string }) {
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <span>Premium Access</span>
-            <span className="text-2xl">$10/mo</span>
+            <span className="text-2xl">250,000₫/mo</span>
           </CardTitle>
         </CardHeader>
         <CardContent>

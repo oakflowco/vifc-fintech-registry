@@ -1,0 +1,193 @@
+{
+  "common": {
+    "registry": "Danh bạ",
+    "trends": "Xu hướng",
+    "deals": "Giao dịch",
+    "asean": "ASEAN",
+    "insights": "Phân tích",
+    "login": "Đăng nhập",
+    "signup": "Đăng ký",
+    "logout": "Đăng xuất",
+    "account": "Tài khoản",
+    "search": "Tìm kiếm...",
+    "showing": "Hiển thị",
+    "of": "trong",
+    "entries": "mục",
+    "exportCsv": "Xuất CSV",
+    "pro": "PRO",
+    "premium": "Cao cấp",
+    "free": "Miễn phí",
+    "all": "Tất cả",
+    "details": "Chi tiết",
+    "backTo": "Quay lại",
+    "source": "Nguồn",
+    "live": "LIVE",
+    "lastUpdated": "Cập nhật lần cuối",
+    "loading": "Đang tải...",
+    "noData": "Không tìm thấy dữ liệu",
+    "fintechCompanies": "Công ty Fintech",
+    "investors": "Nhà đầu tư & Quỹ",
+    "banks": "Ngân hàng & Thành viên",
+    "securities": "Công ty Chứng khoán",
+    "insurance": "Bảo hiểm",
+    "digitalBanks": "Ngân hàng Số",
+    "neobanks": "Neobanks",
+    "sandbox": "Sandbox Quản lý",
+    "whyVietnam": "Tại sao Việt Nam?",
+    "vifc": "VIFC Da Nang",
+    "vifcHcmc": "VIFC Ho Chi Minh City",
+    "capitalMarkets": "Thị trường Vốn",
+    "commodities": "Hàng hóa (MXV)",
+    "carbonCredits": "Tín chỉ Carbon",
+    "creditRatings": "Xếp hạng Tín nhiệm",
+    "developmentFinance": "Tài chính Phát triển",
+    "marketSize": "Quy mô Thị trường",
+    "investorGuide": "Hướng dẫn Đầu tư",
+    "regulators": "Cơ quan Quản lý",
+    "risks": "Rủi ro & Thách thức",
+    "calendar": "Lịch Kinh tế",
+    "privacyNotice": "Chính sách Bảo mật",
+    "termsOfUse": "Điều khoản Sử dụng",
+    "vifcStatus": "Trạng thái VIFC",
+    "member": "Thành viên",
+    "founding": "Thành viên Sáng lập",
+    "applicant": "Ứng viên",
+    "inTalks": "Đang đàm phán",
+    "mou": "Đã ký MOU"
+  },
+  "home": {
+    "title": "Trung tâm Tài chính Quốc tế Việt Nam",
+    "subtitle": "Nền tảng dữ liệu toàn diện cho hệ sinh thái tài chính Việt Nam — danh bạ, xu hướng thị trường và thông tin đầu tư"
+  },
+  "trends": {
+    "title": "Trung tâm Tài chính Việt Nam — Thông tin Thị trường",
+    "subtitle": "Dữ liệu trực tiếp từ World Bank, Yahoo Finance & Google News — tự động cập nhật mỗi giờ",
+    "keyIndicators": "Chỉ số Chính",
+    "capitalMarketsMacro": "Thị trường Vốn & Kinh tế Vĩ mô",
+    "fintechEcosystem": "Hệ sinh thái Fintech",
+    "investmentLandscape": "Bối cảnh Đầu tư & Khởi nghiệp",
+    "newsRegulatory": "Tin tức IFC & Diễn biến Pháp lý",
+    "latestNews": "Tin tức Mới nhất",
+    "regulatoryMilestones": "Các mốc Pháp lý Quan trọng",
+    "relatedLinks": "Liên kết & Tài nguyên Liên quan",
+    "entitiesByCity": "Tổ chức theo Thành phố",
+    "categoryDistribution": "Phân bổ theo Danh mục",
+    "domesticVsForeign": "Đầu tư Trong nước so với Nước ngoài"
+  },
+  "deals": {
+    "title": "Theo dõi Giao dịch",
+    "subtitle": "Các vòng gọi vốn, M&A và hoạt động đầu tư trong hệ sinh thái fintech Việt Nam",
+    "latestDealNews": "Tin tức Giao dịch Mới nhất",
+    "curatedDatabase": "Cơ sở Dữ liệu Giao dịch",
+    "totalDeals": "Tổng số Giao dịch",
+    "totalInvested": "Tổng vốn Đầu tư",
+    "avgDealSize": "Quy mô Giao dịch TB",
+    "uniqueInvestors": "Nhà đầu tư Riêng biệt"
+  },
+  "whyVietnam": {
+    "title": "Tại sao Việt Nam?",
+    "subtitle": "Hệ sinh thái fintech phát triển nhanh nhất Đông Nam Á",
+    "keyStats": "Thống kê Chính",
+    "reasons": "8 Lý do Đầu tư vào Hệ sinh thái Tài chính Việt Nam",
+    "comparison": "Việt Nam so với Các Trung tâm Tài chính Lớn",
+    "readyToExplore": "Sẵn sàng khám phá?"
+  },
+  "vifc": {
+    "title": "VIFC Da Nang",
+    "subtitle": "Trung tâm Tài chính Quốc tế Đầu tiên của Việt Nam",
+    "incentives": "Chính sách Ưu đãi",
+    "whoCanRegister": "Ai Có thể Đăng ký?",
+    "registrationProcess": "Quy trình Đăng ký",
+    "contact": "Liên hệ VIFC Da Nang"
+  },
+  "capitalMarkets": {
+    "title": "Thị trường Vốn Việt Nam",
+    "subtitle": "Sàn giao dịch chứng khoán, thị trường trái phiếu, phái sinh và khung pháp lý cho nhà đầu tư nước ngoài",
+    "stockExchanges": "Sàn Giao dịch Chứng khoán",
+    "bondMarket": "Thị trường Trái phiếu",
+    "derivatives": "Thị trường Phái sinh",
+    "foreignInvestor": "Khung Pháp lý cho Nhà đầu tư Nước ngoài"
+  },
+  "carbon": {
+    "title": "Thị trường Tín chỉ Carbon Việt Nam",
+    "subtitle": "Thí điểm ETS, sàn giao dịch carbon và cơ hội đầu tư",
+    "roadmap": "Lộ trình Triển khai",
+    "coveredSectors": "Các Ngành được Bao phủ",
+    "creditTypes": "Các Loại Tín chỉ Carbon Đủ điều kiện",
+    "investmentOps": "Cơ hội Đầu tư"
+  },
+  "sandbox": {
+    "title": "Sandbox Quản lý",
+    "subtitle": "Các chương trình đổi mới fintech, blockchain và tài sản số",
+    "participants": "Các Đơn vị Tham gia Sandbox"
+  },
+  "regulators": {
+    "title": "Cơ quan Quản lý",
+    "subtitle": "Các cơ quan quản lý và tổ chức chính điều hành hệ sinh thái tài chính Việt Nam"
+  },
+  "marketSize": {
+    "title": "Ước tính Quy mô Thị trường",
+    "subtitle": "TAM, SAM và SOM cho từng lĩnh vực fintech tại Việt Nam",
+    "totalTam": "Tổng TAM",
+    "totalSam": "Tổng SAM",
+    "currentSom": "SOM Hiện tại"
+  },
+  "investorGuide": {
+    "title": "Cách Đầu tư vào Việt Nam",
+    "subtitle": "Hướng dẫn từng bước cho nhà đầu tư quốc tế"
+  },
+  "risks": {
+    "title": "Rủi ro & Thách thức",
+    "subtitle": "Đánh giá trung thực với các chiến lược giảm thiểu thực tế",
+    "mitigations": "Chiến lược Giảm thiểu"
+  },
+  "calendar": {
+    "title": "Lịch Kinh tế",
+    "subtitle": "Các ngày quan trọng cho nhà đầu tư — pháp lý, dữ liệu, sự kiện thị trường",
+    "criticalDates": "Ngày Quan trọng"
+  },
+  "ratings": {
+    "title": "Cơ quan Xếp hạng Tín nhiệm",
+    "subtitle": "Xếp hạng tín nhiệm quốc gia và hạ tầng dữ liệu tài chính",
+    "sovereignRatings": "Xếp hạng Tín nhiệm Quốc gia Việt Nam"
+  },
+  "commodities": {
+    "title": "Sàn Giao dịch Hàng hóa (MXV)",
+    "subtitle": "Sàn giao dịch hàng hóa quốc gia Việt Nam — hơn 28 sản phẩm",
+    "globalRankings": "Xếp hạng Hàng hóa Toàn cầu của Việt Nam",
+    "tradedProducts": "Sản phẩm Giao dịch",
+    "licensedBrokers": "Môi giới Hàng hóa Được cấp phép"
+  },
+  "dfi": {
+    "title": "Tổ chức Tài chính Phát triển",
+    "subtitle": "Các ngân hàng phát triển đa phương và song phương — cam kết hơn 60 tỷ USD"
+  },
+  "neobanks": {
+    "title": "Ngân hàng Số & Neobanks",
+    "subtitle": "Nền tảng ngân hàng số và ứng dụng ngân hàng ưu tiên di động",
+    "timeline": "Dòng thời gian Ngân hàng Số"
+  },
+  "auth": {
+    "createAccount": "Tạo Tài khoản",
+    "loginTitle": "Đăng nhập",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "alreadyHaveAccount": "Đã có tài khoản? Đăng nhập",
+    "noAccount": "Chưa có tài khoản? Đăng ký",
+    "premiumAccess": "Truy cập Cao cấp",
+    "upgradeToPremium": "Nâng cấp lên Cao cấp",
+    "payWithMomo": "Thanh toán bằng MoMo",
+    "securePayment": "Thanh toán an toàn qua ví điện tử MoMo",
+    "myAccount": "Tài khoản của tôi",
+    "profile": "Hồ sơ",
+    "subscriptionStatus": "Trạng thái",
+    "expires": "Hết hạn",
+    "premiumFeatures": "Tính năng Cao cấp"
+  },
+  "footer": {
+    "description": "VIFC Database — Trung tâm Tài chính Quốc tế Việt Nam. Dữ liệu được cập nhật tự động từ bảng tính đăng ký.",
+    "privacy": "Chính sách Bảo mật",
+    "terms": "Điều khoản Sử dụng",
+    "poweredBy": "Dữ liệu trực tiếp từ World Bank, Yahoo Finance & Google News"
+  }
+}

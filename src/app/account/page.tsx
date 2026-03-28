@@ -100,7 +100,7 @@ export default function AccountPage() {
             <CardHeader>
               <CardTitle>Upgrade to Premium</CardTitle>
               <CardDescription>
-                Unlock all features for $10/month (250,000 VND)
+                Unlock all features for 250,000₫/month
               </CardDescription>
             </CardHeader>
             <CardContent>

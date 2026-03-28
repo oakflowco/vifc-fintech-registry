@@ -1,0 +1,193 @@
+{
+  "common": {
+    "registry": "등록부",
+    "trends": "트렌드",
+    "deals": "거래",
+    "asean": "ASEAN",
+    "insights": "인사이트",
+    "login": "로그인",
+    "signup": "회원가입",
+    "logout": "로그아웃",
+    "account": "계정",
+    "search": "검색...",
+    "showing": "표시 중",
+    "of": "/",
+    "entries": "건",
+    "exportCsv": "CSV 내보내기",
+    "pro": "PRO",
+    "premium": "프리미엄",
+    "free": "무료",
+    "all": "전체",
+    "details": "상세",
+    "backTo": "돌아가기",
+    "source": "출처",
+    "live": "LIVE",
+    "lastUpdated": "최근 업데이트",
+    "loading": "로딩 중...",
+    "noData": "데이터를 찾을 수 없습니다",
+    "fintechCompanies": "핀테크 기업",
+    "investors": "투자자 & 펀드",
+    "banks": "은행 & 회원",
+    "securities": "증권사",
+    "insurance": "보험",
+    "digitalBanks": "디지털 은행",
+    "neobanks": "네오뱅크",
+    "sandbox": "규제 샌드박스",
+    "whyVietnam": "왜 베트남인가?",
+    "vifc": "VIFC Da Nang",
+    "vifcHcmc": "VIFC Ho Chi Minh City",
+    "capitalMarkets": "자본시장",
+    "commodities": "원자재 (MXV)",
+    "carbonCredits": "탄소 크레딧",
+    "creditRatings": "신용등급",
+    "developmentFinance": "개발금융",
+    "marketSize": "시장 규모",
+    "investorGuide": "투자자 가이드",
+    "regulators": "규제 기관",
+    "risks": "위험 & 과제",
+    "calendar": "경제 캘린더",
+    "privacyNotice": "개인정보 보호정책",
+    "termsOfUse": "이용약관",
+    "vifcStatus": "VIFC 상태",
+    "member": "회원",
+    "founding": "창립 회원",
+    "applicant": "신청자",
+    "inTalks": "협의 중",
+    "mou": "MOU 체결"
+  },
+  "home": {
+    "title": "베트남 국제금융센터",
+    "subtitle": "베트남 금융 생태계를 위한 종합 데이터 플랫폼 — 등록부, 시장 트렌드 및 투자 인텔리전스"
+  },
+  "trends": {
+    "title": "베트남 금융센터 — 시장 인텔리전스",
+    "subtitle": "World Bank, Yahoo Finance 및 Google News의 실시간 데이터 — 매시간 자동 갱신",
+    "keyIndicators": "핵심 지표",
+    "capitalMarketsMacro": "자본시장 & 거시경제",
+    "fintechEcosystem": "핀테크 생태계",
+    "investmentLandscape": "투자 & 스타트업 현황",
+    "newsRegulatory": "IFC 뉴스 & 규제 동향",
+    "latestNews": "최신 뉴스",
+    "regulatoryMilestones": "규제 마일스톤",
+    "relatedLinks": "관련 링크 & 자료",
+    "entitiesByCity": "도시별 기관 수",
+    "categoryDistribution": "카테고리 분포",
+    "domesticVsForeign": "국내 vs 해외 투자"
+  },
+  "deals": {
+    "title": "딜 트래커",
+    "subtitle": "베트남 핀테크 생태계의 투자 라운드, M&A 및 투자 활동",
+    "latestDealNews": "최신 딜 뉴스",
+    "curatedDatabase": "큐레이션 딜 데이터베이스",
+    "totalDeals": "총 거래 수",
+    "totalInvested": "총 투자액",
+    "avgDealSize": "평균 거래 규모",
+    "uniqueInvestors": "고유 투자자 수"
+  },
+  "whyVietnam": {
+    "title": "왜 베트남인가?",
+    "subtitle": "동남아시아에서 가장 빠르게 성장하는 핀테크 생태계",
+    "keyStats": "핵심 통계",
+    "reasons": "베트남 금융 생태계에 투자해야 하는 8가지 이유",
+    "comparison": "베트남 vs 주요 금융센터",
+    "readyToExplore": "탐색할 준비가 되셨나요?"
+  },
+  "vifc": {
+    "title": "VIFC Da Nang",
+    "subtitle": "베트남 최초의 국제금융센터",
+    "incentives": "인센티브 정책",
+    "whoCanRegister": "누가 등록할 수 있나요?",
+    "registrationProcess": "등록 절차",
+    "contact": "VIFC Da Nang 문의"
+  },
+  "capitalMarkets": {
+    "title": "베트남 자본시장",
+    "subtitle": "증권거래소, 채권시장, 파생상품 및 외국인 투자자 프레임워크",
+    "stockExchanges": "증권거래소",
+    "bondMarket": "채권시장",
+    "derivatives": "파생상품시장",
+    "foreignInvestor": "외국인 투자자 프레임워크"
+  },
+  "carbon": {
+    "title": "베트남 탄소 크레딧 시장",
+    "subtitle": "ETS 파일럿, 탄소 거래소 및 투자 기회",
+    "roadmap": "이행 로드맵",
+    "coveredSectors": "대상 산업",
+    "creditTypes": "적격 탄소 크레딧 유형",
+    "investmentOps": "투자 기회"
+  },
+  "sandbox": {
+    "title": "규제 샌드박스",
+    "subtitle": "핀테크, 블록체인, 디지털 자산 혁신 프로그램",
+    "participants": "샌드박스 참여 기관"
+  },
+  "regulators": {
+    "title": "규제 기관",
+    "subtitle": "베트남 금융 생태계를 관장하는 주요 규제 기관 및 기구"
+  },
+  "marketSize": {
+    "title": "시장 규모 추정",
+    "subtitle": "베트남 각 핀테크 분야의 TAM, SAM 및 SOM",
+    "totalTam": "총 TAM",
+    "totalSam": "총 SAM",
+    "currentSom": "현재 SOM"
+  },
+  "investorGuide": {
+    "title": "베트남 투자 방법",
+    "subtitle": "해외 투자자를 위한 단계별 가이드"
+  },
+  "risks": {
+    "title": "위험 & 과제",
+    "subtitle": "실질적인 완화 전략을 포함한 솔직한 평가",
+    "mitigations": "완화 전략"
+  },
+  "calendar": {
+    "title": "경제 캘린더",
+    "subtitle": "투자자 핵심 일정 — 규제, 데이터, 시장 이벤트",
+    "criticalDates": "핵심 일정"
+  },
+  "ratings": {
+    "title": "신용평가기관",
+    "subtitle": "국가 신용등급 및 금융 데이터 인프라",
+    "sovereignRatings": "베트남 국가 신용등급"
+  },
+  "commodities": {
+    "title": "상품거래소 (MXV)",
+    "subtitle": "베트남 국가 상품거래소 — 28개 이상의 상품",
+    "globalRankings": "베트남의 글로벌 상품 순위",
+    "tradedProducts": "거래 상품",
+    "licensedBrokers": "인가 상품 브로커"
+  },
+  "dfi": {
+    "title": "개발금융기관",
+    "subtitle": "다자 및 양자 개발은행 — 600억 달러 이상 약정"
+  },
+  "neobanks": {
+    "title": "디지털 은행 & 네오뱅크",
+    "subtitle": "디지털 뱅킹 플랫폼 및 모바일 우선 뱅킹 앱",
+    "timeline": "디지털 뱅킹 타임라인"
+  },
+  "auth": {
+    "createAccount": "계정 생성",
+    "loginTitle": "로그인",
+    "email": "이메일",
+    "password": "비밀번호",
+    "alreadyHaveAccount": "이미 계정이 있으신가요? 로그인",
+    "noAccount": "계정이 없으신가요? 회원가입",
+    "premiumAccess": "프리미엄 이용",
+    "upgradeToPremium": "프리미엄으로 업그레이드",
+    "payWithMomo": "MoMo로 결제",
+    "securePayment": "MoMo 전자지갑을 통한 안전한 결제",
+    "myAccount": "내 계정",
+    "profile": "프로필",
+    "subscriptionStatus": "상태",
+    "expires": "만료일",
+    "premiumFeatures": "프리미엄 기능"
+  },
+  "footer": {
+    "description": "VIFC 데이터베이스 — 베트남 국제금융센터. 데이터는 등록 스프레드시트에서 자동 업데이트됩니다.",
+    "privacy": "개인정보 보호정책",
+    "terms": "이용약관",
+    "poweredBy": "World Bank, Yahoo Finance 및 Google News 실시간 데이터 제공"
+  }
+}

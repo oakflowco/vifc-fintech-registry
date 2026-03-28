@@ -1,0 +1,193 @@
+{
+  "common": {
+    "registry": "レジストリ",
+    "trends": "トレンド",
+    "deals": "ディール",
+    "asean": "ASEAN",
+    "insights": "インサイト",
+    "login": "ログイン",
+    "signup": "新規登録",
+    "logout": "ログアウト",
+    "account": "アカウント",
+    "search": "検索...",
+    "showing": "表示中",
+    "of": "/",
+    "entries": "件",
+    "exportCsv": "CSVエクスポート",
+    "pro": "PRO",
+    "premium": "プレミアム",
+    "free": "無料",
+    "all": "すべて",
+    "details": "詳細",
+    "backTo": "戻る",
+    "source": "出典",
+    "live": "LIVE",
+    "lastUpdated": "最終更新",
+    "loading": "読み込み中...",
+    "noData": "データが見つかりません",
+    "fintechCompanies": "フィンテック企業",
+    "investors": "投資家・ファンド",
+    "banks": "銀行・会員",
+    "securities": "証券会社",
+    "insurance": "保険",
+    "digitalBanks": "デジタルバンク",
+    "neobanks": "ネオバンク",
+    "sandbox": "規制サンドボックス",
+    "whyVietnam": "なぜベトナム？",
+    "vifc": "VIFC Da Nang",
+    "vifcHcmc": "VIFC Ho Chi Minh City",
+    "capitalMarkets": "資本市場",
+    "commodities": "コモディティ (MXV)",
+    "carbonCredits": "カーボンクレジット",
+    "creditRatings": "信用格付",
+    "developmentFinance": "開発金融",
+    "marketSize": "市場規模",
+    "investorGuide": "投資家ガイド",
+    "regulators": "規制当局",
+    "risks": "リスクと課題",
+    "calendar": "経済カレンダー",
+    "privacyNotice": "プライバシーポリシー",
+    "termsOfUse": "利用規約",
+    "vifcStatus": "VIFCステータス",
+    "member": "メンバー",
+    "founding": "設立メンバー",
+    "applicant": "申請者",
+    "inTalks": "交渉中",
+    "mou": "MOU締結済"
+  },
+  "home": {
+    "title": "ベトナム国際金融センター",
+    "subtitle": "ベトナム金融エコシステムの総合データプラットフォーム — レジストリ、市場トレンド、投資インテリジェンス"
+  },
+  "trends": {
+    "title": "ベトナム金融センター — マーケットインテリジェンス",
+    "subtitle": "World Bank、Yahoo Finance、Google News のライブデータ — 毎時自動更新",
+    "keyIndicators": "主要指標",
+    "capitalMarketsMacro": "資本市場とマクロ経済",
+    "fintechEcosystem": "フィンテック・エコシステム",
+    "investmentLandscape": "投資・スタートアップの動向",
+    "newsRegulatory": "IFCニュースと規制動向",
+    "latestNews": "最新ニュース",
+    "regulatoryMilestones": "規制マイルストーン",
+    "relatedLinks": "関連リンクとリソース",
+    "entitiesByCity": "都市別の機関数",
+    "categoryDistribution": "カテゴリ分布",
+    "domesticVsForeign": "国内投資と海外投資の比較"
+  },
+  "deals": {
+    "title": "ディールトラッカー",
+    "subtitle": "ベトナムのフィンテック・エコシステムにおける資金調達ラウンド、M&A、投資活動",
+    "latestDealNews": "最新ディールニュース",
+    "curatedDatabase": "厳選ディールデータベース",
+    "totalDeals": "ディール総数",
+    "totalInvested": "投資総額",
+    "avgDealSize": "平均ディール規模",
+    "uniqueInvestors": "ユニーク投資家数"
+  },
+  "whyVietnam": {
+    "title": "なぜベトナム？",
+    "subtitle": "東南アジアで最も急成長するフィンテック・エコシステム",
+    "keyStats": "主要統計",
+    "reasons": "ベトナム金融エコシステムに投資する8つの理由",
+    "comparison": "ベトナムと主要金融センターの比較",
+    "readyToExplore": "探索する準備はできましたか？"
+  },
+  "vifc": {
+    "title": "VIFC Da Nang",
+    "subtitle": "ベトナム初の国際金融センター",
+    "incentives": "優遇政策",
+    "whoCanRegister": "登録対象者",
+    "registrationProcess": "登録プロセス",
+    "contact": "VIFC Da Nang へのお問い合わせ"
+  },
+  "capitalMarkets": {
+    "title": "ベトナム資本市場",
+    "subtitle": "証券取引所、債券市場、デリバティブ、外国投資家の枠組み",
+    "stockExchanges": "証券取引所",
+    "bondMarket": "債券市場",
+    "derivatives": "デリバティブ市場",
+    "foreignInvestor": "外国投資家の枠組み"
+  },
+  "carbon": {
+    "title": "ベトナム・カーボンクレジット市場",
+    "subtitle": "ETSパイロット、炭素取引所、投資機会",
+    "roadmap": "実施ロードマップ",
+    "coveredSectors": "対象セクター",
+    "creditTypes": "適格カーボンクレジットの種類",
+    "investmentOps": "投資機会"
+  },
+  "sandbox": {
+    "title": "規制サンドボックス",
+    "subtitle": "フィンテック、ブロックチェーン、デジタル資産のイノベーションプログラム",
+    "participants": "サンドボックス参加者"
+  },
+  "regulators": {
+    "title": "規制当局",
+    "subtitle": "ベトナムの金融エコシステムを統括する主要規制機関・組織"
+  },
+  "marketSize": {
+    "title": "市場規模の推定",
+    "subtitle": "ベトナムの各フィンテック分野における TAM、SAM、SOM",
+    "totalTam": "合計 TAM",
+    "totalSam": "合計 SAM",
+    "currentSom": "現在の SOM"
+  },
+  "investorGuide": {
+    "title": "ベトナムへの投資方法",
+    "subtitle": "海外投資家向けステップバイステップガイド"
+  },
+  "risks": {
+    "title": "リスクと課題",
+    "subtitle": "実践的な軽減策を伴う率直な評価",
+    "mitigations": "軽減策"
+  },
+  "calendar": {
+    "title": "経済カレンダー",
+    "subtitle": "投資家向け重要日程 — 規制、データ、市場イベント",
+    "criticalDates": "重要日程"
+  },
+  "ratings": {
+    "title": "信用格付機関",
+    "subtitle": "ソブリン格付と金融データインフラ",
+    "sovereignRatings": "ベトナムのソブリン信用格付"
+  },
+  "commodities": {
+    "title": "商品取引所 (MXV)",
+    "subtitle": "ベトナム国家商品取引所 — 28以上の商品",
+    "globalRankings": "ベトナムの世界商品ランキング",
+    "tradedProducts": "取引商品",
+    "licensedBrokers": "認可商品ブローカー"
+  },
+  "dfi": {
+    "title": "開発金融機関",
+    "subtitle": "多国間・二国間開発銀行 — コミットメント総額600億ドル以上"
+  },
+  "neobanks": {
+    "title": "デジタルバンク＆ネオバンク",
+    "subtitle": "デジタルバンキングプラットフォームとモバイルファーストの銀行アプリ",
+    "timeline": "デジタルバンキングの歩み"
+  },
+  "auth": {
+    "createAccount": "アカウント作成",
+    "loginTitle": "ログイン",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "alreadyHaveAccount": "アカウントをお持ちですか？ログイン",
+    "noAccount": "アカウントをお持ちでないですか？新規登録",
+    "premiumAccess": "プレミアムアクセス",
+    "upgradeToPremium": "プレミアムにアップグレード",
+    "payWithMomo": "MoMoで支払う",
+    "securePayment": "MoMo電子ウォレットによる安全な決済",
+    "myAccount": "マイアカウント",
+    "profile": "プロフィール",
+    "subscriptionStatus": "ステータス",
+    "expires": "有効期限",
+    "premiumFeatures": "プレミアム機能"
+  },
+  "footer": {
+    "description": "VIFCデータベース — ベトナム国際金融センター。データはレジストリスプレッドシートから自動更新されます。",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "poweredBy": "World Bank、Yahoo Finance、Google News のライブデータを使用"
+  }
+}

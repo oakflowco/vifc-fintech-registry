@@ -54,7 +54,7 @@ interface TrendChartsProps {
   startupsByCity: { city: string; startups: number; funding: number; pct: number }[];
   startupStages: { stage: string; count: number; avgTicket: number }[];
   investorCountries: { country: string; deals: number; amount: number }[];
-  regulatoryMilestones: { date: string; event: string }[];
+  regulatoryMilestones: { date: string; event: string; url?: string }[];
   relatedLinks: RelatedLink[];
 }
 
@@ -294,8 +294,14 @@ export function TrendCharts({
 
           <Card>
             <CardHeader>
-              <CardTitle>Startups by City</CardTitle>
-              <CardDescription>Where Vietnam&apos;s fintech startups are headquartered</CardDescription>
+              <CardTitle className="flex items-center gap-2">
+                Entities by City
+                <span className="inline-flex items-center gap-1 text-[10px] text-green-500 font-mono font-normal">
+                  <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+                  LIVE
+                </span>
+              </CardTitle>
+              <CardDescription>Computed from registry data — updates when you edit the spreadsheet</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -304,7 +310,7 @@ export function TrendCharts({
                     <div className="flex items-center justify-between text-sm mb-1">
                       <span className="font-medium">{city.city}</span>
                       <span className="text-muted-foreground">
-                        {city.startups} startups · ${city.funding}M · {city.pct}%
+                        {city.startups} entities · {city.pct}%
                       </span>
                     </div>
                     <div className="h-2 rounded-full bg-muted overflow-hidden">
@@ -418,7 +424,21 @@ export function TrendCharts({
                     <Badge variant="outline" className="shrink-0 font-mono text-xs">
                       {m.date}
                     </Badge>
-                    <p className="text-sm text-muted-foreground">{m.event}</p>
+                    {m.url ? (
+                      <a
+                        href={m.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5"
+                      >
+                        {m.event}
+                        <svg className="h-3 w-3 shrink-0 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5zm7.25-.75a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V6.31l-5.47 5.47a.75.75 0 01-1.06-1.06l5.47-5.47H12.25a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">{m.event}</p>
+                    )}
                   </div>
                 ))}
               </div>

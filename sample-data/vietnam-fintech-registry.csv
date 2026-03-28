@@ -1,45 +1,64 @@
-ID,Company Name,Trading Name,Category,License Type,Status,Date Issued,Website,Headquarters
-1,M_Service Joint Stock Company,MoMo,E-Wallet,Payment Intermediary,Active,2015-09-14,momo.vn,Ho Chi Minh City
-2,Vietnam Payment Solution JSC,VNPay,E-Wallet,Payment Intermediary,Active,2014-05-20,vnpay.vn,Hanoi
-3,ZaloPay (VNG Corporation),ZaloPay,E-Wallet,Payment Intermediary,Active,2017-11-08,zalopay.vn,Ho Chi Minh City
-4,Viettel Digital Services Corporation,Viettel Money,E-Wallet,Payment Intermediary,Active,2019-06-15,viettelmoney.vn,Hanoi
-5,ShopeePay Vietnam,ShopeePay,E-Wallet,Payment Intermediary,Active,2019-12-01,shopeepay.vn,Ho Chi Minh City
-6,NAPAS (National Payment Corporation of Vietnam),NAPAS,Payment Infrastructure,Payment Switching,Active,2004-03-01,napas.com.vn,Hanoi
-7,FE Credit (VPBank Finance Company),FE Credit,Consumer Lending,Consumer Finance License,Active,2010-02-10,fecredit.com.vn,Ho Chi Minh City
-8,Tima Joint Stock Company,Tima,P2P Lending,Fintech Sandbox,Active,2016-01-20,tima.vn,Hanoi
-9,Finhay Technology JSC,Finhay,Investment,Securities Brokerage,Active,2017-08-05,finhay.com.vn,Ho Chi Minh City
-10,Infina Investment JSC,Infina,Investment,Securities Advisory,Active,2019-03-12,infina.vn,Ho Chi Minh City
-11,Mfast Technology JSC,Mfast,Insurance Distribution,InsurTech License,Active,2019-07-22,mfast.vn,Ho Chi Minh City
-12,Papaya Insurtech JSC,Papaya,Insurance Distribution,InsurTech License,Active,2020-04-15,papaya.vn,Ho Chi Minh City
-13,Trusting Social Vietnam,Trusting Social,Credit Scoring,Fintech Sandbox,Active,2016-11-30,trustingsocial.com,Ho Chi Minh City
-14,VietCredit Finance Company,VietCredit,Consumer Lending,Consumer Finance License,Active,2017-06-18,vietcredit.com.vn,Ho Chi Minh City
-15,OneFin Vietnam JSC,OneFin,Payment Gateway,Payment Intermediary,Active,2018-09-10,onefin.vn,Hanoi
-16,PayME Digital JSC,PayME,E-Wallet,Payment Intermediary,Active,2020-01-08,payme.vn,Ho Chi Minh City
-17,Payoo (VietUnion Online Services),Payoo,Payment Gateway,Payment Intermediary,Active,2008-06-25,payoo.vn,Ho Chi Minh City
-18,SmartPay JSC,SmartPay,E-Wallet,Payment Intermediary,Active,2018-11-14,smartpay.vn,Ho Chi Minh City
-19,Vimo Technology JSC,Vimo,E-Wallet,Payment Intermediary,Suspended,2016-04-20,vimo.vn,Hanoi
-20,MCredit (MB Shinsei Finance),MCredit,Consumer Lending,Consumer Finance License,Active,2016-12-05,mcredit.com.vn,Hanoi
-21,Robocash Vietnam,Robocash,P2P Lending,Fintech Sandbox,Active,2018-05-18,robocash.vn,Ho Chi Minh City
-22,Lendela Vietnam,Lendela,Loan Marketplace,Fintech Sandbox,Active,2020-07-01,lendela.com,Ho Chi Minh City
-23,VNPT Money (VNPT-Media),VNPT Money,E-Wallet,Payment Intermediary,Active,2020-03-22,vnptmoney.vn,Hanoi
-24,Galaxy Fintech JSC,Galaxy Pay,E-Wallet,Payment Intermediary,Pending,2021-06-10,galaxypay.vn,Ho Chi Minh City
-25,Fundiin Vietnam JSC,Fundiin,Buy Now Pay Later,Fintech Sandbox,Active,2019-10-15,fundiin.vn,Ho Chi Minh City
-26,Kredivo Vietnam (FinAccel),Kredivo,Buy Now Pay Later,Consumer Finance License,Active,2021-02-28,kredivo.vn,Ho Chi Minh City
-27,VNLife Corporation,VNLife,Payment Infrastructure,Payment Intermediary,Active,2019-08-12,vnlife.vn,Hanoi
-28,ECPay Vietnam,ECPay,Payment Gateway,Payment Intermediary,Active,2009-04-15,ecpay.vn,Ho Chi Minh City
-29,AirPay Vietnam (Garena),AirPay,E-Wallet,Payment Intermediary,Active,2016-08-30,airpay.vn,Ho Chi Minh City
-30,Dragonfly Financial Technologies,Dragonfly,Remittance,Payment Intermediary,Expired,2018-02-14,dragonfly.vn,Da Nang
-31,Alphatrue Solutions JSC,Basal Pay,Blockchain / Crypto,VIFC Sandbox (Crypto Asset Conversion),Sandbox,2025-01-15,basalpay.io,Da Nang
-32,U2U Network,U2U Chain,Blockchain / Crypto,Blockchain Infrastructure (Layer-1),Active,2024-11-01,u2u.xyz,Ho Chi Minh City
-33,1Matrix Technology JSC,1Matrix,Blockchain / Crypto,Blockchain Infrastructure (Layer-1),Active,2025-05-01,1matrix.io,Hanoi
-34,Kyber Network,KyberSwap,Blockchain / Crypto,DeFi Protocol (DEX),Active,2017-09-01,kyberswap.com,Ho Chi Minh City
-35,Coin98 Finance,Coin98,Blockchain / Crypto,DeFi / Multi-chain Wallet,Active,2020-06-01,coin98.com,Ho Chi Minh City
-36,Sky Mavis,Axie Infinity / Ronin,Blockchain / Crypto,GameFi / Blockchain Gaming,Active,2018-01-01,skymavis.com,Ho Chi Minh City
-37,TomoChain Lab,Viction (ex-TomoChain),Blockchain / Crypto,Blockchain Infrastructure (Layer-1),Active,2018-03-01,viction.xyz,Ho Chi Minh City
-38,Kardiachain,KardiaChain,Blockchain / Crypto,Blockchain Infrastructure (Layer-1),Active,2019-05-01,kardiachain.io,Ho Chi Minh City
-39,Ancient8,Ancient8,Blockchain / Crypto,Gaming Infrastructure / Chain,Active,2021-10-01,ancient8.gg,Ho Chi Minh City
-40,MB Bank x Dunamu,MB-Upbit Exchange,Blockchain / Crypto,Crypto Exchange (Pilot),Sandbox,2025-06-01,,Hanoi
-41,Techcombank Digital Assets,Techcombank Digital,Blockchain / Crypto,Digital Asset Issuance (Pilot),Sandbox,2025-07-01,techcombank.com.vn,Ho Chi Minh City
-42,Remitano Vietnam,Remitano,Blockchain / Crypto,P2P Crypto Exchange,Active,2016-01-01,remitano.com,Ho Chi Minh City
-43,Holdstation,Holdstation,Blockchain / Crypto,DeFi / Smart Wallet,Active,2023-03-01,holdstation.com,Ho Chi Minh City
-44,Oraichain Labs,Oraichain,Blockchain / Crypto,AI + Blockchain (Layer-1),Active,2020-11-01,orai.io,Ho Chi Minh City
+ID,Company Name,Trading Name,Category,License Type,Status,Date Issued,Website,Headquarters,VIFC Status
+1,M_Service Joint Stock Company,MoMo,E-Wallet,Payment Intermediary,Active,2015-09-14,momo.vn,Ho Chi Minh City,
+2,Vietnam Payment Solution JSC,VNPay,E-Wallet,Payment Intermediary,Active,2014-05-20,vnpay.vn,Hanoi,
+3,ZaloPay (VNG Corporation),ZaloPay,E-Wallet,Payment Intermediary,Active,2017-11-08,zalopay.vn,Ho Chi Minh City,
+4,Viettel Digital Services Corporation,Viettel Money,E-Wallet,Payment Intermediary,Active,2019-06-15,viettelmoney.vn,Hanoi,
+5,ShopeePay Vietnam,ShopeePay,E-Wallet,Payment Intermediary,Active,2019-12-01,shopeepay.vn,Ho Chi Minh City,
+6,NAPAS (National Payment Corporation of Vietnam),NAPAS,Payment Infrastructure,Payment Switching,Active,2004-03-01,napas.com.vn,Hanoi,
+7,FE Credit (VPBank Finance Company),FE Credit,Consumer Lending,Consumer Finance License,Active,2010-02-10,fecredit.com.vn,Ho Chi Minh City,
+8,Tima Joint Stock Company,Tima,P2P Lending,Fintech Sandbox,Active,2016-01-20,tima.vn,Hanoi,
+9,Finhay Technology JSC,Finhay,Investment,Securities Brokerage,Active,2017-08-05,finhay.com.vn,Ho Chi Minh City,
+10,Infina Investment JSC,Infina,Investment,Securities Advisory,Active,2019-03-12,infina.vn,Ho Chi Minh City,
+11,Mfast Technology JSC,Mfast,Insurance Distribution,InsurTech License,Active,2019-07-22,mfast.vn,Ho Chi Minh City,
+12,Papaya Insurtech JSC,Papaya,Insurance Distribution,InsurTech License,Active,2020-04-15,papaya.vn,Ho Chi Minh City,
+13,Trusting Social Vietnam,Trusting Social,Credit Scoring,Fintech Sandbox,Active,2016-11-30,trustingsocial.com,Ho Chi Minh City,
+14,VietCredit Finance Company,VietCredit,Consumer Lending,Consumer Finance License,Active,2017-06-18,vietcredit.com.vn,Ho Chi Minh City,
+15,OneFin Vietnam JSC,OneFin,Payment Gateway,Payment Intermediary,Active,2018-09-10,onefin.vn,Hanoi,
+16,PayME Digital JSC,PayME,E-Wallet,Payment Intermediary,Active,2020-01-08,payme.vn,Ho Chi Minh City,
+17,Payoo (VietUnion Online Services),Payoo,Payment Gateway,Payment Intermediary,Active,2008-06-25,payoo.vn,Ho Chi Minh City,
+18,SmartPay JSC,SmartPay,E-Wallet,Payment Intermediary,Active,2018-11-14,smartpay.vn,Ho Chi Minh City,
+19,Vimo Technology JSC,Vimo,E-Wallet,Payment Intermediary,Suspended,2016-04-20,vimo.vn,Hanoi,
+20,MCredit (MB Shinsei Finance),MCredit,Consumer Lending,Consumer Finance License,Active,2016-12-05,mcredit.com.vn,Hanoi,
+21,Robocash Vietnam,Robocash,P2P Lending,Fintech Sandbox,Active,2018-05-18,robocash.vn,Ho Chi Minh City,
+22,Lendela Vietnam,Lendela,Loan Marketplace,Fintech Sandbox,Active,2020-07-01,lendela.com,Ho Chi Minh City,
+23,VNPT Money (VNPT-Media),VNPT Money,E-Wallet,Payment Intermediary,Active,2020-03-22,vnptmoney.vn,Hanoi,
+24,Galaxy Fintech JSC,Galaxy Pay,E-Wallet,Payment Intermediary,Pending,2021-06-10,galaxypay.vn,Ho Chi Minh City,
+25,Fundiin Vietnam JSC,Fundiin,Buy Now Pay Later,Fintech Sandbox,Active,2019-10-15,fundiin.vn,Ho Chi Minh City,
+26,Kredivo Vietnam (FinAccel),Kredivo,Buy Now Pay Later,Consumer Finance License,Active,2021-02-28,kredivo.vn,Ho Chi Minh City,
+27,VNLife Corporation,VNLife,Payment Infrastructure,Payment Intermediary,Active,2019-08-12,vnlife.vn,Hanoi,
+28,ECPay Vietnam,ECPay,Payment Gateway,Payment Intermediary,Active,2009-04-15,ecpay.vn,Ho Chi Minh City,
+29,AirPay Vietnam (Garena),AirPay,E-Wallet,Payment Intermediary,Active,2016-08-30,airpay.vn,Ho Chi Minh City,
+30,Dragonfly Financial Technologies,Dragonfly,Remittance,Payment Intermediary,Expired,2018-02-14,dragonfly.vn,Da Nang,
+31,Alphatrue Solutions JSC,Basal Pay,Blockchain / Crypto,VIFC Sandbox (Crypto Asset Conversion),Sandbox,2025-01-15,basalpay.io,Da Nang,VIFC Da Nang (Sandbox)
+32,U2U Network,U2U Chain,Blockchain / Crypto,Blockchain Infrastructure (Layer-1),Active,2024-11-01,u2u.xyz,Ho Chi Minh City,
+33,1Matrix Technology JSC,1Matrix,Blockchain / Crypto,Blockchain Infrastructure (Layer-1),Active,2025-05-01,1matrix.io,Hanoi,
+34,Kyber Network,KyberSwap,Blockchain / Crypto,DeFi Protocol (DEX),Active,2017-09-01,kyberswap.com,Ho Chi Minh City,
+35,Coin98 Finance,Coin98,Blockchain / Crypto,DeFi / Multi-chain Wallet,Active,2020-06-01,coin98.com,Ho Chi Minh City,
+36,Sky Mavis,Axie Infinity / Ronin,Blockchain / Crypto,GameFi / Blockchain Gaming,Active,2018-01-01,skymavis.com,Ho Chi Minh City,
+37,TomoChain Lab,Viction (ex-TomoChain),Blockchain / Crypto,Blockchain Infrastructure (Layer-1),Active,2018-03-01,viction.xyz,Ho Chi Minh City,
+38,Kardiachain,KardiaChain,Blockchain / Crypto,Blockchain Infrastructure (Layer-1),Active,2019-05-01,kardiachain.io,Ho Chi Minh City,
+39,Ancient8,Ancient8,Blockchain / Crypto,Gaming Infrastructure / Chain,Active,2021-10-01,ancient8.gg,Ho Chi Minh City,
+40,MB Bank x Dunamu,MB-Upbit Exchange,Blockchain / Crypto,Crypto Exchange (Pilot),Sandbox,2025-06-01,,Hanoi,VIFC Da Nang (Sandbox)
+41,Techcombank Digital Assets,Techcombank Digital,Blockchain / Crypto,Digital Asset Issuance (Pilot),Sandbox,2025-07-01,techcombank.com.vn,Ho Chi Minh City,VIFC HCMC (Sandbox)
+42,Remitano Vietnam,Remitano,Blockchain / Crypto,P2P Crypto Exchange,Active,2016-01-01,remitano.com,Ho Chi Minh City,
+43,Holdstation,Holdstation,Blockchain / Crypto,DeFi / Smart Wallet,Active,2023-03-01,holdstation.com,Ho Chi Minh City,
+44,Oraichain Labs,Oraichain,Blockchain / Crypto,AI + Blockchain (Layer-1),Active,2020-11-01,orai.io,Ho Chi Minh City,
+45,CCTPA (CT Group),ASEAN Carbon Credit Trading Platform,Carbon Credits,Carbon Credit Exchange & Consultancy,Active,2023-09-29,aseancarboncredit.com,Ho Chi Minh City,
+46,VP Carbon JSC,VP Carbon,Carbon Credits,Carbon Project Development & Trading,Active,2022-01-01,vpcarbon.vn,Ho Chi Minh City,
+47,CO2L Tech,CO2L Tech,Carbon Credits / Climate Tech,Carbon Capture & Utilization (CCU),Active,2023-06-01,,Ho Chi Minh City,
+48,Fairatmos Vietnam,Fairatmos,Carbon Credits,Carbon Credit Marketplace (ASEAN),Active,2022-05-01,fairatmos.com,Ho Chi Minh City,
+49,South Pole Vietnam,South Pole VN,Carbon Credits,Carbon Project Developer & Advisory,Active,2010-01-01,southpole.com,Ho Chi Minh City,
+50,VNCPC (Vietnam Cleaner Production Centre),VNCPC,Carbon Credits / Green Finance,MRV & Clean Production Advisory,Active,2000-01-01,vncpc.org,Hanoi,
+51,HNX Carbon Exchange (State-operated),VN Carbon Exchange,Carbon Credits,National Carbon Credit Exchange (Pilot),Sandbox,2026-01-01,,Hanoi,VIFC Da Nang (Sandbox)
+52,Viet Carbon JSC,Viet Carbon,Carbon Credits,Carbon Credit Brokerage & Advisory,Active,2023-01-01,,Ho Chi Minh City,
+53,Green Credit Development JSC,Green Credit,Carbon Credits / Green Finance,Green Bond & Carbon Finance,Active,2021-06-01,,Ho Chi Minh City,
+54,GACA Vietnam (Global Alliance for Clean Air),GACA Vietnam,Carbon Credits / Climate Tech,Air Quality Monitoring & Carbon Offsets,Active,2022-08-01,,Hanoi,
+55,EcoTech Vietnam JSC,EcoTech VN,Carbon Credits / Climate Tech,Renewable Energy Carbon Credits,Active,2019-03-01,,Ho Chi Minh City,
+56,Vietnam Forestry Carbon Company,VN Forest Carbon,Carbon Credits,REDD+ & Forestry Carbon Credits,Active,2020-01-01,,Hanoi,
+57,Propzy,Propzy,PropTech / Fintech,Real Estate Fintech Platform,Inactive,2015-06-01,propzy.vn,Ho Chi Minh City,
+58,Homebase Vietnam,Homebase,PropTech / Fintech,Co-ownership & Mortgage Tech,Active,2022-03-01,homebase.vn,Ho Chi Minh City,
+59,Rever (by Property Guru),Rever,PropTech / Fintech,Real Estate Transaction Platform,Active,2016-01-01,rever.vn,Ho Chi Minh City,
+60,CenHomes (CenGroup),CenHomes,PropTech / Fintech,Real Estate Fintech Marketplace,Active,2018-09-01,cenhomes.vn,Hanoi,
+61,Houze Group,Houze,PropTech / Fintech,Property Management & Fintech,Active,2019-01-01,houze.io,Ho Chi Minh City,
+62,Binance,Binance,Blockchain / Crypto,Crypto Exchange (MOU),Pending,2025-09-24,binance.com,Da Nang,VIFC Da Nang (MOU)
+63,Bybit,Bybit,Blockchain / Crypto,Crypto Exchange (In Talks),Pending,2025-09-01,bybit.com,Da Nang,VIFC Da Nang (In Talks)

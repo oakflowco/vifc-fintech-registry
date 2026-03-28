@@ -9,6 +9,8 @@ const SHEET_URLS: Record<string, string | undefined> = {
   banks: process.env.GOOGLE_SHEET_BANKS_URL,
   securities: process.env.GOOGLE_SHEET_SECURITIES_URL,
   insurance: process.env.GOOGLE_SHEET_INSURANCE_URL,
+  neobanks: process.env.GOOGLE_SHEET_NEOBANKS_URL,
+  deals: process.env.GOOGLE_SHEET_DEALS_URL,
 };
 
 export async function GET(req: NextRequest) {

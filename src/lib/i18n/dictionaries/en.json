@@ -1,0 +1,193 @@
+{
+  "common": {
+    "registry": "Registry",
+    "trends": "Trends",
+    "deals": "Deals",
+    "asean": "ASEAN",
+    "insights": "Insights",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "account": "Account",
+    "search": "Search...",
+    "showing": "Showing",
+    "of": "of",
+    "entries": "entries",
+    "exportCsv": "Export CSV",
+    "pro": "PRO",
+    "premium": "Premium",
+    "free": "Free",
+    "all": "All",
+    "details": "Details",
+    "backTo": "Back to",
+    "source": "Source",
+    "live": "LIVE",
+    "lastUpdated": "Last updated",
+    "loading": "Loading...",
+    "noData": "No data found",
+    "fintechCompanies": "Fintech Companies",
+    "investors": "Investors & Funds",
+    "banks": "Banks & Members",
+    "securities": "Securities Firms",
+    "insurance": "Insurance",
+    "digitalBanks": "Digital Banks",
+    "neobanks": "Neobanks",
+    "sandbox": "Regulatory Sandbox",
+    "whyVietnam": "Why Vietnam?",
+    "vifc": "VIFC Da Nang",
+    "vifcHcmc": "VIFC Ho Chi Minh City",
+    "capitalMarkets": "Capital Markets",
+    "commodities": "Commodities (MXV)",
+    "carbonCredits": "Carbon Credits",
+    "creditRatings": "Credit Ratings",
+    "developmentFinance": "Development Finance",
+    "marketSize": "Market Size",
+    "investorGuide": "Investor Guide",
+    "regulators": "Regulators",
+    "risks": "Risks & Challenges",
+    "calendar": "Economic Calendar",
+    "privacyNotice": "Privacy Notice",
+    "termsOfUse": "Terms of Use",
+    "vifcStatus": "VIFC Status",
+    "member": "Member",
+    "founding": "Founding Member",
+    "applicant": "Applicant",
+    "inTalks": "In Talks",
+    "mou": "MOU Signed"
+  },
+  "home": {
+    "title": "Vietnam International Financial Centre",
+    "subtitle": "Comprehensive data platform for Vietnam's financial ecosystem — registries, market trends, and investment intelligence"
+  },
+  "trends": {
+    "title": "Vietnam Financial Centre — Market Intelligence",
+    "subtitle": "Live data from World Bank, Yahoo Finance & Google News — auto-refreshes hourly",
+    "keyIndicators": "Key Indicators",
+    "capitalMarketsMacro": "Capital Markets & Macro Economy",
+    "fintechEcosystem": "Fintech Ecosystem",
+    "investmentLandscape": "Investment & Startup Landscape",
+    "newsRegulatory": "IFC News & Regulatory Developments",
+    "latestNews": "Latest News",
+    "regulatoryMilestones": "Regulatory Milestones",
+    "relatedLinks": "Related Links & Resources",
+    "entitiesByCity": "Entities by City",
+    "categoryDistribution": "Category Distribution",
+    "domesticVsForeign": "Domestic vs Foreign Investment"
+  },
+  "deals": {
+    "title": "Deal Tracker",
+    "subtitle": "Funding rounds, M&A, and investment activity in Vietnam's fintech ecosystem",
+    "latestDealNews": "Latest Deal News",
+    "curatedDatabase": "Curated Deal Database",
+    "totalDeals": "Total Deals",
+    "totalInvested": "Total Invested",
+    "avgDealSize": "Avg Deal Size",
+    "uniqueInvestors": "Unique Investors"
+  },
+  "whyVietnam": {
+    "title": "Why Vietnam?",
+    "subtitle": "The fastest-growing fintech ecosystem in Southeast Asia",
+    "keyStats": "Key Statistics",
+    "reasons": "8 Reasons to Invest in Vietnam's Financial Ecosystem",
+    "comparison": "Vietnam vs. Major Financial Centres",
+    "readyToExplore": "Ready to explore?"
+  },
+  "vifc": {
+    "title": "VIFC Da Nang",
+    "subtitle": "Vietnam's First International Financial Centre",
+    "incentives": "Incentive Policies",
+    "whoCanRegister": "Who Can Register?",
+    "registrationProcess": "Registration Process",
+    "contact": "Contact VIFC Da Nang"
+  },
+  "capitalMarkets": {
+    "title": "Vietnam Capital Markets",
+    "subtitle": "Stock exchanges, bond market, derivatives, and foreign investor framework",
+    "stockExchanges": "Stock Exchanges",
+    "bondMarket": "Bond Market",
+    "derivatives": "Derivatives Market",
+    "foreignInvestor": "Foreign Investor Framework"
+  },
+  "carbon": {
+    "title": "Vietnam Carbon Credits Market",
+    "subtitle": "ETS pilot, carbon exchange, and investment opportunities",
+    "roadmap": "Implementation Roadmap",
+    "coveredSectors": "Covered Sectors",
+    "creditTypes": "Eligible Carbon Credit Types",
+    "investmentOps": "Investment Opportunities"
+  },
+  "sandbox": {
+    "title": "Regulatory Sandboxes",
+    "subtitle": "Fintech, blockchain, and digital asset innovation programs",
+    "participants": "Known Sandbox Participants"
+  },
+  "regulators": {
+    "title": "Regulatory Bodies",
+    "subtitle": "Key regulators and institutions governing Vietnam's financial ecosystem"
+  },
+  "marketSize": {
+    "title": "Market Size Estimates",
+    "subtitle": "TAM, SAM, and SOM for each fintech sector in Vietnam",
+    "totalTam": "Total TAM",
+    "totalSam": "Total SAM",
+    "currentSom": "Current SOM"
+  },
+  "investorGuide": {
+    "title": "How to Invest in Vietnam",
+    "subtitle": "Step-by-step guide for international investors"
+  },
+  "risks": {
+    "title": "Risks & Challenges",
+    "subtitle": "Honest assessment with practical mitigation strategies",
+    "mitigations": "Mitigation Strategies"
+  },
+  "calendar": {
+    "title": "Economic Calendar",
+    "subtitle": "Key dates for investors — regulatory, data, market events",
+    "criticalDates": "Critical Dates"
+  },
+  "ratings": {
+    "title": "Credit Rating Agencies",
+    "subtitle": "Sovereign ratings and financial data infrastructure",
+    "sovereignRatings": "Vietnam Sovereign Credit Ratings"
+  },
+  "commodities": {
+    "title": "Commodity Exchange (MXV)",
+    "subtitle": "Vietnam's national commodity exchange — 28+ products",
+    "globalRankings": "Vietnam's Global Commodity Rankings",
+    "tradedProducts": "Traded Products",
+    "licensedBrokers": "Licensed Commodity Brokers"
+  },
+  "dfi": {
+    "title": "Development Finance Institutions",
+    "subtitle": "Multilateral and bilateral development banks — $60B+ in commitments"
+  },
+  "neobanks": {
+    "title": "Digital Banks & Neobanks",
+    "subtitle": "Digital banking platforms and mobile-first banking apps",
+    "timeline": "Digital Banking Timeline"
+  },
+  "auth": {
+    "createAccount": "Create Account",
+    "loginTitle": "Login",
+    "email": "Email",
+    "password": "Password",
+    "alreadyHaveAccount": "Already have an account? Login",
+    "noAccount": "Don't have an account? Sign up",
+    "premiumAccess": "Premium Access",
+    "upgradeToPremium": "Upgrade to Premium",
+    "payWithMomo": "Pay with MoMo",
+    "securePayment": "Secure payment via MoMo e-wallet",
+    "myAccount": "My Account",
+    "profile": "Profile",
+    "subscriptionStatus": "Status",
+    "expires": "Expires",
+    "premiumFeatures": "Premium Features"
+  },
+  "footer": {
+    "description": "VIFC Database — Vietnam International Financial Centre. Data updates automatically from registry spreadsheets.",
+    "privacy": "Privacy Notice",
+    "terms": "Terms of Use",
+    "poweredBy": "Powered by live data from World Bank, Yahoo Finance & Google News"
+  }
+}

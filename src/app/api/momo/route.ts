@@ -3,7 +3,7 @@ import { getSessionUserId } from "@/lib/session";
 import { getUserById, hasActiveSubscription } from "@/lib/users";
 import { createMoMoPayment } from "@/lib/momo";
 
-const AMOUNT_VND = Number(process.env.MOMO_AMOUNT_VND) || 250000; // ~$10
+const AMOUNT_VND = Number(process.env.MOMO_AMOUNT_VND) || 250000; // 250,000₫/month
 
 export async function POST() {
   const userId = await getSessionUserId();

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
+import { useLocale } from "@/lib/i18n/context";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -33,6 +35,11 @@ const STATUS_KEYWORDS: Record<string, "default" | "secondary" | "destructive"> =
     approved: "default",
     licensed: "default",
     operating: "default",
+    "vifc da nang": "default",
+    "vifc hcmc": "default",
+    member: "default",
+    sandbox: "secondary",
+    applicant: "secondary",
     pending: "secondary",
     review: "secondary",
     revoked: "destructive",
@@ -93,15 +100,24 @@ export function RegistryTable({
   filterColumns,
   exportType,
 }: RegistryTableProps) {
+  const { t } = useLocale();
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<Record<string, string>>({});
 
+  // Hide the ID column — we show row numbers in the # column instead
+  const displayHeaders = useMemo(
+    () => headers.filter((h) => h !== "ID" && h !== "id"),
+    [headers]
+  );
+
   const filtersConfig = useMemo(() => {
     const cols = filterColumns ?? headers.filter((h) => isFilterColumn(h));
-    return cols.map((col) => ({
-      column: col,
-      options: Array.from(new Set(data.map((d) => d[col]).filter(Boolean))).sort(),
-    }));
+    return cols
+      .map((col) => ({
+        column: col,
+        options: Array.from(new Set(data.map((d) => d[col]).filter(Boolean))).sort(),
+      }))
+      .filter((f) => f.options.length >= 2); // hide filters with only 1 unique value
   }, [headers, data, filterColumns]);
 
   const filtered = useMemo(() => {
@@ -126,7 +142,7 @@ export function RegistryTable({
     <div className="space-y-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <Input
-          placeholder="Search..."
+          placeholder={t.common.search}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="sm:max-w-xs"
@@ -142,11 +158,11 @@ export function RegistryTable({
                 <SelectValue>
                   {filters[column] && filters[column] !== "all"
                     ? `${column}: ${filters[column]}`
-                    : `All ${column}`}
+                    : `${t.common.all} ${column}`}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All {column}</SelectItem>
+                <SelectItem value="all">{t.common.all} {column}</SelectItem>
                 {options.map((opt) => (
                   <SelectItem key={opt} value={opt}>
                     {opt}
@@ -160,14 +176,14 @@ export function RegistryTable({
 
       <div className="flex items-center justify-between">
         <span className="text-sm text-muted-foreground">
-          Showing {filtered.length} of {data.length} entries
+          {t.common.showing} {filtered.length} {t.common.of} {data.length} {t.common.entries}
         </span>
         {exportType && (
           <a
             href={`/api/export?type=${exportType}`}
             className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
           >
-            <span>↓</span> Export CSV
+            <span>↓</span> {t.common.exportCsv}
             <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-semibold text-amber-500">
               PRO
             </span>
@@ -180,7 +196,7 @@ export function RegistryTable({
           <TableHeader>
             <TableRow>
               <TableHead className="w-[50px]">#</TableHead>
-              {headers.map((h) => (
+              {displayHeaders.map((h) => (
                 <TableHead key={h}>{h}</TableHead>
               ))}
             </TableRow>
@@ -189,20 +205,34 @@ export function RegistryTable({
             {filtered.length === 0 ? (
               <TableRow>
                 <TableCell
-                  colSpan={headers.length + 1}
+                  colSpan={displayHeaders.length + 1}
                   className="text-center py-8 text-muted-foreground"
                 >
-                  No entries found.
+                  {t.common.noData}
                 </TableCell>
               </TableRow>
             ) : (
-              filtered.map((entry, i) => (
-                <TableRow key={i}>
+              filtered.map((entry, i) => {
+                // Use the original row index (1-based) from the full dataset, not filtered index
+                const originalIndex = data.indexOf(entry) + 1;
+                const profileHref = exportType ? `/company/${exportType}/${originalIndex}` : undefined;
+                return (
+                <TableRow key={i} className={profileHref ? "cursor-pointer hover:bg-muted/50" : ""}>
                   <TableCell className="font-mono text-xs text-muted-foreground">
                     {i + 1}
                   </TableCell>
-                  {headers.map((h) => {
+                  {displayHeaders.map((h, colIdx) => {
                     const value = entry[h] || "";
+                    const isNameCol = colIdx === 0 || h.toLowerCase().includes("company name") || h.toLowerCase().includes("name");
+                    if (isNameCol && profileHref && value) {
+                      return (
+                        <TableCell key={h}>
+                          <Link href={profileHref} className="text-sm font-medium text-primary hover:underline underline-offset-4">
+                            {value}
+                          </Link>
+                        </TableCell>
+                      );
+                    }
                     if (isBadgeColumn(h) && value) {
                       return (
                         <TableCell key={h}>
@@ -234,7 +264,8 @@ export function RegistryTable({
                     );
                   })}
                 </TableRow>
-              ))
+                );
+              })
             )}
           </TableBody>
         </Table>

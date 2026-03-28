@@ -1,21 +1,23 @@
-ID,Bank Name,Trading Name,Category,Bank Type,Status,License Number,Headquarters,Website,Total Assets (VND Trillion)
-1,Joint Stock Commercial Bank for Foreign Trade of Vietnam,Vietcombank (VCB),State-owned Commercial Bank,State-owned,Active,001/NH-GP,Hanoi,vietcombank.com.vn,1800
-2,Vietnam Joint Stock Commercial Bank for Industry and Trade,VietinBank (CTG),State-owned Commercial Bank,State-owned,Active,002/NH-GP,Hanoi,vietinbank.vn,1700
-3,Joint Stock Commercial Bank for Investment and Development of Vietnam,BIDV,State-owned Commercial Bank,State-owned,Active,003/NH-GP,Hanoi,bidv.com.vn,2100
-4,Vietnam Prosperity Joint Stock Commercial Bank,VPBank,Private Commercial Bank,Private,Active,012/NH-GP,Hanoi,vpbank.com.vn,790
-5,Military Commercial Joint Stock Bank,MB Bank,Private Commercial Bank,Private,Active,008/NH-GP,Hanoi,mbbank.com.vn,850
-6,Techcombank,Techcombank (TCB),Private Commercial Bank,Private,Active,006/NH-GP,Ho Chi Minh City,techcombank.com.vn,750
-7,Asia Commercial Joint Stock Bank,ACB,Private Commercial Bank,Private,Active,005/NH-GP,Ho Chi Minh City,acb.com.vn,650
-8,Saigon - Hanoi Commercial Joint Stock Bank,SHB,Private Commercial Bank,Private,Active,011/NH-GP,Hanoi,shb.com.vn,580
-9,Vietnam International Commercial Joint Stock Bank,VIB,Private Commercial Bank,Private,Active,009/NH-GP,Ho Chi Minh City,vib.com.vn,390
-10,Ho Chi Minh City Development Joint Stock Commercial Bank,HDBank,Private Commercial Bank,Private,Active,010/NH-GP,Ho Chi Minh City,hdbank.com.vn,470
-11,Tien Phong Commercial Joint Stock Bank,TPBank,Private Commercial Bank,Private,Active,015/NH-GP,Hanoi,tpb.vn,350
-12,HSBC Bank (Vietnam) Ltd,HSBC Vietnam,Foreign Bank Branch,Foreign,Active,100/NH-GP,Ho Chi Minh City,hsbc.com.vn,120
-13,Standard Chartered Bank (Vietnam) Ltd,Standard Chartered VN,Foreign Bank Branch,Foreign,Active,101/NH-GP,Ho Chi Minh City,sc.com/vn,80
-14,Shinhan Bank Vietnam Ltd,Shinhan Vietnam,Foreign Bank,Foreign,Active,102/NH-GP,Ho Chi Minh City,shinhan.com.vn,95
-15,Woori Bank Vietnam,Woori Vietnam,Foreign Bank Branch,Foreign,Active,103/NH-GP,Hanoi,wooribank.com.vn,45
-16,CIMB Vietnam,CIMB Vietnam,Foreign Bank,Foreign,Active,104/NH-GP,Ho Chi Minh City,cimb.com.vn,30
-17,United Overseas Bank Vietnam,UOB Vietnam,Foreign Bank,Foreign,Active,105/NH-GP,Ho Chi Minh City,uob.com.vn,35
-18,Agribank (Vietnam Bank for Agriculture and Rural Development),Agribank,State-owned Commercial Bank,State-owned,Active,004/NH-GP,Hanoi,agribank.com.vn,1900
-19,Lien Viet Post Joint Stock Commercial Bank,LPBank,Private Commercial Bank,Private,Active,014/NH-GP,Ho Chi Minh City,lpbank.com.vn,380
-20,Vietnam Maritime Commercial Joint Stock Bank,MSB,Private Commercial Bank,Private,Active,013/NH-GP,Ho Chi Minh City,msb.com.vn,280
+ID,Bank Name,Trading Name,Category,Bank Type,Status,License Number,Headquarters,Website,Total Assets (VND Trillion),VIFC Status
+1,Joint Stock Commercial Bank for Foreign Trade of Vietnam,Vietcombank (VCB),State-owned Commercial Bank,State-owned,Active,001/NH-GP,Hanoi,vietcombank.com.vn,1800,VIFC Da Nang (Member)
+2,Vietnam Joint Stock Commercial Bank for Industry and Trade,VietinBank (CTG),State-owned Commercial Bank,State-owned,Active,002/NH-GP,Hanoi,vietinbank.vn,1700,VIFC Da Nang (Member)
+3,Joint Stock Commercial Bank for Investment and Development of Vietnam,BIDV,State-owned Commercial Bank,State-owned,Active,003/NH-GP,Hanoi,bidv.com.vn,2100,
+4,Vietnam Prosperity Joint Stock Commercial Bank,VPBank,Private Commercial Bank,Private,Active,012/NH-GP,Hanoi,vpbank.com.vn,790,
+5,Military Commercial Joint Stock Bank,MB Bank,Private Commercial Bank,Private,Active,008/NH-GP,Hanoi,mbbank.com.vn,850,VIFC HCMC (Founding)
+6,Techcombank,Techcombank (TCB),Private Commercial Bank,Private,Active,006/NH-GP,Ho Chi Minh City,techcombank.com.vn,750,
+7,Asia Commercial Joint Stock Bank,ACB,Private Commercial Bank,Private,Active,005/NH-GP,Ho Chi Minh City,acb.com.vn,650,
+8,Saigon - Hanoi Commercial Joint Stock Bank,SHB,Private Commercial Bank,Private,Active,011/NH-GP,Hanoi,shb.com.vn,580,VIFC HCMC (Founding)
+9,Vietnam International Commercial Joint Stock Bank,VIB,Private Commercial Bank,Private,Active,009/NH-GP,Ho Chi Minh City,vib.com.vn,390,
+10,Ho Chi Minh City Development Joint Stock Commercial Bank,HDBank,Private Commercial Bank,Private,Active,010/NH-GP,Ho Chi Minh City,hdbank.com.vn,470,VIFC Da Nang (Member) / VIFC HCMC (Founding)
+11,Tien Phong Commercial Joint Stock Bank,TPBank,Private Commercial Bank,Private,Active,015/NH-GP,Hanoi,tpb.vn,350,VIFC HCMC (Founding)
+12,HSBC Bank (Vietnam) Ltd,HSBC Vietnam,Foreign Bank Branch,Foreign,Active,100/NH-GP,Ho Chi Minh City,hsbc.com.vn,120,
+13,Standard Chartered Bank (Vietnam) Ltd,Standard Chartered VN,Foreign Bank Branch,Foreign,Active,101/NH-GP,Ho Chi Minh City,sc.com/vn,80,
+14,Shinhan Bank Vietnam Ltd,Shinhan Vietnam,Foreign Bank,Foreign,Active,102/NH-GP,Ho Chi Minh City,shinhan.com.vn,95,
+15,Woori Bank Vietnam,Woori Vietnam,Foreign Bank Branch,Foreign,Active,103/NH-GP,Hanoi,wooribank.com.vn,45,
+16,CIMB Vietnam,CIMB Vietnam,Foreign Bank,Foreign,Active,104/NH-GP,Ho Chi Minh City,cimb.com.vn,30,
+17,United Overseas Bank Vietnam,UOB Vietnam,Foreign Bank,Foreign,Active,105/NH-GP,Ho Chi Minh City,uob.com.vn,35,
+18,Agribank (Vietnam Bank for Agriculture and Rural Development),Agribank,State-owned Commercial Bank,State-owned,Active,004/NH-GP,Hanoi,agribank.com.vn,1900,
+19,Lien Viet Post Joint Stock Commercial Bank,LPBank,Private Commercial Bank,Private,Active,014/NH-GP,Ho Chi Minh City,lpbank.com.vn,380,
+20,Vietnam Maritime Commercial Joint Stock Bank,MSB,Private Commercial Bank,Private,Active,013/NH-GP,Ho Chi Minh City,msb.com.vn,280,
+21,Nam A Commercial Joint Stock Bank,Nam A Bank,Private Commercial Bank,Private,Active,NAB/NH-GP,Ho Chi Minh City,namabank.com.vn,120,VIFC Da Nang (Member) / VIFC HCMC (Founding)
+22,Vikki Bank,Vikki Bank,Private Commercial Bank,Private,Active,,Da Nang,,20,VIFC Da Nang (Member)

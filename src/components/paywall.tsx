@@ -10,10 +10,10 @@ export function Paywall() {
   async function handleCheckout() {
     setLoading(true);
     try {
-      const res = await fetch("/api/checkout", { method: "POST" });
+      const res = await fetch("/api/momo", { method: "POST" });
       const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
+      if (data.payUrl) {
+        window.location.href = data.payUrl;
       }
     } catch {
       setLoading(false);
@@ -38,7 +38,7 @@ export function Paywall() {
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <span>Full Access</span>
-            <span className="text-2xl">$49</span>
+            <span className="text-2xl">250,000₫/mo</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -65,7 +65,7 @@ export function Paywall() {
             </li>
             <li className="flex items-center gap-2">
               <span className="text-green-500">&#10003;</span>
-              Lifetime access — one-time payment
+              30-day access per payment — renew anytime
             </li>
           </ul>
         </CardContent>
@@ -76,11 +76,11 @@ export function Paywall() {
         disabled={loading}
         className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
       >
-        {loading ? "Redirecting to checkout..." : "Unlock for $49"}
+        {loading ? "Redirecting to MoMo..." : "Pay with MoMo — 250,000₫/mo"}
       </button>
 
       <p className="text-xs text-muted-foreground mt-4">
-        Secure payment via Stripe. One-time purchase, no subscription.
+        Secure payment via MoMo e-wallet. 30-day access per payment.
       </p>
     </div>
   );

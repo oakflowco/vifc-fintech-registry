@@ -1,0 +1,193 @@
+{
+  "common": {
+    "registry": "登记册",
+    "trends": "趋势",
+    "deals": "交易",
+    "asean": "ASEAN",
+    "insights": "洞察",
+    "login": "登录",
+    "signup": "注册",
+    "logout": "退出登录",
+    "account": "账户",
+    "search": "搜索...",
+    "showing": "显示",
+    "of": "/",
+    "entries": "条目",
+    "exportCsv": "导出 CSV",
+    "pro": "PRO",
+    "premium": "高级版",
+    "free": "免费",
+    "all": "全部",
+    "details": "详情",
+    "backTo": "返回",
+    "source": "来源",
+    "live": "LIVE",
+    "lastUpdated": "最近更新",
+    "loading": "加载中...",
+    "noData": "未找到数据",
+    "fintechCompanies": "金融科技公司",
+    "investors": "投资者与基金",
+    "banks": "银行与会员",
+    "securities": "证券公司",
+    "insurance": "保险",
+    "digitalBanks": "数字银行",
+    "neobanks": "新型银行",
+    "sandbox": "监管沙盒",
+    "whyVietnam": "为什么选择越南？",
+    "vifc": "VIFC Da Nang",
+    "vifcHcmc": "VIFC Ho Chi Minh City",
+    "capitalMarkets": "资本市场",
+    "commodities": "大宗商品 (MXV)",
+    "carbonCredits": "碳信用",
+    "creditRatings": "信用评级",
+    "developmentFinance": "发展融资",
+    "marketSize": "市场规模",
+    "investorGuide": "投资者指南",
+    "regulators": "监管机构",
+    "risks": "风险与挑战",
+    "calendar": "经济日历",
+    "privacyNotice": "隐私声明",
+    "termsOfUse": "使用条款",
+    "vifcStatus": "VIFC 状态",
+    "member": "会员",
+    "founding": "创始会员",
+    "applicant": "申请者",
+    "inTalks": "洽谈中",
+    "mou": "已签署 MOU"
+  },
+  "home": {
+    "title": "越南国际金融中心",
+    "subtitle": "越南金融生态系统综合数据平台 — 登记册、市场趋势与投资情报"
+  },
+  "trends": {
+    "title": "越南金融中心 — 市场情报",
+    "subtitle": "来自 World Bank、Yahoo Finance 和 Google News 的实时数据 — 每小时自动刷新",
+    "keyIndicators": "关键指标",
+    "capitalMarketsMacro": "资本市场与宏观经济",
+    "fintechEcosystem": "金融科技生态系统",
+    "investmentLandscape": "投资与创业格局",
+    "newsRegulatory": "IFC 新闻与监管动态",
+    "latestNews": "最新消息",
+    "regulatoryMilestones": "监管里程碑",
+    "relatedLinks": "相关链接与资源",
+    "entitiesByCity": "按城市分布的机构",
+    "categoryDistribution": "类别分布",
+    "domesticVsForeign": "国内与外资投资对比"
+  },
+  "deals": {
+    "title": "交易追踪",
+    "subtitle": "越南金融科技生态系统的融资轮次、并购及投资活动",
+    "latestDealNews": "最新交易新闻",
+    "curatedDatabase": "精选交易数据库",
+    "totalDeals": "交易总数",
+    "totalInvested": "投资总额",
+    "avgDealSize": "平均交易规模",
+    "uniqueInvestors": "独立投资者数"
+  },
+  "whyVietnam": {
+    "title": "为什么选择越南？",
+    "subtitle": "东南亚增长最快的金融科技生态系统",
+    "keyStats": "关键数据",
+    "reasons": "投资越南金融生态系统的8大理由",
+    "comparison": "越南与主要金融中心对比",
+    "readyToExplore": "准备好了吗？"
+  },
+  "vifc": {
+    "title": "VIFC Da Nang",
+    "subtitle": "越南首个国际金融中心",
+    "incentives": "优惠政策",
+    "whoCanRegister": "谁可以注册？",
+    "registrationProcess": "注册流程",
+    "contact": "联系 VIFC Da Nang"
+  },
+  "capitalMarkets": {
+    "title": "越南资本市场",
+    "subtitle": "证券交易所、债券市场、衍生品及外国投资者框架",
+    "stockExchanges": "证券交易所",
+    "bondMarket": "债券市场",
+    "derivatives": "衍生品市场",
+    "foreignInvestor": "外国投资者框架"
+  },
+  "carbon": {
+    "title": "越南碳信用市场",
+    "subtitle": "ETS 试点、碳交易所及投资机会",
+    "roadmap": "实施路线图",
+    "coveredSectors": "覆盖行业",
+    "creditTypes": "合格碳信用类型",
+    "investmentOps": "投资机会"
+  },
+  "sandbox": {
+    "title": "监管沙盒",
+    "subtitle": "金融科技、区块链和数字资产创新项目",
+    "participants": "已知沙盒参与者"
+  },
+  "regulators": {
+    "title": "监管机构",
+    "subtitle": "管理越南金融生态系统的主要监管机构和组织"
+  },
+  "marketSize": {
+    "title": "市场规模估算",
+    "subtitle": "越南各金融科技领域的 TAM、SAM 和 SOM",
+    "totalTam": "总 TAM",
+    "totalSam": "总 SAM",
+    "currentSom": "当前 SOM"
+  },
+  "investorGuide": {
+    "title": "如何投资越南",
+    "subtitle": "国际投资者分步指南"
+  },
+  "risks": {
+    "title": "风险与挑战",
+    "subtitle": "客观评估与实用缓解策略",
+    "mitigations": "缓解策略"
+  },
+  "calendar": {
+    "title": "经济日历",
+    "subtitle": "投资者关键日期 — 监管、数据、市场事件",
+    "criticalDates": "重要日期"
+  },
+  "ratings": {
+    "title": "信用评级机构",
+    "subtitle": "主权评级与金融数据基础设施",
+    "sovereignRatings": "越南主权信用评级"
+  },
+  "commodities": {
+    "title": "商品交易所 (MXV)",
+    "subtitle": "越南国家商品交易所 — 28+ 种产品",
+    "globalRankings": "越南全球商品排名",
+    "tradedProducts": "交易产品",
+    "licensedBrokers": "持牌商品经纪商"
+  },
+  "dfi": {
+    "title": "发展金融机构",
+    "subtitle": "多边和双边发展银行 — 承诺超过600亿美元"
+  },
+  "neobanks": {
+    "title": "数字银行与新型银行",
+    "subtitle": "数字银行平台和移动优先银行应用",
+    "timeline": "数字银行发展时间线"
+  },
+  "auth": {
+    "createAccount": "创建账户",
+    "loginTitle": "登录",
+    "email": "邮箱",
+    "password": "密码",
+    "alreadyHaveAccount": "已有账户？登录",
+    "noAccount": "没有账户？注册",
+    "premiumAccess": "高级访问",
+    "upgradeToPremium": "升级到高级版",
+    "payWithMomo": "使用 MoMo 支付",
+    "securePayment": "通过 MoMo 电子钱包安全支付",
+    "myAccount": "我的账户",
+    "profile": "个人资料",
+    "subscriptionStatus": "状态",
+    "expires": "到期时间",
+    "premiumFeatures": "高级功能"
+  },
+  "footer": {
+    "description": "VIFC 数据库 — 越南国际金融中心。数据从登记表格自动更新。",
+    "privacy": "隐私声明",
+    "terms": "使用条款",
+    "poweredBy": "数据来源：World Bank、Yahoo Finance 和 Google News 实时数据"
+  }
+}

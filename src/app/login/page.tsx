@@ -103,7 +103,7 @@ export default function LoginPage() {
             <div className="flex items-center gap-2 justify-center">
               <Badge variant="outline" className="text-[10px]">Premium</Badge>
               <span className="text-xs text-muted-foreground">
-                $10/month via MoMo — Trends + CSV Export
+                250,000₫/month via MoMo — Trends + CSV Export
               </span>
             </div>
           </div>

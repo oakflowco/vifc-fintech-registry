@@ -6,10 +6,9 @@ import { PremiumGate } from "@/components/premium-gate";
 import { fetchMacroData } from "@/lib/fetch-world-bank";
 import { fetchVNIndex, summarizeByYear } from "@/lib/fetch-stock";
 import { fetchFintechNews } from "@/lib/fetch-news";
+import { fetchSheetData } from "@/lib/sheets";
 import {
-  categoryDistribution,
   quarterlyInvestment,
-  startupsByCity,
   startupStages,
   investorCountries,
   regulatoryMilestones,
@@ -27,14 +26,66 @@ export default async function TrendsPage() {
     return <PremiumGate feature="Vietnam Fintech Trends & Market Intelligence" />;
   }
 
-  // Fetch live data in parallel
-  const [macroData, vnIndexMonthly, liveNews] = await Promise.all([
+  // Fetch live data in parallel — all 5 registries
+  const sheetUrls = [
+    process.env.GOOGLE_SHEET_FINTECH_URL,
+    process.env.GOOGLE_SHEET_INVESTORS_URL,
+    process.env.GOOGLE_SHEET_BANKS_URL,
+    process.env.GOOGLE_SHEET_SECURITIES_URL,
+    process.env.GOOGLE_SHEET_INSURANCE_URL,
+  ].filter(Boolean) as string[];
+
+  const [macroData, vnIndexMonthly, liveNews, ...sheetResults] = await Promise.all([
     fetchMacroData(),
     fetchVNIndex(),
     fetchFintechNews(),
+    ...sheetUrls.map((url) =>
+      fetchSheetData(url).catch(() => ({ headers: [], data: [] }))
+    ),
   ]);
 
   const vnIndexYearly = summarizeByYear(vnIndexMonthly);
+
+  // Compute startups by city from registry data
+  const allEntries = sheetResults.flatMap((r) => r.data);
+  const cityCount = new Map<string, number>();
+  for (const entry of allEntries) {
+    const city = entry["Headquarters"] || entry["headquarters"] || entry["HQ"] || "";
+    if (city) cityCount.set(city, (cityCount.get(city) || 0) + 1);
+  }
+  const totalByCity = Array.from(cityCount.entries())
+    .sort((a, b) => b[1] - a[1]);
+  const totalCompanies = totalByCity.reduce((sum, [, count]) => sum + count, 0);
+
+  // Top cities + "Other"
+  const topCities = totalByCity.slice(0, 5);
+  const otherCount = totalByCity.slice(5).reduce((sum, [, c]) => sum + c, 0);
+  const startupsByCity = [
+    ...topCities.map(([city, count]) => ({
+      city,
+      startups: count,
+      funding: 0, // not available from sheet
+      pct: totalCompanies > 0 ? Math.round((count / totalCompanies) * 100) : 0,
+    })),
+    ...(otherCount > 0
+      ? [{ city: "Other", startups: otherCount, funding: 0, pct: Math.round((otherCount / totalCompanies) * 100) }]
+      : []),
+  ];
+
+  // Compute category distribution from registry data (LIVE)
+  const catCount = new Map<string, number>();
+  for (const entry of allEntries) {
+    const cat = entry["Category"] || entry["category"] || entry["Type"] || entry["type"] || "";
+    if (cat) catCount.set(cat, (catCount.get(cat) || 0) + 1);
+  }
+  const totalCats = Array.from(catCount.values()).reduce((a, b) => a + b, 0);
+  const categoryDistribution = Array.from(catCount.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([category, count]) => ({
+      category,
+      count,
+      share: totalCats > 0 ? Math.round((count / totalCats) * 1000) / 10 : 0,
+    }));
 
   // Build key metrics from live data
   const latestMacro = macroData[macroData.length - 1];

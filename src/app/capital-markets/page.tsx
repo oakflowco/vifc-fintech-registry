@@ -1,15 +1,139 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { fetchVNIndex, summarizeByYear } from "@/lib/fetch-stock";
+import { fetchMacroData } from "@/lib/fetch-world-bank";
 
-export default function CapitalMarketsPage() {
+export const revalidate = 3600; // refresh hourly
+
+// Fetch latest VN-Index price (daily data, last 60 days)
+async function fetchLatestVNIndex(): Promise<{
+  price: number;
+  ytdChange: number;
+  yearStart: number;
+  avgVolume: number;
+} | null> {
+  try {
+    const now = Math.floor(Date.now() / 1000);
+    const sixtyDaysAgo = now - 60 * 24 * 60 * 60;
+    const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent("0P0000HY8X.VN")}?period1=${sixtyDaysAgo}&period2=${now}&interval=1d`;
+    const res = await fetch(url, {
+      next: { revalidate: 3600 },
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const result = data?.chart?.result?.[0];
+    if (!result?.timestamp) return null;
+
+    const closes = (result.indicators?.quote?.[0]?.close || []) as (number | null)[];
+    const volumes = (result.indicators?.quote?.[0]?.volume || []) as (number | null)[];
+
+    // Latest valid close
+    const validCloses = closes.filter((c): c is number => c != null && c > 0);
+    const price = validCloses[validCloses.length - 1] || 0;
+
+    // Avg daily volume
+    const validVols = volumes.filter((v): v is number => v != null && v > 0);
+    const avgVolume = validVols.length > 0
+      ? validVols.reduce((a, b) => a + b, 0) / validVols.length
+      : 0;
+
+    return { price, ytdChange: 0, yearStart: validCloses[0] || price, avgVolume };
+  } catch {
+    return null;
+  }
+}
+
+// Fetch year-start price for YTD calculation
+async function fetchYearStartPrice(): Promise<number | null> {
+  try {
+    const year = new Date().getFullYear();
+    const jan1 = Math.floor(new Date(`${year}-01-01`).getTime() / 1000);
+    const jan15 = jan1 + 15 * 24 * 60 * 60;
+    const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent("0P0000HY8X.VN")}?period1=${jan1}&period2=${jan15}&interval=1d`;
+    const res = await fetch(url, {
+      next: { revalidate: 86400 },
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const closes = data?.chart?.result?.[0]?.indicators?.quote?.[0]?.close || [];
+    const valid = closes.filter((c: number | null) => c != null && c > 0);
+    return valid.length > 0 ? valid[0] : null;
+  } catch {
+    return null;
+  }
+}
+
+function fmt(n: number): string {
+  return n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+}
+
+function fmtPct(n: number): string {
+  const sign = n > 0 ? "+" : "";
+  return `${sign}${n.toFixed(1)}%`;
+}
+
+export default async function CapitalMarketsPage() {
+  // Fetch live data in parallel
+  const [latest, yearStart, macroData, vnIndexMonthly] = await Promise.all([
+    fetchLatestVNIndex(),
+    fetchYearStartPrice(),
+    fetchMacroData(),
+    fetchVNIndex(),
+  ]);
+
+  const vnIndexYearly = summarizeByYear(vnIndexMonthly);
+  const latestMacro = macroData[macroData.length - 1];
+
+  // Compute live metrics
+  const vnPrice = latest?.price || 0;
+  const ytdPct = latest && yearStart && yearStart > 0
+    ? ((vnPrice - yearStart) / yearStart) * 100
+    : 0;
+  const avgDailyVolume = latest?.avgVolume || 0;
+
+  // Market cap estimate: VN market cap correlates with GDP (~55-65%)
+  const gdpB = latestMacro?.gdpBillions || 0;
+  const estimatedMarketCapB = gdpB > 0 ? Math.round(gdpB * 0.58) : 0;
+
   const keyStats = [
-    { label: "VN-Index (2025)", value: "1,784", sub: "+41% YTD" },
-    { label: "Market Cap", value: "$289B", sub: "~55% of GDP" },
-    { label: "Listed Companies", value: "795+", sub: "HOSE + HNX + UPCOM" },
-    { label: "Bond Market Size", value: "$147B", sub: "33.3% of GDP" },
-    { label: "Corporate Bond Issuance", value: "$21.8B", sub: "+11.3% YoY (2025)" },
-    { label: "Daily Trading Volume", value: "$1.2B+", sub: "HOSE average" },
+    {
+      label: `VN-Index (${new Date().getFullYear()})`,
+      value: vnPrice > 0 ? fmt(Math.round(vnPrice)) : "—",
+      sub: ytdPct !== 0 ? `${fmtPct(ytdPct)} YTD` : "—",
+      live: true,
+    },
+    {
+      label: "Est. Market Cap",
+      value: estimatedMarketCapB > 0 ? `$${estimatedMarketCapB}B` : "—",
+      sub: gdpB > 0 ? `~${Math.round((estimatedMarketCapB / gdpB) * 100)}% of GDP` : "—",
+      live: true,
+    },
+    {
+      label: "GDP (USD)",
+      value: latestMacro ? `$${latestMacro.gdpBillions}B` : "—",
+      sub: latestMacro ? `${latestMacro.gdpGrowth > 0 ? "+" : ""}${latestMacro.gdpGrowth}% growth` : "—",
+      live: true,
+    },
+    {
+      label: "FDI Inflows",
+      value: latestMacro ? `$${latestMacro.fdi}B` : "—",
+      sub: "Net inflows (annual)",
+      live: true,
+    },
+    // These remain static — no free API
+    { label: "Listed Companies", value: "1,600+", sub: "HOSE + HNX + UPCOM", live: false },
+    {
+      label: "Avg Daily Volume",
+      value: avgDailyVolume > 0 ? `${fmt(Math.round(avgDailyVolume / 1e6))}M shares` : "—",
+      sub: "30-day average",
+      live: avgDailyVolume > 0,
+    },
   ];
+
+  // Yearly VN-Index history for the mini table
+  const recentYears = vnIndexYearly.slice(-5);
 
   const exchanges = [
     {
@@ -18,8 +142,8 @@ export default function CapitalMarketsPage() {
       description: "Vietnam's main stock exchange and largest by market cap. Lists large-cap companies. Home to VN-Index — the benchmark index.",
       stats: [
         { label: "Listed Companies", value: "400+" },
-        { label: "Market Cap", value: "~$250B" },
-        { label: "Key Index", value: "VN-Index" },
+        { label: "Market Cap", value: estimatedMarketCapB > 0 ? `~$${Math.round(estimatedMarketCapB * 0.86)}B` : "~$250B" },
+        { label: "Key Index", value: vnPrice > 0 ? `VN-Index: ${fmt(Math.round(vnPrice))}` : "VN-Index" },
         { label: "Listing Requirement", value: "VND 120B+ charter capital" },
       ],
       topListings: ["Vietcombank (VCB)", "Vingroup (VIC)", "Vinhomes (VHM)", "FPT Corp (FPT)", "Mobile World (MWG)", "Techcombank (TCB)"],
@@ -95,11 +219,22 @@ export default function CapitalMarketsPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold tracking-tight">Vietnam Capital Markets</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Comprehensive overview of Vietnam&apos;s stock exchanges, bond market, derivatives, and foreign investor framework
-        </p>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Vietnam Capital Markets</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Stock exchanges, bond market, derivatives, and foreign investor framework
+          </p>
+        </div>
+        <div className="text-right hidden sm:block">
+          <div className="flex items-center gap-1.5 text-[10px] text-green-500 font-mono">
+            <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+            LIVE
+          </div>
+          <p className="text-[10px] text-muted-foreground font-mono">
+            Source: Yahoo Finance, World Bank
+          </p>
+        </div>
       </div>
 
       {/* Key Stats */}
@@ -108,12 +243,59 @@ export default function CapitalMarketsPage() {
           <Card key={s.label}>
             <CardContent className="pt-6 text-center">
               <div className="text-2xl font-bold">{s.value}</div>
-              <div className="text-xs font-medium mt-1">{s.label}</div>
+              <div className="text-xs font-medium mt-1 flex items-center justify-center gap-1">
+                {s.label}
+                {s.live && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-green-500 inline-block" />
+                )}
+              </div>
               <div className="text-[10px] text-muted-foreground">{s.sub}</div>
             </CardContent>
           </Card>
         ))}
       </div>
+
+      {/* VN-Index Yearly History */}
+      {recentYears.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-xl font-bold tracking-tight mb-4">VN-Index History</h2>
+          <Card>
+            <CardContent className="pt-6">
+              <div className="overflow-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-2.5 font-medium text-muted-foreground">Year</th>
+                      <th className="text-right py-2.5 font-medium text-muted-foreground">Year End</th>
+                      <th className="text-right py-2.5 font-medium text-muted-foreground">Year High</th>
+                      <th className="text-right py-2.5 font-medium text-muted-foreground">Year Low</th>
+                      <th className="text-right py-2.5 font-medium text-muted-foreground">Change</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {recentYears.map((y, i) => {
+                      const prev = i > 0 ? recentYears[i - 1].yearEnd : 0;
+                      const changePct = prev > 0 ? ((y.yearEnd - prev) / prev) * 100 : 0;
+                      return (
+                        <tr key={y.year} className="border-b last:border-0">
+                          <td className="py-2.5 font-medium font-mono">{y.year}</td>
+                          <td className="py-2.5 text-right font-mono">{fmt(y.yearEnd)}</td>
+                          <td className="py-2.5 text-right font-mono text-muted-foreground">{fmt(y.yearHigh)}</td>
+                          <td className="py-2.5 text-right font-mono text-muted-foreground">{fmt(y.yearLow)}</td>
+                          <td className={`py-2.5 text-right font-mono text-xs ${changePct > 0 ? "text-green-500" : changePct < 0 ? "text-red-500" : "text-muted-foreground"}`}>
+                            {prev > 0 ? fmtPct(changePct) : "—"}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[10px] text-muted-foreground mt-3 font-mono">Source: Yahoo Finance — auto-refreshes hourly</p>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       {/* Stock Exchanges */}
       <div className="mb-8">

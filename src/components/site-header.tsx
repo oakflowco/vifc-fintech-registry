@@ -4,34 +4,46 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useLocale } from "@/lib/i18n/context";
+import type { Dictionary } from "@/lib/i18n/get-dictionary";
 
-const mainNav = [
-  { href: "/", label: "Registry" },
-  { href: "/trends", label: "Trends", premium: true },
-  { href: "/asean", label: "ASEAN" },
-  { href: "/deals", label: "Deals" },
-];
+function getNavItems(t: Dictionary["common"]) {
+  const mainNav = [
+    { href: "/", label: t.registry },
+    { href: "/search", label: t.search?.replace("...", "") || "Search" },
+    { href: "/trends", label: t.trends, premium: true },
+    { href: "/asean", label: t.asean },
+    { href: "/deals", label: t.deals },
+  ];
 
-const registryDropdown = [
-  { href: "/", label: "Fintech Companies" },
-  { href: "/investors", label: "Investors & Funds" },
-  { href: "/banks", label: "Banks & Members" },
-  { href: "/securities", label: "Securities Firms" },
-  { href: "/insurance", label: "Insurance" },
-  { href: "/sandbox", label: "Regulatory Sandbox" },
-];
+  const registryDropdown = [
+    { href: "/", label: t.fintechCompanies },
+    { href: "/investors", label: t.investors },
+    { href: "/banks", label: t.banks },
+    { href: "/securities", label: t.securities },
+    { href: "/insurance", label: t.insurance },
+    { href: "/neobanks", label: t.digitalBanks },
+    { href: "/sandbox", label: t.sandbox },
+  ];
 
-const insightsDropdown = [
-  { href: "/why-vietnam", label: "Why Vietnam?" },
-  { href: "/vifc", label: "VIFC Da Nang" },
-  { href: "/capital-markets", label: "Capital Markets" },
-  { href: "/carbon", label: "Carbon Credits" },
-  { href: "/market-size", label: "Market Size" },
-  { href: "/investor-guide", label: "Investor Guide" },
-  { href: "/regulators", label: "Regulators" },
-  { href: "/risks", label: "Risks & Challenges" },
-  { href: "/calendar", label: "Economic Calendar" },
-];
+  const insightsDropdown = [
+    { href: "/why-vietnam", label: t.whyVietnam },
+    { href: "/vifc", label: t.vifc },
+    { href: "/capital-markets", label: t.capitalMarkets },
+    { href: "/commodities", label: t.commodities },
+    { href: "/carbon", label: t.carbonCredits },
+    { href: "/ratings", label: t.creditRatings },
+    { href: "/dfi", label: t.developmentFinance },
+    { href: "/market-size", label: t.marketSize },
+    { href: "/investor-guide", label: t.investorGuide },
+    { href: "/regulators", label: t.regulators },
+    { href: "/risks", label: t.risks },
+    { href: "/calendar", label: t.calendar },
+  ];
+
+  return { mainNav, registryDropdown, insightsDropdown };
+}
 
 interface UserState {
   email: string;
@@ -94,8 +106,11 @@ function Dropdown({
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { t } = useLocale();
   const [user, setUser] = useState<UserState | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const { mainNav, registryDropdown, insightsDropdown } = getNavItems(t.common);
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -129,7 +144,7 @@ export function SiteHeader() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-0.5">
-            <Dropdown label="Registry" items={registryDropdown} isActive={registryActive} />
+            <Dropdown label={t.common.registry} items={registryDropdown} isActive={registryActive} />
 
             {mainNav.filter((i) => i.href !== "/").map((item) => (
               <Link
@@ -145,13 +160,13 @@ export function SiteHeader() {
                 {item.label}
                 {"premium" in item && item.premium && (
                   <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1 py-0.5 text-[9px] font-semibold text-amber-500">
-                    PRO
+                    {t.common.pro}
                   </span>
                 )}
               </Link>
             ))}
 
-            <Dropdown label="Insights" items={insightsDropdown} isActive={insightsActive} />
+            <Dropdown label={t.common.insights} items={insightsDropdown} isActive={insightsActive} />
 
             {/* Auth */}
             <div className="ml-2 pl-2 border-l border-border">
@@ -166,38 +181,46 @@ export function SiteHeader() {
                   )}
                 >
                   {user.subscribed && <span className="h-1.5 w-1.5 rounded-full bg-green-500" />}
-                  Account
+                  {t.common.account}
                 </Link>
               ) : (
                 <Link
                   href="/login"
                   className="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 >
-                  Login
+                  {t.common.login}
                 </Link>
               )}
             </div>
+
+            {/* Language Switcher */}
+            <div className="ml-1 pl-1 border-l border-border">
+              <LanguageSwitcher />
+            </div>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden flex items-center justify-center h-9 w-9 rounded-md border"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-            )}
-          </button>
+          {/* Mobile Language + Menu */}
+          <div className="md:hidden flex items-center gap-1">
+            <LanguageSwitcher />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="flex items-center justify-center h-9 w-9 rounded-md border"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileOpen && (
           <div className="md:hidden border-t py-3 space-y-3">
             <div>
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">Registry</p>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">{t.common.registry}</p>
               <div className="flex flex-wrap gap-1.5">
                 {registryDropdown.map((item) => (
                   <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
@@ -207,20 +230,20 @@ export function SiteHeader() {
               </div>
             </div>
             <div>
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">Data & Analysis</p>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">{t.common.trends} & {t.common.deals}</p>
               <div className="flex flex-wrap gap-1.5">
                 {mainNav.filter((i) => i.href !== "/").map((item) => (
                   <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors inline-flex items-center gap-1", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
                     {item.label}
                     {"premium" in item && item.premium && (
-                      <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1 py-0.5 text-[9px] font-semibold text-amber-500">PRO</span>
+                      <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1 py-0.5 text-[9px] font-semibold text-amber-500">{t.common.pro}</span>
                     )}
                   </Link>
                 ))}
               </div>
             </div>
             <div>
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">Insights</p>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">{t.common.insights}</p>
               <div className="flex flex-wrap gap-1.5">
                 {insightsDropdown.map((item) => (
                   <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
@@ -233,11 +256,11 @@ export function SiteHeader() {
               {user ? (
                 <Link href="/account" className="text-xs font-medium text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5">
                   {user.subscribed && <span className="h-1.5 w-1.5 rounded-full bg-green-500" />}
-                  My Account ({user.email})
+                  {t.common.account} ({user.email})
                 </Link>
               ) : (
                 <Link href="/login" className="text-xs font-medium text-muted-foreground hover:text-foreground">
-                  Login / Sign Up
+                  {t.common.login} / {t.common.signup}
                 </Link>
               )}
             </div>

@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { VietnamFinancialMap } from "@/components/vietnam-map";
 
 export default function VIFCPage() {
   const incentives = [
@@ -43,6 +44,16 @@ export default function VIFCPage() {
           regulatory environment, competitive tax incentives, and a strategic
           gateway to ASEAN&apos;s 680 million consumers.
         </p>
+      </div>
+
+      {/* Financial Hub Map */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">Vietnam Financial Hub Map</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <VietnamFinancialMap />
+          </CardContent>
+        </Card>
       </div>
 
       {/* Key Facts */}
