@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createUser, activateSubscription } from "@/lib/users";
 import { createSessionToken, COOKIE_NAME } from "@/lib/session";
-import { sendTelegramNotification } from "@/lib/telegram";
+import { sendTelegramNotification, formatSignupNotification } from "@/lib/telegram";
 import { authLimiter, checkRateLimit } from "@/lib/rate-limit";
 import { signupSchema } from "@/lib/validation";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
+  // Vercel provides geo headers automatically on deployed functions
+  const countryCode = req.headers.get("x-vercel-ip-country") || "";
+  const countryName = req.headers.get("x-vercel-ip-country-region") || "";
   const limited = await checkRateLimit(authLimiter, `signup:${ip}`);
   if (limited) return limited;
 
@@ -30,16 +33,20 @@ export async function POST(req: NextRequest) {
   // Auto-activate full access for all new signups (free tier)
   await activateSubscription(user.id, "FREE_SIGNUP");
 
+  // Convert country code (e.g. "VN") to flag emoji (e.g. "🇻🇳")
+  const countryFlag = countryCode
+    ? String.fromCodePoint(...[...countryCode.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65))
+    : "";
+
   // Notify admin
   await sendTelegramNotification(
-    [
-      `<b>👤 New User Signup</b>`,
-      ``,
-      `<b>Email:</b> ${email}`,
-      `<b>User ID:</b> <code>${user.id}</code>`,
-      `<b>Access:</b> Full (auto-activated)`,
-      `<b>Time:</b> ${new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" })}`,
-    ].join("\n")
+    formatSignupNotification({
+      email,
+      userId: user.id,
+      ip,
+      country: countryName || countryCode || "Unknown",
+      countryFlag,
+    })
   );
 
   const token = createSessionToken(user.id);

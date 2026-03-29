@@ -27,6 +27,30 @@ export async function sendTelegramNotification(message: string): Promise<boolean
   }
 }
 
+export function formatSignupNotification({
+  email,
+  userId,
+  ip,
+  country,
+  countryFlag,
+}: {
+  email: string;
+  userId: string;
+  ip: string;
+  country: string;
+  countryFlag: string;
+}): string {
+  return [
+    `<b>👤 New User Signup</b>`,
+    ``,
+    `<b>Email:</b> ${email}`,
+    `<b>User ID:</b> <code>${userId}</code>`,
+    `<b>IP:</b> <code>${ip}</code>`,
+    `<b>Location:</b> ${countryFlag} ${country}`,
+    `<b>Signed up:</b> ${new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" })}`,
+  ].join("\n");
+}
+
 export function formatSubscriptionNotification({
   email,
   transactionId,
