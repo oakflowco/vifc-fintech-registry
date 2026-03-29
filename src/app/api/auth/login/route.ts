@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyUser } from "@/lib/users";
 import { createSessionToken, COOKIE_NAME } from "@/lib/session";
+import { authLimiter, checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
+  const limited = await checkRateLimit(authLimiter, `login:${ip}`);
+  if (limited) return limited;
+
   const { email, password } = await req.json();
 
   if (!email || !password) {

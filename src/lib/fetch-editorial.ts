@@ -1,49 +1,74 @@
 // Editorial data fetcher — pulls strategic/curated content from Google Sheets
 // Your team edits these sheets directly; the website picks up changes automatically.
 //
-// GOOGLE SHEETS SETUP:
-// Create a single spreadsheet with these tabs (one per content type):
+// SETUP: One Google Spreadsheet with multiple tabs.
+// Only 2 env vars needed:
+//   GOOGLE_SHEET_EDITORIAL_BASE — the published base URL (same format as registry sheets)
+//   GOOGLE_SHEET_EDITORIAL_GIDS — JSON map of tab name → gid number
+//
+// Example:
+//   GOOGLE_SHEET_EDITORIAL_BASE=https://docs.google.com/spreadsheets/d/e/YOUR_ID/pub
+//   GOOGLE_SHEET_EDITORIAL_GIDS={"unicorns":"0","ratings":"123456","milestones":"789012",...}
+//
+// TAB NAMES & COLUMNS:
 // ┌──────────────────────┬────────────────────────────────────────────────────┐
 // │ Tab Name             │ Columns                                           │
 // ├──────────────────────┼────────────────────────────────────────────────────┤
 // │ unicorns             │ Name, Valuation, Sector, Status                   │
 // │ ratings              │ Agency, Rating, Outlook, LastUpdate                │
 // │ rating_agencies      │ Name, Type, Established, Regulator, Description,  │
-// │                      │ Coverage, Website, Methodology                    │
-// │ regulatory_milestones│ Date, Event, URL                                  │
+// │                      │ Coverage (pipe-separated), Website, Methodology   │
+// │ milestones           │ Date, Event, URL                                  │
 // │ market_size          │ Sector, TAM, SAM, SOM, Growth, Penetration,       │
-// │                      │ KeyPlayers, Outlook                               │
+// │                      │ Key Players, Outlook                              │
 // │ vifc_incentives      │ Icon, Title, Description                          │
 // │ vifc_entities        │ Type, Description, Requirements                   │
-// │ vifc_timeline        │ Step, Title, Duration, Description                │
-// │ investor_guide_steps │ Step, Title, Description, Details                 │
-// │ investor_guide_costs │ Item, Range, Notes                                │
+// │ investor_costs       │ Item, Range, Notes                                │
 // │ risks                │ Category, Title, Description, Impact              │
-// │ mitigations          │ Strategy, Description                             │
-// │ calendar_events      │ Month, Day, Event, Type, Impact                   │
+// │ calendar             │ Month, Day, Event, Type, Impact                   │
 // │ carbon_timeline      │ Period, Event, Description                        │
 // │ carbon_credits       │ Type, Description, Eligibility, Status            │
-// │ dfi_institutions     │ Name, Type, Portfolio, Focus, KeyProjects, URL    │
-// │ commodities_products │ Category, Name, Note, Volume                      │
-// │ commodities_brokers  │ Name, License, HQ, Website                       │
+// │ dfi                  │ Name, Type, Portfolio, Focus, Key Projects, URL   │
+// │ commodity_products   │ Category, Name, Note, Volume                      │
+// │ commodity_brokers    │ Name, License, HQ, Website                        │
 // │ quarterly_investment │ Quarter, Domestic, Foreign                        │
 // │ startup_stages       │ Stage, Count, AvgTicket                           │
 // │ investor_countries   │ Country, Deals, Amount                            │
 // │ related_links        │ Title, URL, Source, Description                   │
-// │ why_vietnam          │ Key, Value (highlights + comparison data)         │
+// │ why_vietnam          │ Label, Value, Sub                                 │
 // └──────────────────────┴────────────────────────────────────────────────────┘
-//
-// Each tab is published as CSV. Set env var GOOGLE_SHEET_EDITORIAL_BASE
-// to the base export URL and GOOGLE_SHEET_EDITORIAL_GIDS with tab gids.
 
 import { fetchSheetData, type RegistryEntry } from "./sheets";
+
+// ── Build URL from base + gid ──
+
+let _gidMap: Record<string, string> | null = null;
+
+function getGidMap(): Record<string, string> {
+  if (_gidMap) return _gidMap;
+  try {
+    _gidMap = JSON.parse(process.env.GOOGLE_SHEET_EDITORIAL_GIDS || "{}");
+  } catch {
+    _gidMap = {};
+  }
+  return _gidMap!;
+}
+
+function getEditorialUrl(tabName: string): string | null {
+  const base = process.env.GOOGLE_SHEET_EDITORIAL_BASE;
+  if (!base) return null;
+  const gids = getGidMap();
+  const gid = gids[tabName];
+  if (gid == null) return null;
+  return `${base}?gid=${gid}&single=true&output=csv`;
+}
 
 // ── Generic sheet fetcher with fallback ──
 
 async function fetchEditorialSheet(
-  envKey: string
+  tabName: string
 ): Promise<RegistryEntry[]> {
-  const url = process.env[envKey];
+  const url = getEditorialUrl(tabName);
   if (!url) return [];
   try {
     const { data } = await fetchSheetData(url);
@@ -74,7 +99,7 @@ const UNICORN_FALLBACK: Unicorn[] = [
 ];
 
 export async function fetchUnicorns(): Promise<Unicorn[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_UNICORNS_URL");
+  const rows = await fetchEditorialSheet("unicorns");
   if (rows.length === 0) return UNICORN_FALLBACK;
   return rows.map((r) => ({
     name: r["Name"] || r["name"] || "",
@@ -93,7 +118,7 @@ export interface RegulatoryMilestone {
 }
 
 export async function fetchRegulatoryMilestones(): Promise<RegulatoryMilestone[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_MILESTONES_URL");
+  const rows = await fetchEditorialSheet("milestones");
   if (rows.length === 0) {
     // Fallback to static data
     const { regulatoryMilestones } = await import("./trend-data");
@@ -120,7 +145,7 @@ export interface MarketSector {
 }
 
 export async function fetchMarketSize(): Promise<MarketSector[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_MARKET_SIZE_URL");
+  const rows = await fetchEditorialSheet("market_size");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     sector: r["Sector"] || "",
@@ -143,7 +168,7 @@ export interface VIFCIncentive {
 }
 
 export async function fetchVIFCIncentives(): Promise<VIFCIncentive[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_VIFC_INCENTIVES_URL");
+  const rows = await fetchEditorialSheet("vifc_incentives");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     icon: r["Icon"] || r["icon"] || "📋",
@@ -161,7 +186,7 @@ export interface VIFCEntityType {
 }
 
 export async function fetchVIFCEntityTypes(): Promise<VIFCEntityType[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_VIFC_ENTITIES_URL");
+  const rows = await fetchEditorialSheet("vifc_entities");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     type: r["Type"] || r["type"] || "",
@@ -180,7 +205,7 @@ export interface InvestorGuideStep {
 }
 
 export async function fetchInvestorGuideSteps(): Promise<InvestorGuideStep[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_INVESTOR_STEPS_URL");
+  const rows = await fetchEditorialSheet("investor_steps");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     step: r["Step"] || r["step"] || "",
@@ -199,7 +224,7 @@ export interface InvestorGuideCost {
 }
 
 export async function fetchInvestorGuideCosts(): Promise<InvestorGuideCost[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_INVESTOR_COSTS_URL");
+  const rows = await fetchEditorialSheet("investor_costs");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     item: r["Item"] || r["item"] || "",
@@ -218,7 +243,7 @@ export interface RiskItem {
 }
 
 export async function fetchRisks(): Promise<RiskItem[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_RISKS_URL");
+  const rows = await fetchEditorialSheet("risks");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     category: r["Category"] || r["category"] || "",
@@ -239,7 +264,7 @@ export interface CalendarEvent {
 }
 
 export async function fetchCalendarEvents(): Promise<CalendarEvent[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_CALENDAR_URL");
+  const rows = await fetchEditorialSheet("calendar");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     month: r["Month"] || r["month"] || "",
@@ -262,7 +287,7 @@ export interface DFIInstitution {
 }
 
 export async function fetchDFIInstitutions(): Promise<DFIInstitution[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_DFI_URL");
+  const rows = await fetchEditorialSheet("dfi");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     name: r["Name"] || r["name"] || "",
@@ -290,7 +315,7 @@ export interface CarbonCreditType {
 }
 
 export async function fetchCarbonTimeline(): Promise<CarbonTimelineEntry[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_CARBON_TIMELINE_URL");
+  const rows = await fetchEditorialSheet("carbon_timeline");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     period: r["Period"] || r["period"] || "",
@@ -300,7 +325,7 @@ export async function fetchCarbonTimeline(): Promise<CarbonTimelineEntry[]> {
 }
 
 export async function fetchCarbonCredits(): Promise<CarbonCreditType[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_CARBON_CREDITS_URL");
+  const rows = await fetchEditorialSheet("carbon_credits");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     type: r["Type"] || r["type"] || "",
@@ -327,7 +352,7 @@ export interface CommodityBroker {
 }
 
 export async function fetchCommodityProducts(): Promise<CommodityProduct[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_COMMODITY_PRODUCTS_URL");
+  const rows = await fetchEditorialSheet("commodity_products");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     category: r["Category"] || r["category"] || "",
@@ -338,7 +363,7 @@ export async function fetchCommodityProducts(): Promise<CommodityProduct[]> {
 }
 
 export async function fetchCommodityBrokers(): Promise<CommodityBroker[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_COMMODITY_BROKERS_URL");
+  const rows = await fetchEditorialSheet("commodity_brokers");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     name: r["Name"] || r["name"] || "",
@@ -357,7 +382,7 @@ export interface QuarterlyInvestment {
 }
 
 export async function fetchQuarterlyInvestment(): Promise<QuarterlyInvestment[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_QUARTERLY_INVESTMENT_URL");
+  const rows = await fetchEditorialSheet("quarterly_investment");
   if (rows.length === 0) {
     const { quarterlyInvestment } = await import("./trend-data");
     return quarterlyInvestment;
@@ -378,7 +403,7 @@ export interface StartupStage {
 }
 
 export async function fetchStartupStages(): Promise<StartupStage[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_STARTUP_STAGES_URL");
+  const rows = await fetchEditorialSheet("startup_stages");
   if (rows.length === 0) {
     const { startupStages } = await import("./trend-data");
     return startupStages;
@@ -399,7 +424,7 @@ export interface InvestorCountry {
 }
 
 export async function fetchInvestorCountries(): Promise<InvestorCountry[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_INVESTOR_COUNTRIES_URL");
+  const rows = await fetchEditorialSheet("investor_countries");
   if (rows.length === 0) {
     const { investorCountries } = await import("./trend-data");
     return investorCountries;
@@ -421,7 +446,7 @@ export interface RelatedLink {
 }
 
 export async function fetchRelatedLinks(): Promise<RelatedLink[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_RELATED_LINKS_URL");
+  const rows = await fetchEditorialSheet("related_links");
   if (rows.length === 0) {
     const { relatedLinks } = await import("./trend-data");
     return relatedLinks;
@@ -448,7 +473,7 @@ export interface RatingAgency {
 }
 
 export async function fetchRatingAgencies(): Promise<RatingAgency[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_RATING_AGENCIES_URL");
+  const rows = await fetchEditorialSheet("rating_agencies");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     name: r["Name"] || r["name"] || "",
@@ -471,7 +496,7 @@ export interface WhyVietnamHighlight {
 }
 
 export async function fetchWhyVietnamHighlights(): Promise<WhyVietnamHighlight[]> {
-  const rows = await fetchEditorialSheet("GOOGLE_SHEET_WHY_VIETNAM_URL");
+  const rows = await fetchEditorialSheet("why_vietnam");
   if (rows.length === 0) return [];
   return rows.map((r) => ({
     label: r["Label"] || r["label"] || "",

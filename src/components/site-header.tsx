@@ -153,9 +153,6 @@ export function SiteHeader() {
               )}
             >
               Intelligence
-              <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-semibold text-amber-500">
-                {t.common.pro}
-              </span>
             </Link>
 
             <Link
@@ -254,9 +251,8 @@ export function SiteHeader() {
 
             {/* Trends + Auth */}
             <div className="pt-3 border-t flex items-center justify-between">
-              <Link href="/trends" className="rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent inline-flex items-center gap-1.5">
+              <Link href="/trends" className="rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent">
                 Intelligence
-                <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-semibold text-amber-500">{t.common.pro}</span>
               </Link>
               {user ? (
                 <Link href="/account" className="text-xs font-medium text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5">
