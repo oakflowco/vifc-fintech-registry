@@ -88,15 +88,23 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-4 text-center">
+          <div className="mt-4 text-center space-y-2">
             <button
               onClick={() => { setIsSignup(!isSignup); setError(""); }}
-              className="text-sm text-muted-foreground hover:text-foreground"
+              className="text-sm text-muted-foreground hover:text-foreground block w-full"
             >
               {isSignup
                 ? "Already have an account? Login"
                 : "Don't have an account? Sign up"}
             </button>
+            {!isSignup && (
+              <a
+                href="/forgot-password"
+                className="text-xs text-muted-foreground hover:text-foreground block"
+              >
+                Forgot password?
+              </a>
+            )}
           </div>
 
           <div className="mt-6 border-t pt-4">

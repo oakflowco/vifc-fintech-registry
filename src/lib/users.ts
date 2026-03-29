@@ -94,6 +94,17 @@ export async function activateSubscription(
   return true;
 }
 
+export async function resetUserPassword(userId: string): Promise<string | null> {
+  const users = readUsers();
+  const user = users.find((u) => u.id === userId);
+  if (!user) return null;
+
+  const newPassword = uuidv4().slice(0, 10);
+  user.passwordHash = await bcrypt.hash(newPassword, 10);
+  writeUsers(users);
+  return newPassword;
+}
+
 export function hasActiveSubscription(user: User): boolean {
   if (!user.subscription.active) return false;
   if (!user.subscription.expiresAt) return false;
