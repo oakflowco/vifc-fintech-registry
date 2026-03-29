@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "VIFC Database",
     short_name: "VIFC",
-    description: "Vietnam Fintech & Financial Registry",
+    description: "Vietnam Financial Registry & Market Intelligence",
     start_url: "/",
     display: "standalone",
     background_color: "#0f1117",

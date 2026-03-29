@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { RegistryPage } from "@/components/registry-page";
 
 export const metadata: Metadata = {
-  title: "Vietnam Fintech Registry — 300+ Companies, Investors & Banks",
+  title: "Vietnam Financial Registry — 300+ Companies, Investors & Banks",
   description:
-    "Browse Vietnam's most comprehensive fintech database. 300+ licensed companies, investors, banks, securities firms, and insurance providers registered with VIFC Da Nang.",
+    "Browse Vietnam's most comprehensive financial registry. 300+ licensed fintech companies, investors, banks, securities firms, and insurance providers. VIFC Da Nang registered entities.",
 };
 
 export default function FintechPage() {

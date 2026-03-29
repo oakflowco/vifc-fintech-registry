@@ -55,7 +55,7 @@ export default function Image() {
             maxWidth: 800,
           }}
         >
-          Vietnam Fintech & Financial Registry
+          Vietnam Financial Registry & Market Intelligence
         </div>
         <div
           style={{

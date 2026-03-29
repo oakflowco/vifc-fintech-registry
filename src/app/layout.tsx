@@ -19,25 +19,28 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://vifcdatabase.com"),
   title: {
-    default: "VIFC Database — Vietnam Fintech & Financial Registry",
+    default: "VIFC Database — Vietnam Financial Registry & Market Intelligence",
     template: "%s | VIFC Database",
   },
   description:
-    "Vietnam's most comprehensive fintech registry. Browse 300+ fintech companies, investors, banks, securities firms, and insurance providers. Live market intelligence, VIFC Da Nang insights, and ASEAN comparison data.",
+    "Vietnam's most comprehensive financial registry and market intelligence platform. Browse 300+ companies across fintech, banking, securities, insurance, and investment sectors. Live data, VIFC Da Nang insights, and ASEAN comparison.",
   keywords: [
     "VIFC",
-    "Vietnam fintech",
+    "VIFC Database",
+    "Vietnam financial registry",
     "Vietnam International Financial Centre",
     "Da Nang",
-    "fintech registry",
+    "Vietnam fintech",
     "Vietnam investors",
     "Vietnam banks",
+    "Vietnam securities",
     "VIFC Da Nang",
     "Vietnam financial centre",
-    "ASEAN fintech",
+    "ASEAN finance",
     "Vietnam market intelligence",
     "VN-Index",
     "Vietnam FDI",
+    "Vietnam capital markets",
   ],
   authors: [{ name: "VIFC Database" }],
   creator: "VIFC Database",
@@ -58,23 +61,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://vifcdatabase.com",
     siteName: "VIFC Database",
-    title: "VIFC Database — Vietnam Fintech & Financial Registry",
+    title: "VIFC Database — Vietnam Financial Registry & Market Intelligence",
     description:
-      "Vietnam's most comprehensive fintech registry. Browse 300+ companies, live market data, and VIFC Da Nang insights.",
+      "Vietnam's most comprehensive financial registry. Browse 300+ companies, live market data, and VIFC Da Nang insights.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "VIFC Database — Vietnam Financial Registry",
+        alt: "VIFC Database — Vietnam Financial Registry & Market Intelligence",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "VIFC Database — Vietnam Fintech & Financial Registry",
+    title: "VIFC Database — Vietnam Financial Registry & Market Intelligence",
     description:
-      "Vietnam's most comprehensive fintech registry. Browse 300+ companies, live market data, and VIFC Da Nang insights.",
+      "Vietnam's most comprehensive financial registry. Browse 300+ companies, live market data, and VIFC Da Nang insights.",
     images: ["/og-image.png"],
   },
   alternates: {

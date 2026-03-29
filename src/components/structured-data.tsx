@@ -5,7 +5,7 @@ export function OrganizationSchema() {
     name: "VIFC Database",
     url: "https://vifcdatabase.com",
     logo: "https://vifcdatabase.com/icon.svg",
-    description: "Vietnam's most comprehensive fintech and financial registry. Browse 300+ companies, live market data, and VIFC Da Nang insights.",
+    description: "Vietnam's most comprehensive financial registry and market intelligence platform. Browse 300+ companies, live market data, and VIFC Da Nang insights.",
     sameAs: [],
     contactPoint: {
       "@type": "ContactPoint",
