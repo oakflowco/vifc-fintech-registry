@@ -1,5 +1,7 @@
 import { fetchSheetData } from "@/lib/sheets";
 import { RegistryTable } from "@/components/registry-table";
+import { getSessionUserId } from "@/lib/session";
+import { getUserById, hasActiveSubscription } from "@/lib/users";
 
 interface RegistryPageProps {
   title: string;
@@ -18,6 +20,16 @@ export async function RegistryPage({
   filterColumns,
   exportType,
 }: RegistryPageProps) {
+  // Check subscription status
+  let subscribed = false;
+  const userId = await getSessionUserId();
+  if (userId) {
+    const user = await getUserById(userId);
+    if (user && hasActiveSubscription(user)) {
+      subscribed = true;
+    }
+  }
+
   let headers: string[] = [];
   let data: Record<string, string>[] = [];
   let error = "";
@@ -60,6 +72,7 @@ export async function RegistryPage({
           data={data}
           filterColumns={filterColumns}
           exportType={exportType}
+          isPremium={subscribed}
         />
       )}
     </div>

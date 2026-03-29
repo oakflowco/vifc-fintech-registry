@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
+type Plan = "monthly" | "annual";
+
 export default function SubscribePage() {
   const [email, setEmail] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -14,6 +16,7 @@ export default function SubscribePage() {
   const [isNew, setIsNew] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState<Plan>("annual");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -54,7 +57,7 @@ export default function SubscribePage() {
               <p className="text-sm text-muted-foreground">
                 {isNew
                   ? "Your premium account is ready. Use the credentials below to login."
-                  : "Your subscription has been extended for 30 days."}
+                  : "Your subscription has been extended."}
               </p>
             </div>
 
@@ -113,11 +116,76 @@ export default function SubscribePage() {
           </p>
         </div>
 
-        {/* Pricing */}
+        {/* Plan Toggle */}
+        <div className="grid grid-cols-2 gap-3">
+          <button onClick={() => setSelectedPlan("monthly")} className="text-left">
+            <Card
+              className={`h-full transition-colors cursor-pointer ${
+                selectedPlan === "monthly"
+                  ? "border-primary ring-1 ring-primary"
+                  : "hover:bg-muted/30"
+              }`}
+            >
+              <CardHeader className="p-4 pb-2">
+                <CardTitle className="text-sm">Monthly</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <p className="text-xl font-bold">
+                  250,000₫<span className="text-xs font-normal text-muted-foreground">/mo</span>
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">~$10 USD</p>
+              </CardContent>
+            </Card>
+          </button>
+
+          <button onClick={() => setSelectedPlan("annual")} className="text-left">
+            <Card
+              className={`h-full transition-colors cursor-pointer border-primary/50 ${
+                selectedPlan === "annual"
+                  ? "border-primary ring-1 ring-primary"
+                  : "hover:bg-muted/30"
+              }`}
+            >
+              <CardHeader className="p-4 pb-2">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm">Annual</CardTitle>
+                  <Badge className="bg-amber-500/15 text-amber-500 border-amber-500/25 hover:bg-amber-500/15 text-[10px] px-1.5 py-0">
+                    Best Value
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <p className="text-xl font-bold">
+                  2,500,000₫<span className="text-xs font-normal text-muted-foreground">/yr</span>
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">~208,000₫/mo</p>
+              </CardContent>
+            </Card>
+          </button>
+        </div>
+
+        {/* Comparison */}
+        <div className="rounded-lg border bg-muted/30 p-3 text-sm space-y-1">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Monthly:</span>
+            <span>250,000₫ x 12 = <span className="font-semibold">3,000,000₫/yr</span></span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Annual:</span>
+            <span>
+              <span className="font-semibold">2,500,000₫/yr</span>
+              <span className="text-green-500 ml-2">Save 17%</span>
+            </span>
+          </div>
+        </div>
+
+        {/* Features */}
         <Card>
           <CardHeader className="text-center pb-2">
-            <CardTitle className="text-3xl">250,000₫<span className="text-base font-normal text-muted-foreground">/month</span></CardTitle>
-            <CardDescription>~$10 USD · 30-day access</CardDescription>
+            <CardTitle className="text-lg">What&apos;s included</CardTitle>
+            <CardDescription>
+              {selectedPlan === "monthly" ? "30-day access" : "365-day access"}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -157,8 +225,6 @@ export default function SubscribePage() {
             {/* QR Code */}
             <div className="flex flex-col items-center gap-3">
               <div className="relative w-48 h-48 rounded-lg border-2 border-[#a50064] overflow-hidden bg-white flex items-center justify-center">
-                {/* Replace with your actual MoMo QR code image */}
-                {/* Put your QR code image at: public/momo-qr.png */}
                 <Image
                   src="/momo-qr.png"
                   alt="MoMo QR Code"
@@ -166,7 +232,6 @@ export default function SubscribePage() {
                   height={192}
                   className="object-contain"
                   onError={(e) => {
-                    // Fallback if image doesn't exist
                     (e.target as HTMLImageElement).style.display = "none";
                     (e.target as HTMLImageElement).parentElement!.innerHTML = '<div class="text-center p-4"><p class="text-sm font-semibold text-[#a50064]">MoMo QR Code</p><p class="text-xs text-gray-500 mt-1">Add your QR at public/momo-qr.png</p></div>';
                   }}
@@ -183,7 +248,15 @@ export default function SubscribePage() {
             <div className="rounded-lg bg-muted/50 p-3 space-y-1.5 text-sm">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Amount:</span>
-                <span className="font-semibold">250,000₫</span>
+                <span className="font-semibold">
+                  {selectedPlan === "monthly" ? "250,000₫" : "2,500,000₫"}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Plan:</span>
+                <span className="font-medium">
+                  {selectedPlan === "monthly" ? "Monthly (30 days)" : "Annual (365 days)"}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Transfer note:</span>
@@ -231,7 +304,11 @@ export default function SubscribePage() {
                 className="w-full h-10 rounded-md text-sm font-medium text-white disabled:opacity-50"
                 style={{ backgroundColor: "#a50064" }}
               >
-                {loading ? "Submitting..." : "I've Paid — Activate My Account"}
+                {loading
+                  ? "Submitting..."
+                  : selectedPlan === "monthly"
+                    ? "I've Paid 250,000₫ — Activate Monthly"
+                    : "I've Paid 2,500,000₫ — Activate Annual"}
               </button>
             </form>
 

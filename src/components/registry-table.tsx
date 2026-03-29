@@ -139,6 +139,12 @@ export function RegistryTable({
     });
   }, [data, search, filters]);
 
+  const showPaywall = !isPremium && filtered.length > FREE_ROW_LIMIT;
+  const visibleRows = showPaywall ? filtered.slice(0, FREE_ROW_LIMIT) : filtered;
+  const blurredRows = showPaywall
+    ? filtered.slice(FREE_ROW_LIMIT, FREE_ROW_LIMIT + BLUR_PREVIEW_COUNT)
+    : [];
+
   const setFilter = (col: string) => (value: string | null) => {
     setFilters((prev) => ({ ...prev, [col]: value ?? "all" }));
   };
@@ -181,7 +187,18 @@ export function RegistryTable({
 
       <div className="flex items-center justify-between">
         <span className="text-sm text-muted-foreground">
-          {t.common.showing} {filtered.length} {t.common.of} {data.length} {t.common.entries}
+          {!isPremium && filtered.length > FREE_ROW_LIMIT ? (
+            <>
+              {t.common.showing} {FREE_ROW_LIMIT} {t.common.of} {filtered.length} {t.common.entries}
+              <span className="ml-1.5 inline-flex items-center rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-semibold text-amber-500">
+                🔒 Free preview
+              </span>
+            </>
+          ) : (
+            <>
+              {t.common.showing} {filtered.length} {t.common.of} {data.length} {t.common.entries}
+            </>
+          )}
         </span>
         {exportType && (
           <a
@@ -217,8 +234,7 @@ export function RegistryTable({
                 </TableCell>
               </TableRow>
             ) : (
-              filtered.map((entry, i) => {
-                // Use the original row index (1-based) from the full dataset, not filtered index
+              visibleRows.map((entry, i) => {
                 const originalIndex = data.indexOf(entry) + 1;
                 const profileHref = exportType ? `/company/${exportType}/${originalIndex}` : undefined;
                 return (
@@ -275,6 +291,59 @@ export function RegistryTable({
           </TableBody>
         </Table>
       </div>
+
+      {/* Blur overlay for gated rows */}
+      {showPaywall && (
+        <div className="relative -mt-4">
+          {/* Blurred preview rows */}
+          <div className="opacity-30 blur-sm select-none pointer-events-none overflow-hidden rounded-lg border">
+            <Table>
+              <TableBody>
+                {blurredRows.map((entry, i) => (
+                  <TableRow key={i}>
+                    <TableCell className="font-mono text-xs text-muted-foreground">
+                      {FREE_ROW_LIMIT + i + 1}
+                    </TableCell>
+                    {displayHeaders.map((h) => {
+                      const value = entry[h] || "";
+                      if (isBadgeColumn(h) && value) {
+                        return (
+                          <TableCell key={h}>
+                            <Badge variant={badgeVariant(value)}>{value}</Badge>
+                          </TableCell>
+                        );
+                      }
+                      return (
+                        <TableCell key={h} className="text-sm">
+                          {value || "—"}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          {/* Gradient overlay with CTA */}
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-transparent via-card/70 to-card rounded-lg">
+            <div className="text-center space-y-3 px-6 py-8">
+              <p className="text-base font-semibold tracking-tight">
+                Subscribe to view all {filtered.length} entries
+              </p>
+              <p className="text-sm text-muted-foreground">
+                250,000₫/month — full access to all registries, trends, and exports
+              </p>
+              <Link
+                href="/subscribe"
+                className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors"
+              >
+                Unlock Full Access
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
