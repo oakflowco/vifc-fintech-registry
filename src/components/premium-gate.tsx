@@ -47,16 +47,17 @@ export function PremiumGate({ feature }: { feature: string }) {
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
-          href="/login"
-          className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          href="/subscribe"
+          className="inline-flex h-12 items-center justify-center rounded-lg text-sm font-medium text-white transition-colors hover:opacity-90 px-8"
+          style={{ backgroundColor: "#a50064" }}
         >
-          Login / Sign Up
+          Subscribe via MoMo — 250,000₫/mo
         </Link>
         <Link
-          href="/account"
+          href="/login"
           className="inline-flex h-12 items-center justify-center rounded-lg border px-8 text-sm font-medium transition-colors hover:bg-accent"
         >
-          Subscribe Now
+          Already have an account? Login
         </Link>
       </div>
     </div>

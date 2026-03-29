@@ -185,7 +185,7 @@
     "premiumFeatures": "Premium Features"
   },
   "footer": {
-    "description": "VIFC Database — Vietnam International Financial Centre. Data updates automatically from registry spreadsheets.",
+    "description": "VIFC Database - Vietnam International Financial Centre. Built by OakFlow Team.",
     "privacy": "Privacy Notice",
     "terms": "Terms of Use",
     "poweredBy": "Powered by live data from World Bank, Yahoo Finance & Google News"

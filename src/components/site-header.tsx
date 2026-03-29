@@ -8,41 +8,44 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { useLocale } from "@/lib/i18n/context";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 
-function getNavItems(t: Dictionary["common"]) {
-  const mainNav = [
-    { href: "/", label: t.registry },
-    { href: "/search", label: t.search?.replace("...", "") || "Search" },
-    { href: "/trends", label: t.trends, premium: true },
-    { href: "/asean", label: t.asean },
-    { href: "/deals", label: t.deals },
-  ];
+// Navigation organized by user intent:
+// Data = "Show me the companies"
+// Markets = "Show me the landscape"
+// Invest = "Help me decide and act"
+// Trends PRO = The premium product
 
-  const registryDropdown = [
+function getNavGroups(t: Dictionary["common"]) {
+  const dataDropdown = [
     { href: "/", label: t.fintechCompanies },
     { href: "/investors", label: t.investors },
     { href: "/banks", label: t.banks },
     { href: "/securities", label: t.securities },
     { href: "/insurance", label: t.insurance },
     { href: "/neobanks", label: t.digitalBanks },
-    { href: "/sandbox", label: t.sandbox },
+    { href: "/deals", label: t.deals },
   ];
 
-  const insightsDropdown = [
-    { href: "/why-vietnam", label: t.whyVietnam },
-    { href: "/vifc", label: t.vifc },
+  const marketsDropdown = [
     { href: "/capital-markets", label: t.capitalMarkets },
+    { href: "/asean", label: "ASEAN Dashboard" },
     { href: "/commodities", label: t.commodities },
     { href: "/carbon", label: t.carbonCredits },
     { href: "/ratings", label: t.creditRatings },
-    { href: "/dfi", label: t.developmentFinance },
-    { href: "/market-size", label: t.marketSize },
+  ];
+
+  const investDropdown = [
+    { href: "/why-vietnam", label: t.whyVietnam },
+    { href: "/vifc", label: t.vifc },
     { href: "/investor-guide", label: t.investorGuide },
+    { href: "/market-size", label: t.marketSize },
+    { href: "/sandbox", label: t.sandbox },
     { href: "/regulators", label: t.regulators },
+    { href: "/dfi", label: t.developmentFinance },
     { href: "/risks", label: t.risks },
     { href: "/calendar", label: t.calendar },
   ];
 
-  return { mainNav, registryDropdown, insightsDropdown };
+  return { dataDropdown, marketsDropdown, investDropdown };
 }
 
 interface UserState {
@@ -75,10 +78,10 @@ function Dropdown({
       <button
         onClick={() => setOpen(!open)}
         className={cn(
-          "rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors inline-flex items-center gap-1",
+          "rounded-md px-3 py-1.5 text-sm font-medium transition-colors inline-flex items-center gap-1",
           isActive
             ? "text-foreground"
-            : "text-muted-foreground hover:text-accent-foreground"
+            : "text-muted-foreground hover:text-foreground"
         )}
       >
         {label}
@@ -87,13 +90,13 @@ function Dropdown({
         </svg>
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 w-48 rounded-lg border bg-card shadow-lg py-1 z-50">
+        <div className="absolute top-full left-0 mt-1 w-52 rounded-lg border bg-card shadow-lg py-1 z-50">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="block px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             >
               {item.label}
             </Link>
@@ -110,7 +113,7 @@ export function SiteHeader() {
   const [user, setUser] = useState<UserState | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { mainNav, registryDropdown, insightsDropdown } = getNavItems(t.common);
+  const { dataDropdown, marketsDropdown, investDropdown } = getNavGroups(t.common);
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -124,8 +127,9 @@ export function SiteHeader() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  const registryActive = registryDropdown.some((i) => isActive(i.href));
-  const insightsActive = insightsDropdown.some((i) => isActive(i.href));
+  const dataActive = dataDropdown.some((i) => isActive(i.href));
+  const marketsActive = marketsDropdown.some((i) => isActive(i.href));
+  const investActive = investDropdown.some((i) => isActive(i.href));
 
   return (
     <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
@@ -138,69 +142,64 @@ export function SiteHeader() {
             </div>
             <div className="hidden sm:block">
               <p className="text-xs font-semibold leading-tight">VIFC</p>
-              <p className="text-xs font-semibold leading-tight">Database</p>
+              <p className="text-xs font-semibold leading-tight text-muted-foreground">Database</p>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-0.5">
-            <Dropdown label={t.common.registry} items={registryDropdown} isActive={registryActive} />
+          <nav className="hidden md:flex items-center">
+            <Dropdown label="Data" items={dataDropdown} isActive={dataActive} />
+            <Dropdown label="Markets" items={marketsDropdown} isActive={marketsActive} />
+            <Dropdown label="Invest" items={investDropdown} isActive={investActive} />
 
-            {mainNav.filter((i) => i.href !== "/").map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors inline-flex items-center gap-1",
-                  isActive(item.href)
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                )}
-              >
-                {item.label}
-                {"premium" in item && item.premium && (
-                  <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1 py-0.5 text-[9px] font-semibold text-amber-500">
-                    {t.common.pro}
-                  </span>
-                )}
-              </Link>
-            ))}
-
-            <Dropdown label={t.common.insights} items={insightsDropdown} isActive={insightsActive} />
+            <Link
+              href="/trends"
+              className={cn(
+                "rounded-md px-3 py-1.5 text-sm font-medium transition-colors inline-flex items-center gap-1.5",
+                isActive("/trends")
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {t.common.trends}
+              <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-semibold text-amber-500">
+                {t.common.pro}
+              </span>
+            </Link>
 
             {/* Auth */}
-            <div className="ml-2 pl-2 border-l border-border">
+            <div className="ml-3 pl-3 border-l border-border">
               {user ? (
                 <Link
                   href="/account"
                   className={cn(
-                    "rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors inline-flex items-center gap-1.5",
+                    "rounded-md px-3 py-1.5 text-sm font-medium transition-colors inline-flex items-center gap-1.5",
                     isActive("/account")
                       ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
-                  {user.subscribed && <span className="h-1.5 w-1.5 rounded-full bg-green-500" />}
+                  {user.subscribed && <span className="h-2 w-2 rounded-full bg-green-500" />}
                   {t.common.account}
                 </Link>
               ) : (
                 <Link
                   href="/login"
-                  className="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {t.common.login}
                 </Link>
               )}
             </div>
 
-            {/* Language Switcher */}
-            <div className="ml-1 pl-1 border-l border-border">
+            {/* Language */}
+            <div className="ml-2 pl-2 border-l border-border">
               <LanguageSwitcher />
             </div>
           </nav>
 
-          {/* Mobile Language + Menu */}
-          <div className="md:hidden flex items-center gap-1">
+          {/* Mobile */}
+          <div className="md:hidden flex items-center gap-1.5">
             <LanguageSwitcher />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -218,49 +217,57 @@ export function SiteHeader() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t py-3 space-y-3">
+          <div className="md:hidden border-t py-4 space-y-4">
+            {/* Data */}
             <div>
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">{t.common.registry}</p>
+              <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Data</p>
               <div className="flex flex-wrap gap-1.5">
-                {registryDropdown.map((item) => (
+                {dataDropdown.map((item) => (
                   <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
                     {item.label}
                   </Link>
                 ))}
               </div>
             </div>
+
+            {/* Markets */}
             <div>
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">{t.common.trends} & {t.common.deals}</p>
+              <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Markets</p>
               <div className="flex flex-wrap gap-1.5">
-                {mainNav.filter((i) => i.href !== "/").map((item) => (
-                  <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors inline-flex items-center gap-1", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
-                    {item.label}
-                    {"premium" in item && item.premium && (
-                      <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1 py-0.5 text-[9px] font-semibold text-amber-500">{t.common.pro}</span>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">{t.common.insights}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {insightsDropdown.map((item) => (
+                {marketsDropdown.map((item) => (
                   <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
                     {item.label}
                   </Link>
                 ))}
               </div>
             </div>
-            <div className="pt-2 border-t">
+
+            {/* Invest */}
+            <div>
+              <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Invest</p>
+              <div className="flex flex-wrap gap-1.5">
+                {investDropdown.map((item) => (
+                  <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Trends + Auth */}
+            <div className="pt-3 border-t flex items-center justify-between">
+              <Link href="/trends" className="rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent inline-flex items-center gap-1.5">
+                {t.common.trends}
+                <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-semibold text-amber-500">{t.common.pro}</span>
+              </Link>
               {user ? (
                 <Link href="/account" className="text-xs font-medium text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5">
-                  {user.subscribed && <span className="h-1.5 w-1.5 rounded-full bg-green-500" />}
-                  {t.common.account} ({user.email})
+                  {user.subscribed && <span className="h-2 w-2 rounded-full bg-green-500" />}
+                  {t.common.account}
                 </Link>
               ) : (
                 <Link href="/login" className="text-xs font-medium text-muted-foreground hover:text-foreground">
-                  {t.common.login} / {t.common.signup}
+                  {t.common.login}
                 </Link>
               )}
             </div>
