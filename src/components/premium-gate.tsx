@@ -31,7 +31,7 @@ export function PremiumGate({ feature }: { feature: string }) {
             </li>
             <li className="flex items-center gap-2">
               <span className="text-green-500">&#10003;</span>
-              VN-Index, GDP, FDI live data (World Bank + Yahoo Finance)
+              VN-Index, GDP, FDI live data
             </li>
             <li className="flex items-center gap-2">
               <span className="text-green-500">&#10003;</span>
@@ -39,11 +39,7 @@ export function PremiumGate({ feature }: { feature: string }) {
             </li>
             <li className="flex items-center gap-2">
               <span className="text-green-500">&#10003;</span>
-              CSV export — download Fintech, Investors, Banks data
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">&#10003;</span>
-              Pay via MoMo — 250,000₫/month
+              CSV export — download Fintech, Investors, Banks data, reports
             </li>
           </ul>
         </CardContent>
