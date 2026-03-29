@@ -10,6 +10,13 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+function CompanyInitials({ name }: { name: string; domain?: string }) {
+  return (
+    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold text-lg shrink-0">
+      {name.slice(0, 2).toUpperCase()}
+    </div>
+  );
+}
 
 export const revalidate = 60;
 
@@ -212,6 +219,19 @@ export default async function CompanyProfilePage({ params }: PageProps) {
   const statusValue =
     entry["Status"] || entry["status"] || entry["State"] || "";
 
+  // Extract domain for logo
+  const rawWebsite =
+    entry["Website"] || entry["website"] || entry["URL"] || entry["url"] || "";
+  let logoDomain: string | null = null;
+  if (rawWebsite) {
+    try {
+      const url = rawWebsite.startsWith("http") ? rawWebsite : `https://${rawWebsite}`;
+      logoDomain = new URL(url).hostname;
+    } catch {
+      if (rawWebsite.includes(".")) logoDomain = rawWebsite.replace(/^www\./, "");
+    }
+  }
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       {/* Back link */}
@@ -224,12 +244,17 @@ export default async function CompanyProfilePage({ params }: PageProps) {
 
       {/* Page heading */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
-          {entityName}
-        </h1>
-        <div className="mt-2 flex flex-wrap gap-2">
-          <Badge variant="secondary">{config.label}</Badge>
-          {statusValue && <Badge variant="outline">{statusValue}</Badge>}
+        <div className="flex items-center gap-4">
+          {logoDomain && <CompanyInitials domain={logoDomain} name={entityName} />}
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
+              {entityName}
+            </h1>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <Badge variant="secondary">{config.label}</Badge>
+              {statusValue && <Badge variant="outline">{statusValue}</Badge>}
+            </div>
+          </div>
         </div>
       </div>
 

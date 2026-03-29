@@ -98,6 +98,43 @@ function isUrlValue(value: string) {
   );
 }
 
+function getWebsiteDomain(entry: RegistryEntry): string | null {
+  const raw =
+    entry["Website"] || entry["website"] || entry["URL"] || entry["url"] || "";
+  if (!raw) return null;
+  try {
+    const url = raw.startsWith("http") ? raw : `https://${raw}`;
+    return new URL(url).hostname;
+  } catch {
+    // handle bare domains like "momo.vn"
+    if (raw.includes(".")) return raw.replace(/^www\./, "");
+    return null;
+  }
+}
+
+function CompanyLogo({ domain }: { domain: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-muted text-[9px] font-bold text-muted-foreground">
+        {domain.charAt(0).toUpperCase()}
+      </span>
+    );
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`}
+      alt=""
+      width={24}
+      height={24}
+      className="h-6 w-6 shrink-0 rounded"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 export function RegistryTable({
   headers,
   data,
@@ -245,12 +282,20 @@ export function RegistryTable({
                   {displayHeaders.map((h, colIdx) => {
                     const value = entry[h] || "";
                     const isNameCol = colIdx === 0 || h.toLowerCase().includes("company name") || h.toLowerCase().includes("name");
-                    if (isNameCol && profileHref && value) {
+                    if (isNameCol && value) {
+                      const domain = getWebsiteDomain(entry);
                       return (
                         <TableCell key={h}>
-                          <Link href={profileHref} className="text-sm font-medium text-primary hover:underline underline-offset-4">
-                            {value}
-                          </Link>
+                          <div className="flex items-center gap-2">
+                            {domain && <CompanyLogo domain={domain} />}
+                            {profileHref ? (
+                              <Link href={profileHref} className="text-sm font-medium text-primary hover:underline underline-offset-4">
+                                {value}
+                              </Link>
+                            ) : (
+                              <span className="text-sm font-medium">{value}</span>
+                            )}
+                          </div>
                         </TableCell>
                       );
                     }

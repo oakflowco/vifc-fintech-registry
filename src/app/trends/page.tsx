@@ -79,6 +79,14 @@ export default async function TrendsPage() {
       : []),
   ];
 
+  // Build registry entities for bubble map
+  const registryEntities = allEntries.map((entry) => ({
+    name: entry["Company Name"] || entry["Bank Name"] || entry["Company"] || entry["Trading Name"] || entry["Name"] || entry["company"] || entry["name"] || "",
+    category: entry["Category"] || entry["category"] || entry["Bank Type"] || entry["License Type"] || entry["Type"] || entry["type"] || "",
+    city: entry["Headquarters"] || entry["headquarters"] || entry["HQ"] || entry["City"] || entry["city"] || "",
+    status: entry["Status"] || entry["status"] || "",
+  })).filter((e) => e.name && e.category);
+
   // Compute category distribution from registry data (LIVE)
   const catCount = new Map<string, number>();
   for (const entry of allEntries) {
@@ -203,6 +211,7 @@ export default async function TrendsPage() {
         investorCountries={investorCountries}
         regulatoryMilestones={regulatoryMilestones}
         relatedLinks={relatedLinks}
+        registryEntities={registryEntities}
       />
     </div>
   );

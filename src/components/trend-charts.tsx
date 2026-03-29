@@ -25,6 +25,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { FintechBubbleMap } from "@/components/fintech-bubble-map";
 import type { MacroYear } from "@/lib/fetch-world-bank";
 import type { StockDataPoint, YearlyStock } from "@/lib/fetch-stock";
 
@@ -56,6 +57,7 @@ interface TrendChartsProps {
   investorCountries: { country: string; deals: number; amount: number }[];
   regulatoryMilestones: { date: string; event: string; url?: string }[];
   relatedLinks: RelatedLink[];
+  registryEntities?: { name: string; category: string; city: string; status: string }[];
 }
 
 import { CHART_TOOLTIP, GRID_STROKE, AXIS_STROKE, PALETTE } from "@/lib/chart-theme";
@@ -118,6 +120,7 @@ export function TrendCharts({
   investorCountries,
   regulatoryMilestones,
   relatedLinks,
+  registryEntities,
 }: TrendChartsProps) {
   return (
     <div className="space-y-8">
@@ -364,41 +367,83 @@ export function TrendCharts({
         </div>
       </section>
 
-      {/* ── Vietnam Fintech Map ── */}
+      {/* ── Vietnam Fintech Registry Map ── */}
       <section>
-        <h2 className="text-lg font-semibold mb-4">Vietnam Fintech Map</h2>
-        <Card>
-          <CardHeader>
-            <CardTitle>Vietnam Fintech Startup Map</CardTitle>
-            <CardDescription>
-              Overview of Vietnam&apos;s fintech landscape —{" "}
-              <a
-                href="https://fintechnews.sg/vietnam-fintech-startups/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Source: Fintech Singapore
-              </a>
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <a
-              href="https://fintechnews.sg/vietnam-fintech-startups/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://fintechnews.sg/wp-content/uploads/2021/01/Fintech-Vietnam-Startup-Map-2020.png"
-                alt="Fintech Vietnam Startup Map"
-                className="w-full rounded-lg border border-border/50"
-                loading="lazy"
-              />
-            </a>
-          </CardContent>
-        </Card>
+        <div className="flex items-center gap-2 mb-4">
+          <h2 className="text-lg font-semibold">Vietnam Financial Registry Map</h2>
+          <LiveBadge />
+          <span className="text-[10px] text-muted-foreground font-mono ml-auto">Source: VIFC Registry Database</span>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <Card className="lg:col-span-2">
+            <CardHeader>
+              <CardTitle>Entities by Category</CardTitle>
+              <CardDescription>
+                Interactive bubble map — click a category to explore. Sized by entity count, sourced live from the registry.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {registryEntities && registryEntities.length > 0 ? (
+                <FintechBubbleMap entities={registryEntities} />
+              ) : (
+                <div className="h-[480px] flex items-center justify-center text-sm text-muted-foreground">
+                  Unable to load registry data
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Ecosystem Resources</CardTitle>
+              <CardDescription>External research tracking Vietnam&apos;s fintech landscape</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {[
+                  {
+                    title: "StartupBlink — Top Startups Vietnam",
+                    description: "792+ ranked startups with interactive map and ecosystem scores",
+                    url: "https://www.startupblink.com/top-startups/vietnam",
+                    badge: "2026",
+                  },
+                  {
+                    title: "WorldFIS — Vietnam Fintech Ecosystem",
+                    description: "Growth trends, challenges & opportunities outlook",
+                    url: "https://vietnam.worldfis.com/blogs/vietnams-fintech-ecosystem-growth-trends-challenges-and-opportunities/",
+                    badge: "2026",
+                  },
+                  {
+                    title: "InnReg — Vietnam Fintech Trends",
+                    description: "Top companies, market growth analysis & $45B forecast",
+                    url: "https://www.innreg.com/blog/vietnam-fintech-trends",
+                    badge: "2025",
+                  },
+                  {
+                    title: "Fintech Singapore — Startup Map",
+                    description: "118+ startups mapped across sectors (2020 edition)",
+                    url: "https://fintechnews.sg/vietnam-fintech-startups/",
+                    badge: "2020",
+                  },
+                ].map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block rounded-lg border border-border/50 p-3 transition-colors hover:border-primary/50 hover:bg-muted/50"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <Badge variant="outline" className="text-[10px]">{link.badge}</Badge>
+                      <span className="text-sm font-semibold group-hover:text-primary transition-colors">{link.title}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{link.description}</p>
+                  </a>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </section>
 
       {/* ── News (LIVE) & Regulatory Timeline ── */}

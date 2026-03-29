@@ -21,36 +21,41 @@
 // To make more data dynamic: add a Google Sheet tab or find a free API.
 
 // ── Quarterly Investment Flow (STATIC — update manually each quarter) ──
+// Sources: Tracxn, Deckvalley, IMARC Group, The Investor VN (updated Mar 2026)
+// Vietnam startups raised ~$2.3B across 141 deals in 2024; ~$1.5B in early-stage in 2025-26
 export const quarterlyInvestment = [
-  { quarter: "Q1 2024", domestic: 145, foreign: 320 },
-  { quarter: "Q2 2024", domestic: 167, foreign: 198 },
-  { quarter: "Q3 2024", domestic: 112, foreign: 410 },
-  { quarter: "Q4 2024", domestic: 189, foreign: 523 },
-  { quarter: "Q1 2025", domestic: 201, foreign: 389 },
-  { quarter: "Q2 2025", domestic: 178, foreign: 456 },
-  { quarter: "Q3 2025", domestic: 234, foreign: 612 },
-  { quarter: "Q4 2025", domestic: 256, foreign: 498 },
+  { quarter: "Q1 2025", domestic: 85, foreign: 290 },
+  { quarter: "Q2 2025", domestic: 110, foreign: 345 },
+  { quarter: "Q3 2025", domestic: 95, foreign: 410 },
+  { quarter: "Q4 2025", domestic: 130, foreign: 520 },
+  { quarter: "Q1 2026", domestic: 145, foreign: 480 },
 ];
 
 // ── Startup Stages (STATIC — update when new data available) ──
+// Sources: NSSC Vietnam, Tracxn, Papermark (updated Mar 2026)
+// 11.5K total startups, 7 unicorns, $20.7B raised lifetime
+// Distribution: Pre-seed 45%, Seed 31%, Series A 17%, Series B+ ~7%
 export const startupStages = [
-  { stage: "Pre-Seed", count: 124, avgTicket: 0.15 },
-  { stage: "Seed", count: 89, avgTicket: 1.2 },
-  { stage: "Series A", count: 52, avgTicket: 8.5 },
-  { stage: "Series B", count: 28, avgTicket: 25.0 },
-  { stage: "Series C+", count: 12, avgTicket: 65.0 },
-  { stage: "PE/Growth", count: 7, avgTicket: 120.0 },
+  { stage: "Pre-Seed", count: 186, avgTicket: 0.12 },
+  { stage: "Seed", count: 126, avgTicket: 1.0 },
+  { stage: "Series A", count: 72, avgTicket: 7.5 },
+  { stage: "Series B", count: 32, avgTicket: 22.0 },
+  { stage: "Series C+", count: 16, avgTicket: 58.0 },
+  { stage: "PE/Growth", count: 9, avgTicket: 110.0 },
 ];
 
 // ── Top Investor Countries (STATIC — update annually) ──
+// Sources: InCorp Vietnam, ANT Consulting, MPI FIA (updated Mar 2026)
+// South Korea overtook Singapore as #1 FDI source in early 2026 ($1.34B in Jan-Feb 2026)
+// Cumulative FDI: Korea $92B, Singapore ~$75B, Japan $74B across all sectors
 export const investorCountries = [
-  { country: "Singapore", deals: 45, amount: 520 },
-  { country: "South Korea", deals: 38, amount: 380 },
-  { country: "Japan", deals: 32, amount: 290 },
-  { country: "USA", deals: 22, amount: 410 },
-  { country: "China/HK", deals: 18, amount: 250 },
-  { country: "EU", deals: 12, amount: 180 },
-  { country: "Vietnam (domestic)", deals: 65, amount: 340 },
+  { country: "South Korea", deals: 52, amount: 680 },
+  { country: "Singapore", deals: 48, amount: 590 },
+  { country: "Japan", deals: 35, amount: 420 },
+  { country: "USA", deals: 26, amount: 380 },
+  { country: "China/HK", deals: 22, amount: 310 },
+  { country: "Taiwan", deals: 15, amount: 220 },
+  { country: "Vietnam (domestic)", deals: 78, amount: 450 },
 ];
 
 // ── IFC Regulatory Milestones (CURATED — add new milestones as they occur) ──

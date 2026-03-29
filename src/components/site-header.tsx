@@ -8,44 +8,16 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { useLocale } from "@/lib/i18n/context";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 
-// Navigation organized by user intent:
-// Data = "Show me the companies"
-// Markets = "Show me the landscape"
-// Invest = "Help me decide and act"
-// Trends PRO = The premium product
-
-function getNavGroups(t: Dictionary["common"]) {
-  const dataDropdown = [
-    { href: "/", label: t.fintechCompanies },
-    { href: "/investors", label: t.investors },
-    { href: "/banks", label: t.banks },
-    { href: "/securities", label: t.securities },
-    { href: "/insurance", label: t.insurance },
-    { href: "/neobanks", label: t.digitalBanks },
-    { href: "/deals", label: t.deals },
-  ];
-
-  const marketsDropdown = [
-    { href: "/capital-markets", label: t.capitalMarkets },
-    { href: "/asean", label: "ASEAN Dashboard" },
-    { href: "/commodities", label: t.commodities },
-    { href: "/carbon", label: t.carbonCredits },
-    { href: "/ratings", label: t.creditRatings },
-  ];
-
-  const investDropdown = [
+function getInvestDropdown(t: Dictionary["common"]) {
+  return [
     { href: "/why-vietnam", label: t.whyVietnam },
     { href: "/vifc", label: t.vifc },
     { href: "/investor-guide", label: t.investorGuide },
-    { href: "/market-size", label: t.marketSize },
-    { href: "/sandbox", label: t.sandbox },
     { href: "/regulators", label: t.regulators },
-    { href: "/dfi", label: t.developmentFinance },
     { href: "/risks", label: t.risks },
     { href: "/calendar", label: t.calendar },
+    { href: "/sandbox", label: t.sandbox },
   ];
-
-  return { dataDropdown, marketsDropdown, investDropdown };
 }
 
 interface UserState {
@@ -113,7 +85,7 @@ export function SiteHeader() {
   const [user, setUser] = useState<UserState | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { dataDropdown, marketsDropdown, investDropdown } = getNavGroups(t.common);
+  const investDropdown = getInvestDropdown(t.common);
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -127,8 +99,6 @@ export function SiteHeader() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  const dataActive = dataDropdown.some((i) => isActive(i.href));
-  const marketsActive = marketsDropdown.some((i) => isActive(i.href));
   const investActive = investDropdown.some((i) => isActive(i.href));
 
   return (
@@ -149,19 +119,28 @@ export function SiteHeader() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center">
             <Link
-              href="/dashboard"
+              href="/"
               className={cn(
                 "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-                isActive("/dashboard")
+                isActive("/") && !pathname.startsWith("/registry") && !pathname.startsWith("/trends") && !pathname.startsWith("/deals")
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
               Dashboard
             </Link>
-            <Dropdown label="Data" items={dataDropdown} isActive={dataActive} />
-            <Dropdown label="Markets" items={marketsDropdown} isActive={marketsActive} />
-            <Dropdown label="Invest" items={investDropdown} isActive={investActive} />
+
+            <Link
+              href="/registry"
+              className={cn(
+                "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                isActive("/registry")
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {t.common.registry}
+            </Link>
 
             <Link
               href="/trends"
@@ -172,11 +151,25 @@ export function SiteHeader() {
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
-              {t.common.trends}
+              Intelligence
               <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-semibold text-amber-500">
                 {t.common.pro}
               </span>
             </Link>
+
+            <Link
+              href="/deals"
+              className={cn(
+                "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                isActive("/deals")
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {t.common.deals}
+            </Link>
+
+            <Dropdown label="Invest" items={investDropdown} isActive={investActive} />
 
             {/* Auth */}
             <div className="ml-3 pl-3 border-l border-border">
@@ -230,32 +223,19 @@ export function SiteHeader() {
         {mobileOpen && (
           <div className="md:hidden border-t py-4 space-y-4">
             {/* Dashboard */}
-            <Link href="/dashboard" className={cn("block rounded-md px-3 py-2 text-sm font-semibold transition-colors", isActive("/dashboard") ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-accent")}>
-              Dashboard — Vietnam at a Glance
+            <Link href="/" className={cn("block rounded-md px-3 py-2 text-sm font-semibold transition-colors", isActive("/") && pathname === "/" ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-accent")}>
+              Dashboard
             </Link>
-            {/* Data */}
-            <div>
-              <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Data</p>
-              <div className="flex flex-wrap gap-1.5">
-                {dataDropdown.map((item) => (
-                  <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
 
-            {/* Markets */}
-            <div>
-              <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Markets</p>
-              <div className="flex flex-wrap gap-1.5">
-                {marketsDropdown.map((item) => (
-                  <Link key={item.href} href={item.href} className={cn("rounded-md px-3 py-1.5 text-xs font-medium transition-colors", isActive(item.href) ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent")}>
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {/* Registry */}
+            <Link href="/registry" className={cn("block rounded-md px-3 py-2 text-sm font-semibold transition-colors", isActive("/registry") ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-accent")}>
+              {t.common.registry}
+            </Link>
+
+            {/* Deals */}
+            <Link href="/deals" className={cn("block rounded-md px-3 py-2 text-sm font-semibold transition-colors", isActive("/deals") ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-accent")}>
+              {t.common.deals}
+            </Link>
 
             {/* Invest */}
             <div>
@@ -272,7 +252,7 @@ export function SiteHeader() {
             {/* Trends + Auth */}
             <div className="pt-3 border-t flex items-center justify-between">
               <Link href="/trends" className="rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent inline-flex items-center gap-1.5">
-                {t.common.trends}
+                Intelligence
                 <span className="inline-flex items-center rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-semibold text-amber-500">{t.common.pro}</span>
               </Link>
               {user ? (
