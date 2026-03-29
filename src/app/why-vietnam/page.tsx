@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { fetchMacroData } from "@/lib/fetch-world-bank";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Why Invest in Vietnam — The Investment Case",
+  description:
+    "Vietnam's investment thesis: 100M population, 7%+ GDP growth, VIFC Da Nang incentives, and a booming fintech ecosystem.",
+};
 
 export const revalidate = 86400; // daily
 

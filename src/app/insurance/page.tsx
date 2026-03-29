@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { RegistryPage } from "@/components/registry-page";
+
+export const metadata: Metadata = {
+  title: "Vietnam Insurance Companies Registry",
+  description:
+    "Licensed insurance, reinsurance, and InsurTech companies operating in Vietnam's insurance market.",
+};
 
 export default function InsurancePage() {
   return (

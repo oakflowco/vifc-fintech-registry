@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getSessionUserId } from "@/lib/session";
 import { getUserById, hasActiveSubscription } from "@/lib/users";
@@ -14,6 +15,12 @@ import {
   regulatoryMilestones,
   relatedLinks,
 } from "@/lib/trend-data";
+
+export const metadata: Metadata = {
+  title: "Vietnam Fintech Trends & Market Intelligence",
+  description:
+    "Live market data dashboard — VN-Index, GDP growth, FDI inflows, fintech ecosystem trends, and regulatory news updated hourly.",
+};
 
 export const revalidate = 3600;
 

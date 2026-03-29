@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Fintech Market Size & Growth Estimates",
+  description:
+    "Vietnam fintech market sizing: e-wallets, digital lending, InsurTech, and WealthTech segments with growth projections.",
+};
 
 export default function MarketSizePage() {
   const sectors = [

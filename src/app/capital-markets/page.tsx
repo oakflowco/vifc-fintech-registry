@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getSessionUserId } from "@/lib/session";
 import { getUserById, hasActiveSubscription } from "@/lib/users";
 import { PremiumGate } from "@/components/premium-gate";
@@ -5,6 +6,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { fetchVNIndex, summarizeByYear } from "@/lib/fetch-stock";
 import { fetchMacroData } from "@/lib/fetch-world-bank";
+
+export const metadata: Metadata = {
+  title: "Vietnam Capital Markets Overview",
+  description:
+    "Comprehensive guide to Vietnam's stock exchanges (HOSE, HNX, UPCOM), bond market, derivatives, and foreign investor framework.",
+};
 
 export const revalidate = 3600; // refresh hourly
 

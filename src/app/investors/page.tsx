@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { RegistryPage } from "@/components/registry-page";
+
+export const metadata: Metadata = {
+  title: "Vietnam Investors & Fund Registry",
+  description:
+    "Directory of active investors, venture capital funds, and private equity firms investing in Vietnam's fintech and financial services sector.",
+};
 
 export default function InvestorsPage() {
   return (

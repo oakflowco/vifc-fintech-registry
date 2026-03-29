@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Credit Ratings & Data Providers",
+  description:
+    "Credit rating agencies and financial data providers covering Vietnam: Fitch, Moody's, S&P, and local agencies.",
+};
 
 export default function RatingsPage() {
   const agencies = [

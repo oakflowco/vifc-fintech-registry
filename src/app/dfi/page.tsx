@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Development Finance Institutions in Vietnam",
+  description:
+    "International development finance institutions (DFIs) active in Vietnam: World Bank, ADB, IFC, JICA, and KfW.",
+};
 
 export default function DFIPage() {
   const institutions = [

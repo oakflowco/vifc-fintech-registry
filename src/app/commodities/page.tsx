@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Commodity Exchange (MXV)",
+  description:
+    "Overview of Vietnam's Mercantile Exchange (MXV) — commodity futures, trading volumes, and market structure.",
+};
 
 export default function CommoditiesPage() {
   const keyStats = [

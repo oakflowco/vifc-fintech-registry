@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Financial Regulators & Authorities",
+  description:
+    "Guide to Vietnam's financial regulatory bodies: SBV, SSC, MOF, and their roles in fintech, banking, and capital markets oversight.",
+};
 
 export default function RegulatorsPage() {
   const regulators = [

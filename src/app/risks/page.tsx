@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Investment Risks & Challenges",
+  description:
+    "Key risks for investors in Vietnam: regulatory uncertainty, FX controls, IP protection, and market access challenges.",
+};
 
 export default function RisksPage() {
   const risks = [

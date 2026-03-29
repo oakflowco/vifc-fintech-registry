@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "How to Invest in Vietnam — Step by Step Guide",
+  description:
+    "Practical guide for foreign investors: entity setup, licensing costs, banking, tax treatment, and VIFC registration in Vietnam.",
+};
 
 export default function InvestorGuidePage() {
   const steps = [

@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Economic & Regulatory Calendar",
+  description:
+    "Upcoming economic events, regulatory deadlines, and fintech milestones in Vietnam's financial calendar.",
+};
 
 export default function CalendarPage() {
   const events = [

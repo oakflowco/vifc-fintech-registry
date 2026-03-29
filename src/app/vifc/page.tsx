@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { VietnamFinancialMap } from "@/components/vietnam-map";
+
+export const metadata: Metadata = {
+  title: "VIFC Da Nang — Vietnam International Financial Centre",
+  description:
+    "Official guide to VIFC Da Nang: tax incentives (0-10% CIT), regulatory sandbox, registration process, and Vietnam's financial hub map.",
+};
 
 export default function VIFCPage() {
   const incentives = [

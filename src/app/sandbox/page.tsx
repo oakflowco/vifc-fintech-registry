@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Regulatory Sandboxes — Fintech & Blockchain",
+  description:
+    "Vietnam's fintech regulatory sandboxes: SBV Fintech Sandbox, VIFC Da Nang Innovation Sandbox, and Crypto Asset Pilot programs.",
+};
 
 export default function SandboxPage() {
   const sandboxes = [

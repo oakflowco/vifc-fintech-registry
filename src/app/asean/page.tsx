@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import { getSessionUserId } from "@/lib/session";
 import { getUserById, hasActiveSubscription } from "@/lib/users";
 import { PremiumGate } from "@/components/premium-gate";
 import { fetchASEANComparison } from "@/lib/fetch-asean";
 import { ASEANDashboard } from "@/components/asean-dashboard";
+
+export const metadata: Metadata = {
+  title: "Vietnam vs ASEAN Economic Comparison",
+  description:
+    "Compare Vietnam's GDP, FDI, and fintech ecosystem against Singapore, Thailand, Indonesia, Philippines, and Malaysia with live World Bank data.",
+};
 
 export const revalidate = 86400; // daily
 

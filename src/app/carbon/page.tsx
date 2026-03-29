@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Carbon Credits & ETS Market",
+  description:
+    "Vietnam's carbon credit market: ETS pilot timeline, carbon pricing roadmap, and green finance opportunities.",
+};
 
 export default function CarbonPage() {
   const keyFacts = [

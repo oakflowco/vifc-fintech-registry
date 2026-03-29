@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getSessionUserId } from "@/lib/session";
 import { getUserById, hasActiveSubscription } from "@/lib/users";
 import { PremiumGate } from "@/components/premium-gate";
@@ -6,6 +7,12 @@ import { fetchDealNews } from "@/lib/fetch-deals-news";
 import { RegistryTable } from "@/components/registry-table";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "Vietnam Fintech Deal Flow & M&A Tracker",
+  description:
+    "Track the latest fintech deals, M&A activity, and investment rounds in Vietnam's financial technology sector.",
+};
 
 export const revalidate = 3600; // refresh hourly
 

@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { RegistryPage } from "@/components/registry-page";
+
+export const metadata: Metadata = {
+  title: "Vietnam Digital Banks & Neobanks",
+  description:
+    "Digital-only banks and neobank platforms emerging in Vietnam's financial ecosystem.",
+};
 
 export default function NeobanksPage() {
   return (

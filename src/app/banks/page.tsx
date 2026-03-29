@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { RegistryPage } from "@/components/registry-page";
+
+export const metadata: Metadata = {
+  title: "Vietnam Banks & Financial Members Registry",
+  description:
+    "Complete list of banks, financial institutions, and VIFC members operating in Vietnam's banking sector.",
+};
 
 export default function BanksPage() {
   return (

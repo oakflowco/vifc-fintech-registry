@@ -5,6 +5,7 @@ import {
   formatSubscriptionNotification,
   formatRenewalNotification,
 } from "@/lib/telegram";
+import { sendWelcomeEmail } from "@/lib/email";
 import { v4 as uuidv4 } from "uuid";
 
 export async function POST(req: NextRequest) {
@@ -39,16 +40,19 @@ export async function POST(req: NextRequest) {
   // Auto-activate subscription (30 days)
   await activateSubscription(user.id, transactionId);
 
-  // Send Telegram notification to admin
+  // Send welcome email to user + Telegram notification to admin
   if (isNew && tempPassword) {
-    await sendTelegramNotification(
-      formatSubscriptionNotification({
-        email,
-        transactionId,
-        tempPassword,
-        userId: user.id,
-      })
-    );
+    await Promise.all([
+      sendWelcomeEmail(email, tempPassword),
+      sendTelegramNotification(
+        formatSubscriptionNotification({
+          email,
+          transactionId,
+          tempPassword,
+          userId: user.id,
+        })
+      ),
+    ]);
   } else {
     await sendTelegramNotification(
       formatRenewalNotification({
