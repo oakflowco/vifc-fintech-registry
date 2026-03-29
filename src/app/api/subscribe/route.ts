@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createUser, getUserByEmail, activateSubscription } from "@/lib/users";
+import {
+  sendTelegramNotification,
+  formatSubscriptionNotification,
+  formatRenewalNotification,
+} from "@/lib/telegram";
 import { v4 as uuidv4 } from "uuid";
 
 export async function POST(req: NextRequest) {
@@ -14,10 +19,12 @@ export async function POST(req: NextRequest) {
 
   // Check if user already exists
   let user = await getUserByEmail(email);
+  let tempPassword: string | null = null;
+  let isNew = false;
 
   if (!user) {
-    // Create account with random password (will be sent via email)
-    const tempPassword = uuidv4().slice(0, 12);
+    // New user — create account with random password
+    tempPassword = uuidv4().slice(0, 10);
     user = await createUser(email, tempPassword);
 
     if (!user) {
@@ -26,40 +33,38 @@ export async function POST(req: NextRequest) {
         { status: 500 }
       );
     }
-
-    // Log the pending subscription request (for manual verification)
-    console.log("=== NEW SUBSCRIPTION REQUEST ===");
-    console.log("Email:", email);
-    console.log("MoMo Transaction ID:", transactionId);
-    console.log("Temp Password:", tempPassword);
-    console.log("User ID:", user.id);
-    console.log("Timestamp:", new Date().toISOString());
-    console.log("================================");
-  } else {
-    // Existing user — log renewal request
-    console.log("=== SUBSCRIPTION RENEWAL REQUEST ===");
-    console.log("Email:", email);
-    console.log("MoMo Transaction ID:", transactionId);
-    console.log("User ID:", user.id);
-    console.log("Timestamp:", new Date().toISOString());
-    console.log("====================================");
+    isNew = true;
   }
 
-  // Store the pending request (for admin review)
-  // In production, this would go to a database/notification system
-  // For now, auto-activate (you can change this to manual approval)
-  const autoActivate = process.env.AUTO_ACTIVATE_SUBSCRIPTIONS === "true";
+  // Auto-activate subscription (30 days)
+  await activateSubscription(user.id, transactionId);
 
-  if (autoActivate) {
-    await activateSubscription(user.id, transactionId);
-    console.log("Auto-activated subscription for:", email);
+  // Send Telegram notification to admin
+  if (isNew && tempPassword) {
+    await sendTelegramNotification(
+      formatSubscriptionNotification({
+        email,
+        transactionId,
+        tempPassword,
+        userId: user.id,
+      })
+    );
+  } else {
+    await sendTelegramNotification(
+      formatRenewalNotification({
+        email,
+        transactionId,
+        userId: user.id,
+      })
+    );
   }
 
   return NextResponse.json({
     ok: true,
-    message: autoActivate
-      ? "Payment verified. Your account is now active!"
-      : "Payment submitted. We'll verify and activate your account within 24 hours.",
-    autoActivated: autoActivate,
+    isNew,
+    tempPassword: isNew ? tempPassword : null,
+    message: isNew
+      ? "Account created and activated!"
+      : "Subscription renewed for 30 days!",
   });
 }

@@ -10,6 +10,8 @@ export default function SubscribePage() {
   const [email, setEmail] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [tempPassword, setTempPassword] = useState<string | null>(null);
+  const [isNew, setIsNew] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -32,23 +34,65 @@ export default function SubscribePage() {
       return;
     }
 
+    setTempPassword(data.tempPassword || null);
+    setIsNew(data.isNew);
     setSubmitted(true);
   }
 
   if (submitted) {
     return (
       <div className="flex-1 flex items-center justify-center px-4 py-16">
-        <Card className="w-full max-w-md text-center">
+        <Card className="w-full max-w-md">
           <CardContent className="pt-8 pb-8">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 mx-auto mb-4">
               <span className="text-green-500 text-2xl">&#10003;</span>
             </div>
-            <h2 className="text-xl font-bold mb-2">Payment Submitted!</h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              We&apos;ll verify your MoMo payment and send your login credentials
-              to <span className="font-medium text-foreground">{email}</span> within 24 hours.
-            </p>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-center mb-6">
+              <h2 className="text-xl font-bold mb-2">
+                {isNew ? "Account Created & Activated!" : "Subscription Renewed!"}
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                {isNew
+                  ? "Your premium account is ready. Use the credentials below to login."
+                  : "Your subscription has been extended for 30 days."}
+              </p>
+            </div>
+
+            {isNew && tempPassword && (
+              <div className="rounded-lg border bg-muted/50 p-4 mb-4 space-y-3">
+                <h3 className="text-sm font-semibold text-center">Your Login Credentials</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Email</span>
+                    <span className="text-sm font-mono font-medium">{email}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Password</span>
+                    <span className="text-sm font-mono font-medium bg-primary/10 px-2 py-0.5 rounded">{tempPassword}</span>
+                  </div>
+                </div>
+                <p className="text-[10px] text-destructive text-center">
+                  Save this password — it won&apos;t be shown again!
+                </p>
+              </div>
+            )}
+
+            <div className="flex flex-col gap-2">
+              <a
+                href="/login"
+                className="w-full h-10 rounded-md bg-primary text-primary-foreground text-sm font-medium flex items-center justify-center hover:bg-primary/90 transition-colors"
+              >
+                {isNew ? "Login Now" : "Go to Account"}
+              </a>
+              <a
+                href="/trends"
+                className="w-full h-10 rounded-md border text-sm font-medium flex items-center justify-center hover:bg-accent transition-colors"
+              >
+                View Trends
+              </a>
+            </div>
+
+            <p className="text-[10px] text-muted-foreground text-center mt-4">
               Transaction ID: <span className="font-mono">{transactionId}</span>
             </p>
           </CardContent>

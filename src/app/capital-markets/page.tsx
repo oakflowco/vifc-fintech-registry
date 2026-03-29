@@ -1,3 +1,6 @@
+import { getSessionUserId } from "@/lib/session";
+import { getUserById, hasActiveSubscription } from "@/lib/users";
+import { PremiumGate } from "@/components/premium-gate";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { fetchVNIndex, summarizeByYear } from "@/lib/fetch-stock";
@@ -75,6 +78,14 @@ function fmtPct(n: number): string {
 }
 
 export default async function CapitalMarketsPage() {
+  const userId = await getSessionUserId();
+  const user = userId ? await getUserById(userId) : null;
+  const subscribed = user ? hasActiveSubscription(user) : false;
+
+  if (!subscribed) {
+    return <PremiumGate feature="Vietnam Capital Markets Intelligence" />;
+  }
+
   // Fetch live data in parallel
   const [latest, yearStart, macroData, vnIndexMonthly] = await Promise.all([
     fetchLatestVNIndex(),

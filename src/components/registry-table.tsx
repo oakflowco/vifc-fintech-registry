@@ -22,11 +22,15 @@ import {
 } from "@/components/ui/select";
 import type { RegistryEntry } from "@/lib/sheets";
 
+const FREE_ROW_LIMIT = 10;
+const BLUR_PREVIEW_COUNT = 3;
+
 interface RegistryTableProps {
   headers: string[];
   data: RegistryEntry[];
   filterColumns?: string[];
   exportType?: string;
+  isPremium?: boolean;
 }
 
 const STATUS_KEYWORDS: Record<string, "default" | "secondary" | "destructive"> =
@@ -99,6 +103,7 @@ export function RegistryTable({
   data,
   filterColumns,
   exportType,
+  isPremium,
 }: RegistryTableProps) {
   const { t } = useLocale();
   const [search, setSearch] = useState("");

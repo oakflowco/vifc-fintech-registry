@@ -1,3 +1,6 @@
+import { getSessionUserId } from "@/lib/session";
+import { getUserById, hasActiveSubscription } from "@/lib/users";
+import { PremiumGate } from "@/components/premium-gate";
 import { fetchSheetData } from "@/lib/sheets";
 import { fetchDealNews } from "@/lib/fetch-deals-news";
 import { RegistryTable } from "@/components/registry-table";
@@ -9,6 +12,14 @@ export const revalidate = 3600; // refresh hourly
 const SHEET_URL = process.env.GOOGLE_SHEET_DEALS_URL;
 
 export default async function DealsPage() {
+  const userId = await getSessionUserId();
+  const user = userId ? await getUserById(userId) : null;
+  const subscribed = user ? hasActiveSubscription(user) : false;
+
+  if (!subscribed) {
+    return <PremiumGate feature="Vietnam Fintech Deal Flow & M&A Intelligence" />;
+  }
+
   // Fetch both in parallel
   const [sheetResult, liveDeals] = await Promise.all([
     SHEET_URL

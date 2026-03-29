@@ -16,12 +16,52 @@ export function PremiumGate({ feature }: { feature: string }) {
         market intelligence, live data, and CSV exports.
       </p>
 
+      {/* Plan Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 text-left">
+        {/* Monthly */}
+        <Link href="/subscribe" className="block">
+          <Card className="h-full hover:bg-muted/30 transition-colors cursor-pointer">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg">Monthly</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-bold">
+                250,000₫<span className="text-sm font-normal text-muted-foreground">/mo</span>
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                30-day access, renew anytime
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
+
+        {/* Annual */}
+        <Link href="/subscribe" className="block">
+          <Card className="h-full hover:bg-muted/30 transition-colors cursor-pointer border-primary/50">
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg">Annual</CardTitle>
+                <Badge className="bg-amber-500/15 text-amber-500 border-amber-500/25 hover:bg-amber-500/15">
+                  Save 500,000₫
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-bold">
+                2,500,000₫<span className="text-sm font-normal text-muted-foreground">/yr</span>
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                ~208,000₫/mo — best value
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
+      </div>
+
+      {/* Feature List */}
       <Card className="mb-8 text-left">
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            <span>Premium Access</span>
-            <span className="text-2xl">250,000₫/mo</span>
-          </CardTitle>
+          <CardTitle>What&apos;s included</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-2 text-sm text-muted-foreground">
@@ -51,7 +91,7 @@ export function PremiumGate({ feature }: { feature: string }) {
           className="inline-flex h-12 items-center justify-center rounded-lg text-sm font-medium text-white transition-colors hover:opacity-90 px-8"
           style={{ backgroundColor: "#a50064" }}
         >
-          Subscribe via MoMo — 250,000₫/mo
+          View Plans & Subscribe
         </Link>
         <Link
           href="/login"

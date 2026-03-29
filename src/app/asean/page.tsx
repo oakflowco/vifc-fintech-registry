@@ -1,9 +1,20 @@
+import { getSessionUserId } from "@/lib/session";
+import { getUserById, hasActiveSubscription } from "@/lib/users";
+import { PremiumGate } from "@/components/premium-gate";
 import { fetchASEANComparison } from "@/lib/fetch-asean";
 import { ASEANDashboard } from "@/components/asean-dashboard";
 
 export const revalidate = 86400; // daily
 
 export default async function ASEANPage() {
+  const userId = await getSessionUserId();
+  const user = userId ? await getUserById(userId) : null;
+  const subscribed = user ? hasActiveSubscription(user) : false;
+
+  if (!subscribed) {
+    return <PremiumGate feature="Vietnam vs ASEAN Comparison Dashboard" />;
+  }
+
   const data = await fetchASEANComparison();
 
   return (
