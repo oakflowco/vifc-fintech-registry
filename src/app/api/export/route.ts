@@ -39,8 +39,12 @@ export async function GET(req: NextRequest) {
   const csvRows = [headers.join(",")];
   for (const row of data) {
     const values = headers.map((h) => {
-      const val = row[h] || "";
-      // Escape values with commas or quotes
+      let val = row[h] || "";
+      // Prevent CSV formula injection — prefix dangerous leading chars
+      if (/^[=+\-@\t\r]/.test(val)) {
+        val = `'${val}`;
+      }
+      // Escape values with commas, quotes, or newlines
       if (val.includes(",") || val.includes('"') || val.includes("\n")) {
         return `"${val.replace(/"/g, '""')}"`;
       }

@@ -3,20 +3,21 @@ import { createUser, activateSubscription } from "@/lib/users";
 import { createSessionToken, COOKIE_NAME } from "@/lib/session";
 import { sendTelegramNotification } from "@/lib/telegram";
 import { authLimiter, checkRateLimit } from "@/lib/rate-limit";
+import { signupSchema } from "@/lib/validation";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
   const limited = await checkRateLimit(authLimiter, `signup:${ip}`);
   if (limited) return limited;
 
-  const { email, password } = await req.json();
-
-  if (!email || !password || password.length < 6) {
+  const parsed = signupSchema.safeParse(await req.json());
+  if (!parsed.success) {
     return NextResponse.json(
-      { error: "Email and password (min 6 chars) required" },
+      { error: parsed.error.issues[0]?.message ?? "Invalid input" },
       { status: 400 }
     );
   }
+  const { email, password } = parsed.data;
 
   const user = await createUser(email, password);
   if (!user) {
@@ -48,7 +49,7 @@ export async function POST(req: NextRequest) {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 7 * 24 * 60 * 60,
     path: "/",
   });
 

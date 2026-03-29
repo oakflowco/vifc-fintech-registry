@@ -122,3 +122,13 @@ export function hasActiveSubscription(user: User): boolean {
   if (!user.subscription.expiresAt) return false;
   return new Date(user.subscription.expiresAt) > new Date();
 }
+
+export async function deleteUser(
+  userId: string,
+  email: string
+): Promise<void> {
+  const redis = getRedis();
+  if (!redis) return;
+  await redis.del(`user:${userId}`);
+  await redis.del(`user:email:${email.toLowerCase()}`);
+}

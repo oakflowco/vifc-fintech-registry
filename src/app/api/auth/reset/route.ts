@@ -2,13 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import { getUserByEmail, resetUserPassword } from "@/lib/users";
 import { sendTelegramNotification } from "@/lib/telegram";
 import { sendPasswordResetEmail } from "@/lib/email";
+import { authLimiter, checkRateLimit } from "@/lib/rate-limit";
+import { resetSchema } from "@/lib/validation";
 
 export async function POST(req: NextRequest) {
-  const { email } = await req.json();
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
+  const limited = await checkRateLimit(authLimiter, `reset:${ip}`);
+  if (limited) return limited;
 
-  if (!email) {
-    return NextResponse.json({ error: "Email required" }, { status: 400 });
+  const parsed = resetSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: parsed.error.issues[0]?.message ?? "Invalid input" },
+      { status: 400 }
+    );
   }
+  const { email } = parsed.data;
 
   const user = await getUserByEmail(email);
   if (!user) {

@@ -1,22 +1,46 @@
 import { cookies } from "next/headers";
 import crypto from "crypto";
 
-const SECRET = process.env.SESSION_SECRET || "vifc-session-secret-change-me";
+function getSecret(): string {
+  const secret = process.env.SESSION_SECRET;
+  if (!secret || secret === "vifc-session-secret-change-me") {
+    throw new Error(
+      "SESSION_SECRET is not configured. Set a strong random secret (32+ chars) in your environment variables."
+    );
+  }
+  return secret;
+}
+
 const COOKIE_NAME = "vifc_session";
+const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // 7 days (down from 30)
 
 export function createSessionToken(userId: string): string {
-  const payload = `${userId}:${Date.now() + 30 * 24 * 60 * 60 * 1000}`; // 30 days
-  const sig = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+  const expiry = Date.now() + SESSION_DURATION_MS;
+  const nonce = crypto.randomBytes(8).toString("hex");
+  const payload = `${userId}:${expiry}:${nonce}`;
+  const sig = crypto
+    .createHmac("sha256", getSecret())
+    .update(payload)
+    .digest("hex");
   return `${payload}:${sig}`;
 }
 
 export function verifySessionToken(token: string): string | null {
   const parts = token.split(":");
-  if (parts.length !== 3) return null;
-  const [userId, expiry, sig] = parts;
-  const payload = `${userId}:${expiry}`;
-  const expected = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
-  if (sig !== expected) return null;
+  if (parts.length !== 4) return null;
+  const [userId, expiry, nonce, sig] = parts;
+  const payload = `${userId}:${expiry}:${nonce}`;
+  const expected = crypto
+    .createHmac("sha256", getSecret())
+    .update(payload)
+    .digest("hex");
+  // Timing-safe comparison
+  if (
+    sig.length !== expected.length ||
+    !crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))
+  ) {
+    return null;
+  }
   if (Date.now() > Number(expiry)) return null;
   return userId;
 }
@@ -28,4 +52,4 @@ export async function getSessionUserId(): Promise<string | null> {
   return verifySessionToken(token);
 }
 
-export { COOKIE_NAME };
+export { COOKIE_NAME, SESSION_DURATION_MS };

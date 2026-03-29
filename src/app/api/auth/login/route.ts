@@ -2,17 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyUser } from "@/lib/users";
 import { createSessionToken, COOKIE_NAME } from "@/lib/session";
 import { authLimiter, checkRateLimit } from "@/lib/rate-limit";
+import { loginSchema } from "@/lib/validation";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
   const limited = await checkRateLimit(authLimiter, `login:${ip}`);
   if (limited) return limited;
 
-  const { email, password } = await req.json();
-
-  if (!email || !password) {
-    return NextResponse.json({ error: "Email and password required" }, { status: 400 });
+  const parsed = loginSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: parsed.error.issues[0]?.message ?? "Invalid input" },
+      { status: 400 }
+    );
   }
+  const { email, password } = parsed.data;
 
   const user = await verifyUser(email, password);
   if (!user) {
@@ -26,7 +30,7 @@ export async function POST(req: NextRequest) {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 7 * 24 * 60 * 60,
     path: "/",
   });
 

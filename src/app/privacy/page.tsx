@@ -84,6 +84,9 @@ export default function PrivacyPage() {
             <li><strong className="text-foreground">Yahoo Finance:</strong> Stock market data, exchange rates, and financial metrics.</li>
             <li><strong className="text-foreground">Google News:</strong> Aggregated news articles related to Vietnam&apos;s financial sector.</li>
             <li><strong className="text-foreground">MoMo Payment Gateway:</strong> Payment processing for premium subscriptions (250,000 VND/month).</li>
+            <li><strong className="text-foreground">Resend:</strong> Transactional email delivery for password resets and account notifications.</li>
+            <li><strong className="text-foreground">Upstash Redis:</strong> Cloud-hosted database for user account storage and session management.</li>
+            <li><strong className="text-foreground">Telegram Bot API:</strong> Administrative notifications for account events (no user data is shared publicly).</li>
           </ul>
           <p>Each third-party service has its own privacy policy. We encourage you to review their respective policies.</p>
         </CardContent>
@@ -96,10 +99,10 @@ export default function PrivacyPage() {
         <CardContent className="space-y-3 text-sm text-muted-foreground">
           <p>We retain your data as follows:</p>
           <ul className="list-disc pl-5 space-y-1">
-            <li><strong className="text-foreground">Account data:</strong> Retained while your account is active. Deleted within 30 days of account closure.</li>
+            <li><strong className="text-foreground">Account data:</strong> Retained while your account is active. You may delete your account at any time from your account settings — all personal data is removed immediately.</li>
             <li><strong className="text-foreground">Payment records:</strong> Retained for 5 years as required by Vietnamese tax regulations.</li>
             <li><strong className="text-foreground">Usage analytics:</strong> Anonymized data retained indefinitely for service improvement. Personally identifiable data deleted after 12 months.</li>
-            <li><strong className="text-foreground">Cookies:</strong> Session cookies expire on browser close. Preference cookies expire after 1 year.</li>
+            <li><strong className="text-foreground">Cookies:</strong> Session cookies expire after 7 days. Preference cookies (language) expire after 1 year.</li>
           </ul>
         </CardContent>
       </Card>
