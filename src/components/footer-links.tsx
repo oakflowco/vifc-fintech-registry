@@ -20,6 +20,13 @@ export function FooterLinks() {
         </Link>
         <span className="text-xs text-muted-foreground">|</span>
         <Link
+          href="/partner"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Partner with Us
+        </Link>
+        <span className="text-xs text-muted-foreground">|</span>
+        <Link
           href="/terms"
           className="text-xs text-muted-foreground hover:text-foreground transition-colors"
         >

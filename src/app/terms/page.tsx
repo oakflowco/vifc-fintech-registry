@@ -93,7 +93,7 @@ export default function TermsPage() {
             IMPORTANT: The data provided on this platform is sourced from public registries, government databases, and third-party APIs. It is provided &quot;as is&quot; and should not be construed as financial advice.
           </p>
           <ul className="list-disc pl-5 space-y-1">
-            <li>Data is aggregated from Google Sheets registries, World Bank API, Yahoo Finance, and other public sources.</li>
+            <li>Data is aggregated from official registries, World Bank API, Yahoo Finance, and other public sources.</li>
             <li>We make reasonable efforts to ensure accuracy but cannot guarantee that all data is current, complete, or error-free.</li>
             <li>Financial data may be delayed or differ from real-time market values.</li>
             <li>Always verify information independently before making investment decisions.</li>

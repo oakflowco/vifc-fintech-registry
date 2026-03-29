@@ -87,11 +87,10 @@ export function PremiumGate({ feature }: { feature: string }) {
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
-          href="/subscribe"
-          className="inline-flex h-12 items-center justify-center rounded-lg text-sm font-medium text-white transition-colors hover:opacity-90 px-8"
-          style={{ backgroundColor: "#a50064" }}
+          href="/partner"
+          className="inline-flex h-12 items-center justify-center rounded-lg bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 px-8"
         >
-          View Plans & Subscribe
+          Contact us for access
         </Link>
         <Link
           href="/login"

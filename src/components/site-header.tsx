@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useLocale } from "@/lib/i18n/context";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 
@@ -119,10 +120,10 @@ export function SiteHeader() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center">
             <Link
-              href="/"
+              href="/dashboard"
               className={cn(
                 "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-                isActive("/") && !pathname.startsWith("/registry") && !pathname.startsWith("/trends") && !pathname.startsWith("/deals")
+                isActive("/dashboard")
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
@@ -196,15 +197,17 @@ export function SiteHeader() {
               )}
             </div>
 
-            {/* Language */}
-            <div className="ml-2 pl-2 border-l border-border">
+            {/* Language & Theme */}
+            <div className="ml-2 pl-2 border-l border-border flex items-center gap-1.5">
               <LanguageSwitcher />
+              <ThemeToggle />
             </div>
           </nav>
 
           {/* Mobile */}
           <div className="md:hidden flex items-center gap-1.5">
             <LanguageSwitcher />
+            <ThemeToggle />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="flex items-center justify-center h-9 w-9 rounded-md border"
@@ -223,7 +226,7 @@ export function SiteHeader() {
         {mobileOpen && (
           <div className="md:hidden border-t py-4 space-y-4">
             {/* Dashboard */}
-            <Link href="/" className={cn("block rounded-md px-3 py-2 text-sm font-semibold transition-colors", isActive("/") && pathname === "/" ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-accent")}>
+            <Link href="/dashboard" className={cn("block rounded-md px-3 py-2 text-sm font-semibold transition-colors", isActive("/dashboard") ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-accent")}>
               Dashboard
             </Link>
 

@@ -9,12 +9,12 @@ import { fetchVNIndex, summarizeByYear } from "@/lib/fetch-stock";
 import { fetchFintechNews } from "@/lib/fetch-news";
 import { fetchSheetData } from "@/lib/sheets";
 import {
-  quarterlyInvestment,
-  startupStages,
-  investorCountries,
-  regulatoryMilestones,
-  relatedLinks,
-} from "@/lib/trend-data";
+  fetchQuarterlyInvestment,
+  fetchStartupStages,
+  fetchInvestorCountries,
+  fetchRegulatoryMilestones,
+  fetchRelatedLinks,
+} from "@/lib/fetch-editorial";
 
 export const metadata: Metadata = {
   title: "Vietnam Fintech Trends & Market Intelligence",
@@ -42,10 +42,15 @@ export default async function TrendsPage() {
     process.env.GOOGLE_SHEET_INSURANCE_URL,
   ].filter(Boolean) as string[];
 
-  const [macroData, vnIndexMonthly, liveNews, ...sheetResults] = await Promise.all([
+  const [macroData, vnIndexMonthly, liveNews, quarterlyInvestment, startupStages, investorCountries, regulatoryMilestones, relatedLinks, ...sheetResults] = await Promise.all([
     fetchMacroData(),
     fetchVNIndex(),
     fetchFintechNews(),
+    fetchQuarterlyInvestment(),
+    fetchStartupStages(),
+    fetchInvestorCountries(),
+    fetchRegulatoryMilestones(),
+    fetchRelatedLinks(),
     ...sheetUrls.map((url) =>
       fetchSheetData(url).catch(() => ({ headers: [], data: [] }))
     ),

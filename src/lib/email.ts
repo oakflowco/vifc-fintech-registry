@@ -31,7 +31,7 @@ export async function sendPasswordResetEmail(
             <p style="margin: 0 0 8px; font-size: 13px; color: #666;">New Password</p>
             <p style="margin: 0; font-size: 18px; font-weight: 700; font-family: monospace; letter-spacing: 1px;">${newPassword}</p>
           </div>
-          <a href="https://vifc-fintech-registry.vercel.app/login" style="display: inline-block; background: #171717; color: #fff; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500;">
+          <a href="https://vifcdatabase.com/login" style="display: inline-block; background: #171717; color: #fff; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500;">
             Login Now
           </a>
           <p style="color: #999; font-size: 12px; margin: 24px 0 0;">
@@ -86,7 +86,7 @@ export async function sendWelcomeEmail(
             <li>Live news feed — fintech, crypto, IFC updates</li>
             <li>CSV export — all registries</li>
           </ul>
-          <a href="https://vifc-fintech-registry.vercel.app/login" style="display: inline-block; background: #171717; color: #fff; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500;">
+          <a href="https://vifcdatabase.com/login" style="display: inline-block; background: #171717; color: #fff; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500;">
             Login Now
           </a>
           <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />

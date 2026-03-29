@@ -260,7 +260,7 @@ export function TrendCharts({
         </div>
       </section>
 
-      {/* ── Fintech Ecosystem (static — can be connected to Google Sheet later) ── */}
+      {/* ── Fintech Ecosystem ── */}
       <section>
         <h2 className="text-lg font-semibold mb-4">Fintech Ecosystem</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -304,7 +304,7 @@ export function TrendCharts({
                   LIVE
                 </span>
               </CardTitle>
-              <CardDescription>Computed from registry data — updates when you edit the spreadsheet</CardDescription>
+              <CardDescription>Computed from registry data — auto-refreshes hourly</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">

@@ -197,7 +197,7 @@ export default async function CompanyProfilePage({ params }: PageProps) {
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-6 text-center">
           <p className="text-sm text-destructive">
-            Failed to fetch data from the spreadsheet.
+            Failed to fetch registry data. Please try again later.
           </p>
         </div>
       </div>

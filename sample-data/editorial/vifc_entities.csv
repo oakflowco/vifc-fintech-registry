@@ -1,0 +1,7 @@
+Type,Description,Requirements
+Banks & Financial Institutions,"Commercial banks, investment banks, securities firms",SBV license + VIFC registration
+Fintech Companies,"E-wallets, P2P lending, InsurTech, credit scoring",VIFC registration + sandbox (if applicable)
+Blockchain & Digital Assets,"Exchanges, stablecoin issuers, DeFi protocols",VIFC sandbox approval required
+Fund Management,"Venture capital, private equity, hedge funds, REITs",SSC license + VIFC registration
+Professional Services,"Law firms, accounting, consulting, auditing",VIFC registration + professional license
+Insurance,"Life, non-life, reinsurance, InsurTech",MOF license + VIFC registration

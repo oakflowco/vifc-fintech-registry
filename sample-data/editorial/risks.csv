@@ -1,0 +1,17 @@
+Category,Title,Description,Impact
+Regulatory,Regulatory Uncertainty,"Fintech-specific laws are still evolving. Decree 94 (sandbox) only covers 3 activities. Crypto framework still in pilot phase. Rules can change with limited notice.",Medium
+Regulatory,Licensing Complexity,"Multiple regulators (SBV, SSC, MOF, MIC) with overlapping jurisdictions. License processing can take 3-12 months. Requirements may change during application.",Medium
+Regulatory,Data Localization,"Cybersecurity Law requires certain data to be stored in Vietnam. Cross-border data transfer requires government approval in some cases.",Medium
+Regulatory,AML/CFT Compliance,"Vietnam is on FATF grey list monitoring. Enhanced compliance requirements for financial institutions. KYC/AML standards are tightening.",Medium
+Market,Currency Risk (VND),"VND has depreciated ~3-5% annually vs USD over the past decade. SBV manages the exchange rate within a band. Capital controls exist on large transactions.",Medium
+Market,Competition Intensity,"E-wallet market has 40+ players — consolidation expected. Banks are launching their own fintech arms. Regional giants (Grab, Sea) have deep pockets.",Medium
+Market,Consumer Trust,"Several P2P lending platforms have failed, damaging sector reputation. Crypto scams created public skepticism. Trust building takes time.",Medium
+Market,Talent Shortage,"Demand for fintech talent exceeds supply. Senior product, compliance, and risk management roles are hard to fill. Salary inflation in tech sector.",Medium
+Operational,Infrastructure Gaps,"Internet reliability varies outside major cities. Payment acceptance in rural areas is limited. Data center capacity is growing but still behind regional leaders.",Low-Medium
+Operational,IP Protection,"IP enforcement is improving but still weaker than developed markets. Software patents are difficult to enforce. Trade secret protection requires careful contracts.",Low-Medium
+Operational,Bureaucracy,"Government processes can be slow and require multiple touchpoints. Relationships matter — having a local partner or advisor is strongly recommended.",Low-Medium
+Operational,Tax Disputes,"Transfer pricing audits are increasing. Tax authorities may interpret regulations differently than expected. Pre-ruling options are limited.",Low-Medium
+Political & Macro,Political Stability,"One-party system provides policy continuity. Anti-corruption campaigns can disrupt business relationships. Leadership transitions are managed internally.",Low
+Political & Macro,Geopolitical Tensions,"South China Sea disputes create periodic tensions. Vietnam maintains balanced foreign policy (US, China, ASEAN). Trade diversification reduces concentration risk.",Low
+Political & Macro,Climate & Natural Disasters,"Central Vietnam (including Da Nang) is exposed to typhoons (Sept-Nov). Flooding in Mekong Delta affects agriculture. Climate adaptation infrastructure is improving.",Low
+Political & Macro,Global Economic Slowdown,"Export-dependent economy is exposed to global demand. FDI flows can slow during global recessions. However, Vietnam has historically recovered faster than peers.",Low

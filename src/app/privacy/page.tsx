@@ -79,7 +79,7 @@ export default function PrivacyPage() {
         <CardContent className="space-y-3 text-sm text-muted-foreground">
           <p>The VIFC Database integrates with the following third-party services:</p>
           <ul className="list-disc pl-5 space-y-1">
-            <li><strong className="text-foreground">Google Sheets API:</strong> Used to fetch and synchronize registry data from official spreadsheets.</li>
+            <li><strong className="text-foreground">Registry Data API:</strong> Used to fetch and synchronize registry data from official sources.</li>
             <li><strong className="text-foreground">World Bank API:</strong> Economic indicators and development data for Vietnam and ASEAN countries.</li>
             <li><strong className="text-foreground">Yahoo Finance:</strong> Stock market data, exchange rates, and financial metrics.</li>
             <li><strong className="text-foreground">Google News:</strong> Aggregated news articles related to Vietnam&apos;s financial sector.</li>

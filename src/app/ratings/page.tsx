@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { fetchSovereignRatings } from "@/lib/fetch-ratings";
+import { fetchRatingAgencies } from "@/lib/fetch-editorial";
 
 export const metadata: Metadata = {
   title: "Vietnam Credit Ratings & Data Providers",
@@ -8,85 +10,89 @@ export const metadata: Metadata = {
     "Credit rating agencies and financial data providers covering Vietnam: Fitch, Moody's, S&P, and local agencies.",
 };
 
-export default function RatingsPage() {
-  const agencies = [
-    {
-      name: "FiinRatings",
-      type: "Domestic",
-      established: "2017",
-      regulator: "MOF / SSC",
-      description: "Vietnam's first and largest domestic credit rating agency. Subsidiary of FiinGroup. Rates corporate bonds, bank deposits, and insurance companies. ESMA-comparable standards.",
-      coverage: ["Corporate bonds (200+ issuers)", "Bank deposits & financial strength", "Insurance company ratings", "Structured finance", "ESG assessments"],
-      website: "fiinratings.vn",
-      methodology: "Based on international best practices (S&P/Moody's aligned). 20-notch rating scale from AAA to D.",
-    },
-    {
-      name: "Saigon Ratings (SaigonRatings)",
-      type: "Domestic",
-      established: "2023",
-      regulator: "MOF / SSC",
-      description: "Vietnam's second domestic credit rating agency. Licensed by MOF. Focuses on corporate bonds and financial institutions in the southern market.",
-      coverage: ["Corporate bond ratings", "Financial institution assessments", "SME credit assessments"],
-      website: "saigonratings.com.vn",
-      methodology: "Developing proprietary methodology aligned with Vietnamese market conditions.",
-    },
-    {
-      name: "S&P Global Ratings",
-      type: "International (Big 3)",
-      established: "Coverage since 2002",
-      regulator: "SEC (US)",
-      description: "Rates Vietnam's sovereign credit and major corporations/banks. Vietnam sovereign: BB+ (one notch below investment grade).",
-      coverage: ["Sovereign rating: BB+ (stable outlook)", "Major banks (Vietcombank, BIDV, VietinBank)", "State-owned enterprises", "Government-related entities"],
-      website: "spglobal.com/ratings",
-      methodology: "Global methodology. Key upgrade factors: fiscal consolidation, banking sector NPL resolution, governance improvements.",
-    },
-    {
-      name: "Moody's Investors Service",
-      type: "International (Big 3)",
-      established: "Coverage since 2005",
-      regulator: "SEC (US)",
-      description: "Rates Vietnam sovereign and major financial institutions. Vietnam sovereign: Ba2 (equivalent to BB).",
-      coverage: ["Sovereign rating: Ba2 (stable outlook)", "Major commercial banks", "Insurance companies", "Infrastructure bonds"],
-      website: "moodys.com",
-      methodology: "Global methodology. Vietnam on upgrade watchlist due to economic resilience and banking reform progress.",
-    },
-    {
-      name: "Fitch Ratings",
-      type: "International (Big 3)",
-      established: "Coverage since 2008",
-      regulator: "SEC (US)",
-      description: "Rates Vietnam sovereign and selectively covers banks and corporates. Vietnam sovereign: BB+ (positive outlook).",
-      coverage: ["Sovereign rating: BB+ (positive outlook)", "Selected banks", "Government bonds", "Structured finance"],
-      website: "fitchratings.com",
-      methodology: "Positive outlook — closest to investment grade upgrade among the Big 3. Key factor: continued GDP growth and fiscal discipline.",
-    },
-    {
-      name: "FiinGroup (Research & Data)",
-      type: "Domestic Data Provider",
-      established: "2008",
-      regulator: "SSC",
-      description: "Vietnam's leading financial data and research platform. Parent of FiinRatings. Provides FiinPro terminal (Vietnam's 'Bloomberg'), industry analytics, and ESG data.",
-      coverage: ["FiinPro terminal (700+ institutional users)", "Listed company financials", "Bond market data", "Industry research reports", "ESG scoring (FiinESG)"],
-      website: "fiingroup.vn",
-      methodology: "Proprietary database covering 3,000+ Vietnamese companies. Real-time market data and analytics.",
-    },
-    {
-      name: "Vietnam Bond Market Association (VBMA)",
-      type: "Industry Body",
-      established: "2007",
-      regulator: "MOF",
-      description: "Self-regulatory organization for the bond market. Publishes bond market reports, yield curves, and trading data. Key infrastructure for bond market transparency.",
-      coverage: ["Monthly bond market reports", "Government bond yield curves", "Corporate bond trading data", "Market statistics & analysis"],
-      website: "vbma.org.vn",
-      methodology: "Aggregates data from HNX, commercial banks, and bond dealers.",
-    },
-  ];
+export const revalidate = 3600;
 
-  const sovereignRatings = [
-    { agency: "S&P Global", rating: "BB+", outlook: "Stable", lastUpdate: "May 2025" },
-    { agency: "Moody's", rating: "Ba2", outlook: "Stable", lastUpdate: "Mar 2025" },
-    { agency: "Fitch", rating: "BB+", outlook: "Positive", lastUpdate: "Apr 2025" },
-  ];
+// Fallback agencies data — used when Google Sheet is not configured
+const AGENCIES_FALLBACK = [
+  {
+    name: "FiinRatings",
+    type: "Domestic",
+    established: "2017",
+    regulator: "MOF / SSC",
+    description: "Vietnam's first and largest domestic credit rating agency. Subsidiary of FiinGroup. Rates corporate bonds, bank deposits, and insurance companies. ESMA-comparable standards.",
+    coverage: ["Corporate bonds (200+ issuers)", "Bank deposits & financial strength", "Insurance company ratings", "Structured finance", "ESG assessments"],
+    website: "fiinratings.vn",
+    methodology: "Based on international best practices (S&P/Moody's aligned). 20-notch rating scale from AAA to D.",
+  },
+  {
+    name: "Saigon Ratings (SaigonRatings)",
+    type: "Domestic",
+    established: "2023",
+    regulator: "MOF / SSC",
+    description: "Vietnam's second domestic credit rating agency. Licensed by MOF. Focuses on corporate bonds and financial institutions in the southern market.",
+    coverage: ["Corporate bond ratings", "Financial institution assessments", "SME credit assessments"],
+    website: "saigonratings.com.vn",
+    methodology: "Developing proprietary methodology aligned with Vietnamese market conditions.",
+  },
+  {
+    name: "S&P Global Ratings",
+    type: "International (Big 3)",
+    established: "Coverage since 2002",
+    regulator: "SEC (US)",
+    description: "Rates Vietnam's sovereign credit and major corporations/banks. Vietnam sovereign: BB+ (one notch below investment grade).",
+    coverage: ["Sovereign rating: BB+ (stable outlook)", "Major banks (Vietcombank, BIDV, VietinBank)", "State-owned enterprises", "Government-related entities"],
+    website: "spglobal.com/ratings",
+    methodology: "Global methodology. Key upgrade factors: fiscal consolidation, banking sector NPL resolution, governance improvements.",
+  },
+  {
+    name: "Moody's Investors Service",
+    type: "International (Big 3)",
+    established: "Coverage since 2005",
+    regulator: "SEC (US)",
+    description: "Rates Vietnam sovereign and major financial institutions. Vietnam sovereign: Ba2 (equivalent to BB).",
+    coverage: ["Sovereign rating: Ba2 (stable outlook)", "Major commercial banks", "Insurance companies", "Infrastructure bonds"],
+    website: "moodys.com",
+    methodology: "Global methodology. Vietnam on upgrade watchlist due to economic resilience and banking reform progress.",
+  },
+  {
+    name: "Fitch Ratings",
+    type: "International (Big 3)",
+    established: "Coverage since 2008",
+    regulator: "SEC (US)",
+    description: "Rates Vietnam sovereign and selectively covers banks and corporates. Vietnam sovereign: BB+ (positive outlook).",
+    coverage: ["Sovereign rating: BB+ (positive outlook)", "Selected banks", "Government bonds", "Structured finance"],
+    website: "fitchratings.com",
+    methodology: "Positive outlook — closest to investment grade upgrade among the Big 3. Key factor: continued GDP growth and fiscal discipline.",
+  },
+  {
+    name: "FiinGroup (Research & Data)",
+    type: "Domestic Data Provider",
+    established: "2008",
+    regulator: "SSC",
+    description: "Vietnam's leading financial data and research platform. Parent of FiinRatings. Provides FiinPro terminal (Vietnam's 'Bloomberg'), industry analytics, and ESG data.",
+    coverage: ["FiinPro terminal (700+ institutional users)", "Listed company financials", "Bond market data", "Industry research reports", "ESG scoring (FiinESG)"],
+    website: "fiingroup.vn",
+    methodology: "Proprietary database covering 3,000+ Vietnamese companies. Real-time market data and analytics.",
+  },
+  {
+    name: "Vietnam Bond Market Association (VBMA)",
+    type: "Industry Body",
+    established: "2007",
+    regulator: "MOF",
+    description: "Self-regulatory organization for the bond market. Publishes bond market reports, yield curves, and trading data. Key infrastructure for bond market transparency.",
+    coverage: ["Monthly bond market reports", "Government bond yield curves", "Corporate bond trading data", "Market statistics & analysis"],
+    website: "vbma.org.vn",
+    methodology: "Aggregates data from HNX, commercial banks, and bond dealers.",
+  },
+];
+
+export default async function RatingsPage() {
+  const [sovereignRatings, sheetAgencies] = await Promise.all([
+    fetchSovereignRatings(),
+    fetchRatingAgencies(),
+  ]);
+
+  const agencies = sheetAgencies.length > 0 ? sheetAgencies : AGENCIES_FALLBACK;
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">

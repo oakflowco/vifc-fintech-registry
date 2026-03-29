@@ -149,11 +149,8 @@ export default async function DealsPage() {
           <CardContent className="py-12 text-center">
             <h3 className="text-lg font-semibold mb-2">No deal data yet</h3>
             <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
-              Deal news will appear automatically. For curated structured data, create a Google Sheet
-              with columns: Date, Company, Round, Amount (USD M), Lead Investor, Co-Investors, Category, Stage.
-            </p>
-            <p className="text-xs text-muted-foreground font-mono">
-              Set GOOGLE_SHEET_DEALS_URL in .env.local
+              Deal news will appear automatically. Structured deal data with amounts, investors, and stages
+              is coming soon.
             </p>
           </CardContent>
         </Card>
@@ -164,8 +161,8 @@ export default async function DealsPage() {
           <CardHeader>
             <CardTitle className="text-sm">Want structured deal data?</CardTitle>
             <CardDescription className="text-xs">
-              The live news feed above is automatic. For detailed structured data (exact amounts, investors, stages),
-              create a Google Sheet and set GOOGLE_SHEET_DEALS_URL in .env.local.
+              The live news feed above is automatic. Detailed structured data (exact amounts, investors, stages)
+              is coming soon.
             </CardDescription>
           </CardHeader>
         </Card>

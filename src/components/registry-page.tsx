@@ -35,7 +35,7 @@ export async function RegistryPage({
   let error = "";
 
   if (!sheetUrl) {
-    error = `${envVarName} is not configured. Add a new tab to your Google Sheet, publish it as CSV, and set the URL in .env.local.`;
+    error = `${envVarName} is not configured. Set the registry data URL in .env.local.`;
   } else {
     try {
       const result = await fetchSheetData(sheetUrl);
@@ -63,7 +63,7 @@ export async function RegistryPage({
       ) : data.length === 0 ? (
         <div className="rounded-lg border p-6 text-center">
           <p className="text-sm text-muted-foreground">
-            No data found in the spreadsheet. Add some rows and refresh.
+            No data found. Please check your data source and refresh.
           </p>
         </div>
       ) : (
