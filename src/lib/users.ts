@@ -1,7 +1,6 @@
-import fs from "fs";
-import path from "path";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
+import { Redis } from "@upstash/redis";
 
 export interface User {
   id: string;
@@ -15,28 +14,31 @@ export interface User {
   };
 }
 
-const DB_PATH = path.join(process.cwd(), "data", "users.json");
-
-function readUsers(): User[] {
-  try {
-    if (!fs.existsSync(DB_PATH)) return [];
-    const data = fs.readFileSync(DB_PATH, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
+// Lazy init — won't crash at build time if env vars missing
+let _redis: Redis | null = null;
+function getRedis(): Redis | null {
+  if (_redis) return _redis;
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  if (!url || !token) return null;
+  _redis = new Redis({ url, token });
+  return _redis;
 }
 
-function writeUsers(users: User[]) {
-  fs.writeFileSync(DB_PATH, JSON.stringify(users, null, 2));
-}
+// Keys:
+//   user:{id}           → User JSON
+//   user:email:{email}  → userId (lookup index)
 
 export async function createUser(
   email: string,
   password: string
 ): Promise<User | null> {
-  const users = readUsers();
-  if (users.find((u) => u.email === email)) return null;
+  const redis = getRedis();
+  if (!redis) return null;
+
+  // Check if email already registered
+  const existing = await redis.get<string>(`user:email:${email}`);
+  if (existing) return null;
 
   const passwordHash = await bcrypt.hash(password, 10);
   const user: User = {
@@ -47,8 +49,9 @@ export async function createUser(
     subscription: { active: false, expiresAt: null, momoTransactionId: null },
   };
 
-  users.push(user);
-  writeUsers(users);
+  await redis.set(`user:${user.id}`, JSON.stringify(user));
+  await redis.set(`user:email:${email}`, user.id);
+
   return user;
 }
 
@@ -56,29 +59,36 @@ export async function verifyUser(
   email: string,
   password: string
 ): Promise<User | null> {
-  const users = readUsers();
-  const user = users.find((u) => u.email === email);
+  const user = await getUserByEmail(email);
   if (!user) return null;
   const valid = await bcrypt.compare(password, user.passwordHash);
   return valid ? user : null;
 }
 
 export async function getUserById(id: string): Promise<User | null> {
-  const users = readUsers();
-  return users.find((u) => u.id === id) || null;
+  const redis = getRedis();
+  if (!redis) return null;
+  const data = await redis.get<string>(`user:${id}`);
+  if (!data) return null;
+  return typeof data === "string" ? JSON.parse(data) : (data as unknown as User);
 }
 
 export async function getUserByEmail(email: string): Promise<User | null> {
-  const users = readUsers();
-  return users.find((u) => u.email === email) || null;
+  const redis = getRedis();
+  if (!redis) return null;
+  const userId = await redis.get<string>(`user:email:${email}`);
+  if (!userId) return null;
+  return getUserById(userId);
 }
 
 export async function activateSubscription(
   userId: string,
   momoTransactionId: string
 ): Promise<boolean> {
-  const users = readUsers();
-  const user = users.find((u) => u.id === userId);
+  const redis = getRedis();
+  if (!redis) return false;
+
+  const user = await getUserById(userId);
   if (!user) return false;
 
   const expiresAt = new Date();
@@ -90,18 +100,20 @@ export async function activateSubscription(
     momoTransactionId,
   };
 
-  writeUsers(users);
+  await redis.set(`user:${userId}`, JSON.stringify(user));
   return true;
 }
 
 export async function resetUserPassword(userId: string): Promise<string | null> {
-  const users = readUsers();
-  const user = users.find((u) => u.id === userId);
+  const redis = getRedis();
+  if (!redis) return null;
+
+  const user = await getUserById(userId);
   if (!user) return null;
 
   const newPassword = uuidv4().slice(0, 10);
   user.passwordHash = await bcrypt.hash(newPassword, 10);
-  writeUsers(users);
+  await redis.set(`user:${userId}`, JSON.stringify(user));
   return newPassword;
 }
 
