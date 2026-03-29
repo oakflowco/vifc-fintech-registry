@@ -148,6 +148,17 @@ export function SiteHeader() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center">
+            <Link
+              href="/dashboard"
+              className={cn(
+                "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                isActive("/dashboard")
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              Dashboard
+            </Link>
             <Dropdown label="Data" items={dataDropdown} isActive={dataActive} />
             <Dropdown label="Markets" items={marketsDropdown} isActive={marketsActive} />
             <Dropdown label="Invest" items={investDropdown} isActive={investActive} />
@@ -218,6 +229,10 @@ export function SiteHeader() {
         {/* Mobile Menu */}
         {mobileOpen && (
           <div className="md:hidden border-t py-4 space-y-4">
+            {/* Dashboard */}
+            <Link href="/dashboard" className={cn("block rounded-md px-3 py-2 text-sm font-semibold transition-colors", isActive("/dashboard") ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-accent")}>
+              Dashboard — Vietnam at a Glance
+            </Link>
             {/* Data */}
             <div>
               <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Data</p>

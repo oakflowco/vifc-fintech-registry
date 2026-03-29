@@ -364,6 +364,43 @@ export function TrendCharts({
         </div>
       </section>
 
+      {/* ── Vietnam Fintech Map ── */}
+      <section>
+        <h2 className="text-lg font-semibold mb-4">Vietnam Fintech Map</h2>
+        <Card>
+          <CardHeader>
+            <CardTitle>Vietnam Fintech Startup Map</CardTitle>
+            <CardDescription>
+              Overview of Vietnam&apos;s fintech landscape —{" "}
+              <a
+                href="https://fintechnews.sg/vietnam-fintech-startups/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                Source: Fintech Singapore
+              </a>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <a
+              href="https://fintechnews.sg/vietnam-fintech-startups/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://fintechnews.sg/wp-content/uploads/2021/01/Fintech-Vietnam-Startup-Map-2020.png"
+                alt="Fintech Vietnam Startup Map"
+                className="w-full rounded-lg border border-border/50"
+                loading="lazy"
+              />
+            </a>
+          </CardContent>
+        </Card>
+      </section>
+
       {/* ── News (LIVE) & Regulatory Timeline ── */}
       <section>
         <div className="flex items-center gap-2 mb-4">
