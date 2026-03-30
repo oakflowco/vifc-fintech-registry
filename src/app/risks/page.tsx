@@ -44,8 +44,8 @@ export default function RisksPage() {
       category: "Political & Macro",
       level: "Low",
       items: [
-        { risk: "Political Stability", detail: "One-party system provides policy continuity. Anti-corruption campaigns can disrupt business relationships. Leadership transitions are managed internally." },
-        { risk: "Geopolitical Tensions", detail: "South China Sea disputes create periodic tensions. Vietnam maintains balanced foreign policy (US, China, ASEAN). Trade diversification reduces concentration risk." },
+        { risk: "Political Stability", detail: "Vietnam has a stable political environment with consistent policy direction. Leadership transitions are managed smoothly, supporting long-term investment planning." },
+        { risk: "Geopolitical Tensions", detail: "East Sea (Biển Đông) territorial matters create periodic regional tensions. Vietnam maintains a balanced, multi-directional foreign policy. Trade diversification reduces concentration risk." },
         { risk: "Climate & Natural Disasters", detail: "Central Vietnam (including Da Nang) is exposed to typhoons (Sept-Nov). Flooding in Mekong Delta affects agriculture. Climate adaptation infrastructure is improving." },
         { risk: "Global Economic Slowdown", detail: "Export-dependent economy is exposed to global demand. FDI flows can slow during global recessions. However, Vietnam has historically recovered faster than peers." },
       ],

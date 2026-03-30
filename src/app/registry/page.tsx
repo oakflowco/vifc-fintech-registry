@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 const TAB_CONFIG = [
+  { key: "vifc-members", label: "VIFC Members", envVar: "GOOGLE_SHEET_VIFC_MEMBERS_URL", exportType: "vifc-members" },
   { key: "fintech", label: "Fintech", envVar: "GOOGLE_SHEET_FINTECH_URL", exportType: "fintech" },
   { key: "banks", label: "Banks", envVar: "GOOGLE_SHEET_BANKS_URL", exportType: "banks" },
   { key: "investors", label: "Investors", envVar: "GOOGLE_SHEET_INVESTORS_URL", exportType: "investors" },

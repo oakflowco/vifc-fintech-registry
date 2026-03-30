@@ -4,6 +4,7 @@ import { getUserById, hasActiveSubscription } from "@/lib/users";
 import { fetchSheetData } from "@/lib/sheets";
 
 const SHEET_URLS: Record<string, string | undefined> = {
+  "vifc-members": process.env.GOOGLE_SHEET_VIFC_MEMBERS_URL,
   fintech: process.env.GOOGLE_SHEET_FINTECH_URL,
   investors: process.env.GOOGLE_SHEET_INVESTORS_URL,
   banks: process.env.GOOGLE_SHEET_BANKS_URL,

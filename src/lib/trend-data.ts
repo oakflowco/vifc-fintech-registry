@@ -54,7 +54,7 @@ export const investorCountries = [
   { country: "Japan", deals: 35, amount: 420 },
   { country: "USA", deals: 26, amount: 380 },
   { country: "China/HK", deals: 22, amount: 310 },
-  { country: "Taiwan", deals: 15, amount: 220 },
+  { country: "Taiwan (China)", deals: 15, amount: 220 },
   { country: "Vietnam (domestic)", deals: 78, amount: 450 },
 ];
 

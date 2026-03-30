@@ -504,3 +504,124 @@ export async function fetchWhyVietnamHighlights(): Promise<WhyVietnamHighlight[]
     sub: r["Sub"] || r["sub"] || "",
   }));
 }
+
+// ── Sandbox Participants ──
+
+export interface SandboxParticipant {
+  company: string;
+  sandbox: string;
+  category: string;
+  status: string;
+  entryDate: string;
+  exitDate: string;
+  city: string;
+  notes: string;
+}
+
+const SANDBOX_PARTICIPANTS_FALLBACK: SandboxParticipant[] = [
+  { company: "Basal Pay (Alphatrue Solutions)", sandbox: "VIFC Da Nang", category: "Crypto Asset Conversion", status: "Active", entryDate: "Mar 2025", exitDate: "", city: "Da Nang", notes: "" },
+  { company: "MB Bank x Dunamu (Upbit)", sandbox: "Crypto Pilot", category: "Crypto Exchange", status: "Pilot", entryDate: "Late 2025", exitDate: "", city: "Hanoi", notes: "" },
+  { company: "Techcombank Digital Assets", sandbox: "Crypto Pilot", category: "Digital Asset Issuance", status: "Pilot", entryDate: "Late 2025", exitDate: "", city: "Ho Chi Minh City", notes: "" },
+  { company: "Tima", sandbox: "SBV Fintech", category: "P2P Lending", status: "Active", entryDate: "Jul 2025", exitDate: "", city: "Hanoi", notes: "" },
+  { company: "Trusting Social", sandbox: "SBV Fintech", category: "Credit Scoring / AI", status: "Active", entryDate: "Jul 2025", exitDate: "", city: "Ho Chi Minh City", notes: "" },
+  { company: "Robocash Vietnam", sandbox: "SBV Fintech", category: "P2P Lending", status: "Active", entryDate: "Jul 2025", exitDate: "", city: "Ho Chi Minh City", notes: "" },
+  { company: "Fundiin", sandbox: "SBV Fintech", category: "Buy Now Pay Later", status: "Active", entryDate: "Jul 2025", exitDate: "", city: "Ho Chi Minh City", notes: "" },
+  { company: "Lendela Vietnam", sandbox: "SBV Fintech", category: "Loan Marketplace", status: "Active", entryDate: "Jul 2025", exitDate: "", city: "Ho Chi Minh City", notes: "" },
+];
+
+export async function fetchSandboxParticipants(): Promise<SandboxParticipant[]> {
+  const rows = await fetchEditorialSheet("sandbox_participants");
+  if (rows.length === 0) return SANDBOX_PARTICIPANTS_FALLBACK;
+  return rows.map((r) => ({
+    company: r["Company"] || r["company"] || "",
+    sandbox: r["Sandbox"] || r["sandbox"] || "",
+    category: r["Category"] || r["category"] || "",
+    status: r["Status"] || r["status"] || "",
+    entryDate: r["EntryDate"] || r["Entry Date"] || r["entry_date"] || "",
+    exitDate: r["ExitDate"] || r["Exit Date"] || r["exit_date"] || "",
+    city: r["City"] || r["city"] || "",
+    notes: r["Notes"] || r["notes"] || "",
+  }));
+}
+
+// ── Sandbox Programs ──
+
+export interface SandboxProgram {
+  name: string;
+  authority: string;
+  status: string;
+  since: string;
+  scope: string;
+  excluded: string;
+  legal: string;
+  participants: string;
+}
+
+const SANDBOX_PROGRAMS_FALLBACK: SandboxProgram[] = [
+  { name: "SBV Fintech Sandbox", authority: "State Bank of Vietnam", status: "Active", since: "Jul 2025", scope: "Credit scoring|Open APIs / Open Banking|P2P lending platforms", excluded: "Digital asset trading|Robo-advisory|InsurTech", legal: "Decree 94/2025/ND-CP", participants: "Limited to entities registered in Vietnam" },
+  { name: "VIFC Da Nang Innovation Sandbox", authority: "VIFC Da Nang Authority", status: "Active", since: "Mar 2025", scope: "Fintech|Blockchain & digital assets|Green finance|Cross-border payments|Stablecoin pilots|DeFi protocols", excluded: "", legal: "Resolution 222/2025/QH15, Article 24", participants: "Domestic and international entities" },
+  { name: "Crypto Asset Pilot", authority: "National Assembly / Government", status: "Active", since: "Late 2025", scope: "Licensed crypto exchanges|Digital asset issuance|Crypto custody|Stablecoin operations", excluded: "", legal: "Resolution 05/2025", participants: "Minimum VND 10T (~$380M) capital, foreign ownership capped at 49%" },
+];
+
+export async function fetchSandboxPrograms(): Promise<SandboxProgram[]> {
+  const rows = await fetchEditorialSheet("sandbox_programs");
+  if (rows.length === 0) return SANDBOX_PROGRAMS_FALLBACK;
+  return rows.map((r) => ({
+    name: r["Name"] || r["name"] || "",
+    authority: r["Authority"] || r["authority"] || "",
+    status: r["Status"] || r["status"] || "",
+    since: r["Since"] || r["since"] || "",
+    scope: r["Scope"] || r["scope"] || "",
+    excluded: r["Excluded"] || r["excluded"] || "",
+    legal: r["Legal"] || r["legal"] || "",
+    participants: r["Participants"] || r["participants"] || "",
+  }));
+}
+
+// ── Licensing Pipeline ──
+
+export interface LicenseEntry {
+  company: string;
+  licenseType: string;
+  authority: string;
+  status: string;
+  applicationDate: string;
+  issueDate: string;
+  licenseNumber: string;
+  category: string;
+  notes: string;
+}
+
+const LICENSE_FALLBACK: LicenseEntry[] = [
+  { company: "MoMo (M_Service)", licenseType: "E-Wallet", authority: "SBV", status: "Issued", applicationDate: "2015", issueDate: "2016", licenseNumber: "GP-SBV/044", category: "Payments", notes: "Largest e-wallet by users (~40M MAU)" },
+  { company: "VNPay", licenseType: "E-Wallet", authority: "SBV", status: "Issued", applicationDate: "2014", issueDate: "2015", licenseNumber: "GP-SBV/038", category: "Payments", notes: "QR payment leader. Backed by SoftBank, GIC" },
+  { company: "ZaloPay (VNG)", licenseType: "E-Wallet", authority: "SBV", status: "Issued", applicationDate: "2016", issueDate: "2017", licenseNumber: "GP-SBV/056", category: "Payments", notes: "Integrated with Zalo messenger (75M users)" },
+  { company: "ShopeePay Vietnam", licenseType: "E-Wallet", authority: "SBV", status: "Issued", applicationDate: "2018", issueDate: "2019", licenseNumber: "GP-SBV/071", category: "Payments", notes: "Subsidiary of Sea Group (NYSE: SE)" },
+  { company: "Tima", licenseType: "P2P Lending (Sandbox)", authority: "SBV", status: "Sandbox Active", applicationDate: "Apr 2025", issueDate: "Jul 2025", licenseNumber: "SB-001", category: "Lending", notes: "First P2P sandbox participant" },
+  { company: "Fundiin", licenseType: "BNPL (Sandbox)", authority: "SBV", status: "Sandbox Active", applicationDate: "Apr 2025", issueDate: "Jul 2025", licenseNumber: "SB-004", category: "Lending", notes: "Buy Now Pay Later sandbox entrant" },
+  { company: "FE Credit", licenseType: "Consumer Finance", authority: "SBV", status: "Issued", applicationDate: "2010", issueDate: "2010", licenseNumber: "CF-SBV/012", category: "Lending", notes: "Largest consumer finance company. Subsidiary of VPBank" },
+  { company: "MB Bank x Dunamu (Upbit)", licenseType: "Crypto Exchange (Pilot)", authority: "Government", status: "Pilot", applicationDate: "2025", issueDate: "Late 2025", licenseNumber: "CRYPTO-001", category: "Digital Assets", notes: "First licensed crypto exchange pilot" },
+  { company: "Techcombank Digital Assets", licenseType: "Digital Asset Issuance (Pilot)", authority: "Government", status: "Pilot", applicationDate: "2025", issueDate: "Late 2025", licenseNumber: "CRYPTO-002", category: "Digital Assets", notes: "Tokenized asset issuance pilot" },
+  { company: "Viettel Money", licenseType: "E-Wallet / Mobile Money", authority: "SBV", status: "Issued", applicationDate: "2020", issueDate: "2021", licenseNumber: "GP-SBV/088", category: "Payments", notes: "Telco-backed mobile money. 15M+ users" },
+  { company: "Basal Pay", licenseType: "Crypto Conversion (VIFC Sandbox)", authority: "VIFC Da Nang", status: "Sandbox Active", applicationDate: "Jan 2025", issueDate: "Mar 2025", licenseNumber: "VIFC-SB-001", category: "Digital Assets", notes: "First VIFC Da Nang sandbox entrant" },
+  { company: "VNDirect", licenseType: "Securities Broker", authority: "SSC", status: "Issued", applicationDate: "2006", issueDate: "2006", licenseNumber: "SSC-068", category: "Securities", notes: "Top 5 brokerage by market share" },
+  { company: "SSI Securities", licenseType: "Securities Broker", authority: "SSC", status: "Issued", applicationDate: "2000", issueDate: "2000", licenseNumber: "SSC-003", category: "Securities", notes: "Largest brokerage in Vietnam. $2B+ market cap" },
+  { company: "Manulife Vietnam", licenseType: "Life Insurance", authority: "MOF", status: "Issued", applicationDate: "1999", issueDate: "1999", licenseNumber: "INS-MOF/015", category: "Insurance", notes: "Largest foreign life insurer in Vietnam" },
+  { company: "Dai-ichi Life Vietnam", licenseType: "Life Insurance", authority: "MOF", status: "Issued", applicationDate: "2007", issueDate: "2007", licenseNumber: "INS-MOF/042", category: "Insurance", notes: "Bancassurance partnership with Sacombank" },
+];
+
+export async function fetchLicenses(): Promise<LicenseEntry[]> {
+  const rows = await fetchEditorialSheet("licenses");
+  if (rows.length === 0) return LICENSE_FALLBACK;
+  return rows.map((r) => ({
+    company: r["Company"] || r["company"] || "",
+    licenseType: r["LicenseType"] || r["License Type"] || r["license_type"] || "",
+    authority: r["Authority"] || r["authority"] || "",
+    status: r["Status"] || r["status"] || "",
+    applicationDate: r["ApplicationDate"] || r["Application Date"] || r["application_date"] || "",
+    issueDate: r["IssueDate"] || r["Issue Date"] || r["issue_date"] || "",
+    licenseNumber: r["LicenseNumber"] || r["License Number"] || r["license_number"] || "",
+    category: r["Category"] || r["category"] || "",
+    notes: r["Notes"] || r["notes"] || "",
+  }));
+}
